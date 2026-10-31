@@ -1,0 +1,952 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { getPublishedProducts } from "../../lib/products";
+import { hasSupabaseConfig, supabase } from "../../lib/supabase";
+
+const products = await getPublishedProducts();
+
+const categoryOptions = [
+  ...new Map(products.map((p) => [p.category_id, p.category_name])).entries(),
+];
+
+// Lấy danh sách màu đang hoạt động trực tiếp từ Supabase.
+const { data: colorRows, error: colorsError } =
+  hasSupabaseConfig && supabase
+    ? await supabase
+        .from("colors")
+        .select("id, name, hex_code, sort_order")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true })
+        .order("name", { ascending: true })
+    : { data: [], error: null };
+
+if (colorsError) {
+  throw new Error(`Không thể lấy danh sách màu sắc: ${colorsError.message}`);
+}
+
+const colorOptions = colorRows ?? [];
+
+// Lấy danh sách tình trạng đang hoạt động trực tiếp từ Supabase.
+const { data: badgeRows, error: badgesError } =
+  hasSupabaseConfig && supabase
+    ? await supabase
+        .from("badges")
+        .select("id, name, sort_order")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true })
+        .order("name", { ascending: true })
+    : { data: [], error: null };
+
+if (badgesError) {
+  throw new Error(
+    `Không thể lấy danh sách tình trạng sản phẩm: ${badgesError.message}`,
+  );
+}
+
+const badgeOptions = badgeRows ?? [];
+
+const pageTitle = "Sản phẩm | Mèo Hoa";
+const pageDescription =
+  "Khám phá bộ sưu tập hoa lụa, mèo thần tài và quà tặng tại Mèo Hoa.";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath="/san-pham/"
+>
+  <main class="bg-[#fbf8f3] text-[#493a35]">
+    <section
+      aria-labelledby="products-heading"
+      class="relative overflow-hidden bg-[radial-gradient(ellipse_at_top,#f8eee2_0%,#fbf8f3_70%)] py-12 text-center md:py-16"
+    >
+      <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-10">
+        <div class="mx-auto max-w-3xl">
+          <span
+            class="inline-flex items-center gap-2 rounded-full bg-[#eee5d8] px-3 py-1 text-[11px] font-semibold tracking-[0.16em] text-[#846b48]"
+          >
+            <span
+              aria-hidden="true"
+              class="h-1.5 w-1.5 rounded-full bg-[#846b48]"></span>
+            BỘ SƯU TẬP QUÀ TẶNG MÈO HOA
+          </span>
+
+          <h1
+            id="products-heading"
+            class="mt-4 font-heading text-[30px] leading-tight text-[#6a2935] md:text-[42px]"
+          >
+            Hoa Lụa, Mèo Thần Tài & Quà Tặng Tinh Tế
+          </h1>
+
+          <p
+            class="mx-auto mt-3 max-w-2xl text-[13px] leading-7 text-[#81716a] md:text-[15px]"
+          >
+            Khám phá bộ sưu tập hoa lụa, mèo thần tài, giỏ quà và quà tặng tại
+            Mèo Hoa. Mỗi sản phẩm được chăm chút tỉ mỉ, mang vẻ đẹp tinh tế và
+            gửi trao những lời chúc may mắn, ý nghĩa trong các dịp đặc biệt.
+          </p>
+
+          <label
+            class="mx-auto mt-6 flex max-w-3xl items-center gap-3 rounded-md border border-[#eee7df] bg-white p-1.5 pl-3 shadow-sm md:mt-7"
+          >
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="h-4 w-4 shrink-0 stroke-[#8c7049]"
+              stroke-width="1.8"
+            >
+              <circle cx="10.8" cy="10.8" r="6.8"></circle>
+              <path d="m16 16 4.3 4.3"></path>
+            </svg>
+
+            <input
+              data-search
+              type="search"
+              placeholder="Tìm kiếm tên mẫu, loại hoa, dịp tặng..."
+              aria-label="Tìm kiếm sản phẩm"
+              class="h-8 min-w-0 flex-1 bg-transparent text-left text-[12px] outline-none placeholder:text-[#a89b92]"
+            />
+
+            <button
+              data-search-submit
+              type="button"
+              class="inline-flex h-8 shrink-0 items-center gap-2 rounded-sm bg-[#783b46] px-4 text-[11px] text-white transition hover:bg-[#5f2934]"
+            >
+              Tìm kiếm <span aria-hidden="true">→</span>
+            </button>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="mx-auto w-full max-w-[1440px] px-4 pt-12 pb-8 md:px-8 md:pt-16 lg:px-10"
+    >
+      <!-- Desktop category bar -->
+      <div
+        class="hidden items-center gap-3 rounded-md border border-[#eee8e0] bg-white px-4 py-4 md:flex"
+      >
+        <span class="mr-1 shrink-0 text-[14px] font-semibold text-[#8c7049]">
+          ♧ DANH MỤC:
+        </span>
+
+        <div class="flex min-w-0 flex-1 flex-wrap gap-2" data-category-tabs>
+          <button
+            type="button"
+            data-category-value=""
+            class="category-tab rounded-sm bg-[#783b46] px-3 py-2 text-[14px]! text-white md:text-[16px]!"
+          >
+            Tất cả ({products.length})
+          </button>
+
+          {
+            categoryOptions.map(([id, name]) => (
+              <button
+                type="button"
+                data-category-value={String(id ?? "")}
+                class="category-tab rounded-sm px-3 py-2 text-[14px]! text-[#6b5b54]
+                  md:text-[16px]!"
+              >
+                {name} (
+                {
+                  products.filter(
+                    (p) => String(p.category_id ?? "") === String(id ?? ""),
+                  ).length
+                }
+                )
+              </button>
+            ))
+          }
+        </div>
+
+        <label
+          class="hidden md:flex shrink-0 items-center gap-3 rounded-sm bg-[#f1efeb] px-3 py-2 text-[11px] md:text-[14px] text-[#8c7049]"
+        >
+          ↕ SẮP XẾP:
+          <select
+            data-sort
+            class="max-w-[150px] bg-transparent text-[11px] text-[#493a35] outline-none"
+          >
+            <option value="default">Phổ biến nhất</option>
+            <option value="newest">Mới nhất</option>
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+            <option value="name-asc">Tên A–Z</option>
+          </select>
+        </label>
+      </div>
+
+      <!-- Mobile category pills and filter toggle -->
+      <div class="md:hidden">
+        <div class="mb-4 flex gap-2 overflow-x-auto pb-1" data-category-tabs>
+          <button
+            type="button"
+            data-category-value=""
+            class="category-tab shrink-0 rounded-full bg-[#642733] px-4 py-2 text-[14px]! text-white"
+          >
+            Tất cả
+          </button>
+
+          {
+            categoryOptions.map(([id, name]) => (
+              <button
+                type="button"
+                data-category-value={String(id ?? "")}
+                class="category-tab shrink-0 rounded-full bg-[#efebe6] px-4 py-2 text-[14px]! text-[#655650]"
+              >
+                {name}
+              </button>
+            ))
+          }
+        </div>
+
+        <button
+          data-mobile-filter-toggle
+          type="button"
+          class="mb-3 flex w-full items-center justify-between rounded-lg border border-[#eee8e0] bg-white px-4 py-3 text-left text-[14px]! text-[#6a2935] shadow-sm"
+        >
+          <span class="font-heading text-[14px]">⚲ Bộ Lọc Tác Phẩm</span>
+          <span data-mobile-filter-label class="text-[11px]">
+            Mở bộ lọc +
+          </span>
+        </button>
+      </div>
+
+      <!-- Filter panel -->
+      <div
+        data-filter-panel
+        class="mb-5 grid grid-cols-1 gap-3 rounded-md border border-[#eee8e0] bg-white p-4 md:grid-cols-[minmax(0,2fr)_minmax(220px,0.95fr)] md:p-5"
+      >
+        <!-- Color filter -->
+        <div class="min-w-0">
+          <div class="mb-4 flex items-center justify-between gap-3">
+            <span
+              class="text-[11px] md:text-[14px] font-semibold text-[#8c7049]"
+            >
+              ◉ TÔNG MÀU PHONG THỦY CÁT TƯỜNG :
+            </span>
+            <span
+              class="hidden text-[11px] md:text-[14px] text-[#8c8078] sm:inline"
+            >
+              Chọn màu sắc mong muốn
+            </span>
+          </div>
+
+          <div
+            class="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6"
+            data-color-options
+          >
+            {
+              colorOptions.map((color) => (
+                <button
+                  type="button"
+                  data-color-value={String(color.id ?? "")}
+                  class="color-option flex min-w-0 items-center gap-1.5 rounded-full
+                   bg-[#f7f4f0] px-2 py-1.5 text-left text-[14px]! md:text-[16px]! text-[#554740]"
+                  aria-pressed="false"
+                >
+                  <span
+                    class="h-3 w-3 shrink-0 rounded-full border border-black/10"
+                    style={`background-color: ${color.hex_code || "#f3eee5"}`}
+                  />
+                  <span class="truncate">{color.name}</span>
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Badge filter -->
+        <div
+          class="border-t border-[#eee8e0] pt-4 md:border-l md:border-t-0 md:pl-5 md:pt-0"
+        >
+          <p
+            class="mb-3 text-[11px] md:text-[14px] font-semibold text-[#8c7049]"
+          >
+            ⓘ TÌNH TRẠNG:
+          </p>
+          <label
+            class="mt-2 flex cursor-pointer items-center justify-between rounded-sm px-3 py-2 text-[14px]! md:text-[16px]!"
+          >
+            <span class="flex items-center gap-2">
+              <input
+                type="radio"
+                name="badge-filter"
+                data-badge-value=""
+                data-badge-label="Tất cả trạng thái"
+                class="accent-[#783b46]"
+                checked
+              />
+              Tất cả trạng thái
+            </span>
+
+            <span class="text-[11px] text-[#8c8078]">Tất cả</span>
+          </label>
+          <div
+            class="space-y-2 text-[14px]! md:text-[16px]!"
+            data-badge-options
+          >
+            {
+              badgeOptions.map((badge) => {
+                const count = products.filter(
+                  (product) => product.badge_id === badge.id,
+                ).length;
+
+                return (
+                  <label class="flex cursor-pointer items-center justify-between rounded-sm px-3 py-2">
+                    <span class="flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="badge-filter"
+                        data-badge-value={String(badge.id)}
+                        data-badge-label={badge.name}
+                        class="accent-[#783b46]"
+                      />
+                      {badge.name}
+                    </span>
+
+                    <span class="text-[11px] text-[#8c8078]">{count}</span>
+                  </label>
+                );
+              })
+            }
+          </div>
+        </div>
+
+        <!-- Mobile sorting -->
+
+        <label
+          class="mt-4 flex md:hidden items-center justify-between border-t border-[#eee8e0] pt-3
+          text-[11px] text-[#8c7049] md:flex"
+        >
+          SẮP XẾP :
+          <select
+            data-sort-duplicate
+            class="bg-transparent text-[11px] text-[#493a35] outline-none"
+          >
+            <option value="default">Phổ biến nhất</option>
+            <option value="newest">Mới nhất</option>
+            <option value="price-asc">Giá tăng dần</option>
+            <option value="price-desc">Giá giảm dần</option>
+            <option value="name-asc">Tên A–Z</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-10">
+      <div
+        class="mb-5 flex flex-wrap items-center gap-2 text-[11px] text-[#8c8078]"
+      >
+        <span class="mr-1">Bộ lọc đang áp dụng:</span>
+
+        <div data-active-filters class="flex flex-wrap gap-2"></div>
+
+        <button
+          data-reset
+          type="button"
+          class="ml-auto text-[11px] font-semibold tracking-wide text-[#783b46] underline underline-offset-4"
+        >
+          XÓA TẤT CẢ (RESET)
+        </button>
+      </div>
+    </div>
+    <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-10">
+      {
+        products.length > 0 ? (
+          <div
+            data-product-grid
+            class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 lg:gap-5"
+          >
+            {products.map((product) => (
+              <div
+                class="min-w-0"
+                data-filter-card
+                data-filter-category={String(product.category_id ?? "")}
+                data-filter-color={String(product.color_id ?? "")}
+                data-filter-badge={String(product.badge_id ?? "")}
+                data-filter-name={String(product.name ?? "")}
+                data-filter-slug={String(product.slug ?? "")}
+                data-filter-description={String(product.description ?? "")}
+                data-filter-price={String(product.price ?? 0)}
+                data-filter-order={String(product.sort_order ?? 0)}
+              >
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class="rounded-lg border border-dashed border-[#d9c7b8] bg-white px-5 py-16 text-center">
+            <p class="font-heading text-2xl text-[#794640]">
+              Bộ sưu tập đang được cập nhật
+            </p>
+          </div>
+        )
+      }
+    </div>
+
+    <div data-empty-results hidden class="py-16 text-center">
+      <p class="font-heading text-2xl text-[#794640]">
+        Chưa tìm thấy sản phẩm phù hợp
+      </p><p class="mt-2 text-sm text-[#74665d]">
+        Thử thay đổi từ khóa hoặc xóa bớt bộ lọc nhé.
+      </p><button
+        data-reset-empty
+        type="button"
+        class="mt-4 rounded-sm border border-[#d9c7b8] px-4 py-2 text-xs text-[#794640]"
+        >Xóa bộ lọc</button
+      >
+    </div>
+    <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-10 pb-12">
+      <div
+        class="mt-8 flex flex-wrap items-center justify-between
+         gap-3 rounded-md border border-[#eee8e0] bg-white
+          py-2 px-4 lg:py-4 text-[11px] text-[#74665d]"
+      >
+        <span>
+          Hiển thị <strong data-result-count>{products.length}</strong> sản phẩm
+        </span>
+      </div>
+    </div>
+  </main>
+
+  <section class="w-full bg-background py-12 md:py-16 lg:bg-[#EAE8E4]">
+    <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-10">
+      <!-- DESKTOP VERSION -->
+      <div
+        class="hidden rounded-xl bg-surface px-8 py-10 shadow-sm lg:block lg:px-10 lg:py-12 xl:px-12"
+      >
+        <div
+          class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12"
+        >
+          <div class="min-w-0 max-w-190">
+            <div class="mb-4 flex items-center gap-3 text-text-section">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 32 32"
+                fill="none"
+                class="h-6 w-6 shrink-0"
+              >
+                <path
+                  d="M5 18v-3a11 11 0 0 1 22 0v3"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"></path>
+                <path
+                  d="M5 17h5v8H7a2 2 0 0 1-2-2v-6Zm22 0h-5v8h3a2 2 0 0 0 2-2v-6Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M12 12a5 5 0 0 1 8 0"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"></path>
+              </svg>
+
+              <p
+                class="m-0 text-[11px] font-semibold uppercase tracking-[0.12em] sm:text-sm sm:tracking-[0.15em]"
+              >
+                DỊCH VỤ QUÀ TẶNG CÁ NHÂN HÓA
+              </p>
+            </div>
+
+            <h2
+              class="m-0 font-heading text-[clamp(1.65rem,3vw,2.25rem)] font-normal leading-tight tracking-tight text-text-heading"
+            >
+              Bạn chưa tìm được mẫu mèo hay sắc hoa chuẩn ý?
+            </h2>
+
+            <p
+              class="mb-0 mt-4 max-w-190 text-sm leading-7 text-text-navbar sm:text-base sm:leading-[1.8]"
+            >
+              Trò chuyện trực tiếp qua Zalo hoặc Facebook cùng Mèo Hoa để được
+              tư vấn kích thước, phối tone hoa và gửi thiệp chúc phúc theo tên
+              người nhận.
+            </p>
+          </div>
+
+          <div
+            class="flex shrink-0 flex-col gap-3 min-[480px]:flex-row lg:gap-4"
+          >
+            <a
+              href="https://zalo.me/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-14 items-center justify-center gap-3 bg-[#0866FF] px-5 py-4 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-[#0052D4] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-w-55 sm:px-6"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="h-6 w-6 shrink-0"
+              >
+                <path
+                  d="M4 4.5h16v12H9l-5 3v-15Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M7.5 8h9M7.5 11.5h9M7.5 15h5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"></path>
+              </svg>
+              TƯ VẤN QUA ZALO
+            </a>
+
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-14 items-center justify-center gap-3 bg-badge-background px-5 py-4 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-text-heading focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-w-62.5 sm:px-6"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="h-6 w-6 shrink-0"
+              >
+                <path
+                  d="M4 5h16v12H9l-5 3V5Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M8 9h8M8 12.5h5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"></path>
+              </svg>
+              NHẮN TIN FACEBOOK
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOBILE VERSION -->
+      <div
+        class="relative overflow-hidden rounded-2xl bg-[#602A32] px-5 py-8 shadow-xl shadow-text-black/15 sm:rounded-4xl sm:px-8 sm:py-10 lg:hidden"
+      >
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute -bottom-16 -right-12 h-64 w-64 rounded-full bg-white/[0.035]"
+        >
+        </div>
+
+        <div class="relative z-10">
+          <div class="mb-4 flex items-center gap-3 text-[#F3B6B9]">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 32 32"
+              fill="none"
+              class="h-5 w-5 shrink-0 text-[#F4D7A0]"
+            >
+              <path
+                d="M5 18v-3a11 11 0 0 1 22 0v3"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"></path>
+              <path
+                d="M5 17h5v8H7a2 2 0 0 1-2-2v-6Zm22 0h-5v8h3a2 2 0 0 0 2-2v-6Z"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linejoin="round"></path>
+              <path
+                d="M12 12a5 5 0 0 1 8 0"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"></path>
+            </svg>
+
+            <p
+              class="m-0 text-[11px] font-semibold uppercase tracking-[0.13em] sm:tracking-[0.15em]"
+            >
+              DỊCH VỤ QUÀ TẶNG
+            </p>
+          </div>
+
+          <h2
+            class="m-0 max-w-155 font-heading text-[22px] font-medium leading-[30px] tracking-tight text-white"
+          >
+            Thiết kế Quà Tặng theo yêu cầu riêng?
+          </h2>
+
+          <p
+            class="mb-0 mt-3 text-[13px] leading-[1.8] text-[#EAE8E4] sm:text-lg sm:leading-[1.8]"
+          >
+            Mèo Hoa sẵn sàng phối hoa theo màu phong thủy, bản mệnh hoặc thông
+            điệp riêng đặc biệt của quý khách.
+          </p>
+
+          <div class="mt-7 grid grid-cols-2 gap-3 sm:gap-4">
+            <a
+              href="https://zalo.me/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-white px-3 py-3 text-center text-sm font-semibold text-[#602A32] transition-colors hover:bg-[#F8F3EE] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="h-6 w-6 shrink-0"
+              >
+                <path
+                  d="M4 4.5h16v12H9l-5 3v-15Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M7.5 8h9M7.5 11.5h9M7.5 15h5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"></path>
+              </svg>
+              <span>Tư vấn Zalo</span>
+            </a>
+
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-sm bg-badge-background px-3 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-text-heading focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="h-6 w-6 shrink-0"
+              >
+                <path
+                  d="M4 4.5h16v12H9l-5 3v-15Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M7.5 8h9M7.5 11.5h9M7.5 15h5"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"></path>
+              </svg>
+              <span>Tư vấn Facebook</span>
+            </a>
+          </div>
+
+          <div class="my-6 h-px bg-white/15 sm:my-7"></div>
+
+          <div
+            class="flex flex-col gap-2 min-[420px]:flex-row min-[420px]:items-center min-[420px]:justify-between"
+          >
+            <p class="m-0 text-sm leading-relaxed text-[#E4CFD0] sm:text-base">
+              Hotline tư vấn:
+            </p>
+
+            <a
+              href="tel:0355051303"
+              class="font-heading text-[20px] font-semibold leading-tight tracking-wide text-[#F4D7A0] transition-opacity hover:opacity-80"
+            >
+              035 505 1303
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const searchInput =
+      document.querySelector<HTMLInputElement>("[data-search]");
+    const searchSubmit = document.querySelector<HTMLButtonElement>(
+      "[data-search-submit]",
+    );
+    const categoryButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-category-value]"),
+    );
+    const colorButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-color-value]"),
+    );
+    const badgeInputs = Array.from(
+      document.querySelectorAll<HTMLInputElement>("[data-badge-value]"),
+    );
+    const sortInputs = Array.from(
+      document.querySelectorAll<HTMLSelectElement>(
+        "[data-sort], [data-sort-duplicate], [data-sort-mobile]",
+      ),
+    );
+    const filterPanel = document.querySelector<HTMLElement>(
+      "[data-filter-panel]",
+    );
+    const mobileToggle = document.querySelector<HTMLButtonElement>(
+      "[data-mobile-filter-toggle]",
+    );
+    const mobileLabel = document.querySelector<HTMLElement>(
+      "[data-mobile-filter-label]",
+    );
+    const applyMobile = document.querySelector<HTMLButtonElement>(
+      "[data-apply-mobile]",
+    );
+    const resetButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>(
+        "[data-reset], [data-reset-empty]",
+      ),
+    );
+    const grid = document.querySelector<HTMLElement>("[data-product-grid]");
+    const cards = grid
+      ? Array.from(grid.querySelectorAll<HTMLElement>("[data-filter-card]"))
+      : [];
+    const resultCount = document.querySelector<HTMLElement>(
+      "[data-result-count]",
+    );
+    const mobileCount = document.querySelector<HTMLElement>(
+      "[data-mobile-count]",
+    );
+    const emptyResults = document.querySelector<HTMLElement>(
+      "[data-empty-results]",
+    );
+    const activeFilters = document.querySelector<HTMLElement>(
+      "[data-active-filters]",
+    );
+    const state = { category: "", color: "", badge: "", sort: "default" };
+    const normalize = (v: string) =>
+      v
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLocaleLowerCase("vi-VN")
+        .trim();
+    function updateUrl(mode: "push" | "replace" = "push") {
+      const params = new URLSearchParams(window.location.search);
+      const values: Record<string, string> = {
+        search: searchInput?.value.trim() ?? "",
+        category: state.category,
+        color: state.color,
+        badge: state.badge,
+        sort: state.sort === "default" ? "" : state.sort,
+      };
+      Object.entries(values).forEach(([k, v]) =>
+        v ? params.set(k, v) : params.delete(k),
+      );
+      const q = params.toString();
+      const next = `${location.pathname}${q ? `?${q}` : ""}${location.hash}`;
+      if (next === `${location.pathname}${location.search}${location.hash}`)
+        return;
+      if (mode === "replace") history.replaceState({}, "", next);
+      else history.pushState({}, "", next);
+    }
+    function syncControls() {
+      categoryButtons.forEach((b) => {
+        const active = (b.dataset.categoryValue ?? "") === state.category;
+        b.classList.toggle("bg-[#783b46]", active);
+        b.classList.toggle("text-white", active);
+        b.classList.toggle("bg-[#efebe6]", !active);
+        b.classList.toggle("text-[#655650]", !active);
+      });
+      colorButtons.forEach((b) => {
+        const active = (b.dataset.colorValue ?? "") === state.color;
+        b.setAttribute("aria-pressed", String(active));
+        b.classList.toggle("ring-1", active);
+        b.classList.toggle("ring-[#783b46]", active);
+      });
+      badgeInputs.forEach((i) => {
+        i.checked = (i.dataset.badgeValue ?? "") === state.badge;
+        const row = i.closest("label");
+        row?.classList.toggle("bg-[#f2f0ed]", i.checked);
+      });
+      sortInputs.forEach((s) => {
+        s.value = state.sort;
+      });
+    }
+    function renderActiveFilters() {
+      if (!activeFilters) return;
+      activeFilters.innerHTML = "";
+      const entries: [string, string, string][] = [];
+      if (state.category)
+        entries.push([
+          "Danh mục",
+          categoryButtons
+            .find((b) => (b.dataset.categoryValue ?? "") === state.category)
+            ?.textContent?.trim() ?? "",
+          "category",
+        ]);
+      if (state.color)
+        entries.push([
+          "Màu sắc",
+          colorButtons
+            .find((b) => (b.dataset.colorValue ?? "") === state.color)
+            ?.textContent?.trim() ?? "",
+          "color",
+        ]);
+      if (state.badge)
+        entries.push([
+          "Tình trạng",
+          badgeInputs.find((input) => input.dataset.badgeValue === state.badge)
+            ?.dataset.badgeLabel ?? "",
+          "badge",
+        ]);
+      if (searchInput?.value.trim())
+        entries.push(["Tìm kiếm", searchInput.value.trim(), "search"]);
+      entries.forEach(([label, value, key]) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className =
+          "inline-flex items-center gap-1 rounded-full bg-[#eee9e2] px-2.5 py-1 text-[11px] text-[#655650]";
+        b.textContent = `${label}: ${value} ×`;
+        b.addEventListener("click", () => {
+          if (key === "search" && searchInput) searchInput.value = "";
+          else if (key === "category") state.category = "";
+          else if (key === "color") state.color = "";
+          else if (key === "badge") state.badge = "";
+          syncControls();
+          applyFilters();
+          updateUrl();
+        });
+        activeFilters.append(b);
+      });
+      if (!entries.length) activeFilters.textContent = "Chưa áp dụng bộ lọc";
+    }
+    function applyFilters() {
+      const query = normalize(searchInput?.value ?? "");
+      const visible = cards.filter((card) => {
+        const hay = normalize(
+          [
+            card.dataset.filterName,
+            card.dataset.filterSlug,
+            card.dataset.filterDescription,
+          ]
+            .filter(Boolean)
+            .join(" "),
+        );
+        const badge = card.dataset.filterBadge ?? "";
+        const matches =
+          (!query || hay.includes(query)) &&
+          (!state.category ||
+            (card.dataset.filterCategory ?? "") === state.category) &&
+          (!state.color || (card.dataset.filterColor ?? "") === state.color) &&
+          (!state.badge || badge === state.badge);
+        card.hidden = !matches;
+        card.style.display = matches ? "" : "none";
+        return matches;
+      });
+      visible.sort((a, b) => {
+        if (state.sort === "price-asc")
+          return Number(a.dataset.filterPrice) - Number(b.dataset.filterPrice);
+        if (state.sort === "price-desc")
+          return Number(b.dataset.filterPrice) - Number(a.dataset.filterPrice);
+        if (state.sort === "name-asc")
+          return (a.dataset.filterName ?? "").localeCompare(
+            b.dataset.filterName ?? "",
+            "vi",
+          );
+        if (state.sort === "newest")
+          return Number(b.dataset.filterOrder) - Number(a.dataset.filterOrder);
+        return Number(a.dataset.filterOrder) - Number(b.dataset.filterOrder);
+      });
+      visible.forEach((c) => grid?.append(c));
+      if (resultCount) resultCount.textContent = String(visible.length);
+      if (mobileCount) mobileCount.textContent = String(visible.length);
+      if (emptyResults) emptyResults.hidden = visible.length > 0;
+      if (grid) {
+        grid.hidden = visible.length === 0;
+        grid.style.display = visible.length === 0 ? "none" : "";
+      }
+      renderActiveFilters();
+    }
+    function restoreFromUrl() {
+      const p = new URLSearchParams(location.search);
+      if (searchInput) searchInput.value = p.get("search") ?? "";
+      state.category = p.get("category") ?? "";
+      state.color = p.get("color") ?? "";
+      state.badge = p.get("badge") ?? "";
+      const s = p.get("sort") ?? "default";
+      state.sort = [
+        "default",
+        "newest",
+        "price-asc",
+        "price-desc",
+        "name-asc",
+      ].includes(s)
+        ? s
+        : "default";
+      syncControls();
+      applyFilters();
+    }
+    categoryButtons.forEach((b) =>
+      b.addEventListener("click", () => {
+        state.category = b.dataset.categoryValue ?? "";
+        syncControls();
+        applyFilters();
+        updateUrl();
+      }),
+    );
+    colorButtons.forEach((b) =>
+      b.addEventListener("click", () => {
+        const v = b.dataset.colorValue ?? "";
+        state.color = state.color === v ? "" : v;
+        syncControls();
+        applyFilters();
+        updateUrl();
+      }),
+    );
+    badgeInputs.forEach((i) =>
+      i.addEventListener("change", () => {
+        state.badge = i.dataset.badgeValue ?? "";
+        syncControls();
+        applyFilters();
+        updateUrl();
+      }),
+    );
+    sortInputs.forEach((s) =>
+      s.addEventListener("change", () => {
+        state.sort = s.value;
+        syncControls();
+        applyFilters();
+        updateUrl();
+      }),
+    );
+    searchInput?.addEventListener("input", () => {
+      applyFilters();
+      updateUrl("replace");
+    });
+    searchSubmit?.addEventListener("click", () => {
+      applyFilters();
+      updateUrl();
+    });
+    mobileToggle?.addEventListener("click", () => {
+      if (!filterPanel) return;
+      const isOpen = filterPanel.style.display !== "none";
+      filterPanel.style.display = isOpen ? "none" : "grid";
+      if (mobileLabel)
+        mobileLabel.textContent = isOpen ? "Mở bộ lọc +" : "Đóng bộ lọc −";
+    });
+    applyMobile?.addEventListener("click", () => {
+      if (filterPanel) filterPanel.style.display = "none";
+      if (mobileLabel) mobileLabel.textContent = "Mở bộ lọc +";
+      applyFilters();
+      updateUrl();
+    });
+    resetButtons.forEach((b) =>
+      b.addEventListener("click", () => {
+        if (searchInput) searchInput.value = "";
+        state.category = "";
+        state.color = "";
+        state.badge = "";
+        state.sort = "default";
+        syncControls();
+        applyFilters();
+        updateUrl();
+      }),
+    );
+    window.addEventListener("popstate", restoreFromUrl);
+    const mobileBreakpoint = window.matchMedia("(max-width: 767px)");
+    if (filterPanel && mobileBreakpoint.matches)
+      filterPanel.style.display = "none";
+    mobileBreakpoint.addEventListener("change", (event) => {
+      if (filterPanel)
+        filterPanel.style.display = event.matches ? "none" : "grid";
+      if (mobileLabel) mobileLabel.textContent = "Mở bộ lọc +";
+    });
+    restoreFromUrl();
+  </script>
+</BaseLayout>

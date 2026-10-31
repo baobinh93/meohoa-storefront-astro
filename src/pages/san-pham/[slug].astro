@@ -1,0 +1,369 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPublishedProducts } from "../../lib/products";
+import { normalizeProductDescription } from "../../utils/product-description";
+
+export async function getStaticPaths() {
+  const products = await getPublishedProducts();
+
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+
+const primaryImage =
+  product.product_images.find((image) => image.is_primary) ??
+  product.product_images[0];
+
+// Badge: chỉ hiển thị khi sản phẩm có trạng thái trong database
+const badgeName = product.badge_name;
+const isAvailable = badgeName?.toLocaleUpperCase("vi-VN") === "CÓ SẴN";
+
+const pageTitle = product.meta_title || `${product.name} | Mèo Hoa`;
+
+const pageDescription =
+  product.meta_description ||
+  product.description ||
+  `Khám phá ${product.name} tại Mèo Hoa.`;
+
+const formatPrice = (price: number) =>
+  new Intl.NumberFormat("vi-VN", {
+    maximumFractionDigits: 0,
+  }).format(price) + " ₫";
+
+// Chuẩn hóa thông tin mô tả sản phẩm
+const details = normalizeProductDescription(product.description);
+
+// Dòng 1: Nguồn năng lượng
+const powerLabels = details.power.map((power) => {
+  if (power.toLocaleLowerCase("vi-VN") === "năng lượng mặt trời") {
+    return "Mặt trời";
+  }
+
+  return power;
+});
+
+// Dòng 2: Kích thước và các đặc điểm khác
+const otherDetails = [
+  details.size !== null ? `Size ${details.size}cm` : null,
+  ...details.features,
+].filter(Boolean);
+
+// URL website và URL sản phẩm
+const siteUrl = Astro.site ?? new URL("https://meohoa.io.vn");
+const productUrl = new URL(`/san-pham/${product.slug}/`, siteUrl).toString();
+
+// URL ảnh tuyệt đối
+const productImages = product.product_images
+  .map((image) => image.image_url)
+  .filter(Boolean)
+  .map((image) => new URL(image, siteUrl).toString());
+
+const schemaDescription = (
+  product.meta_description ||
+  product.description ||
+  `Khám phá ${product.name} tại Mèo Hoa.`
+)
+  .replace(/<[^>]*>/g, " ")
+  .trim();
+
+// Product Schema
+const productSchema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: product.name,
+  url: productUrl,
+  ...(productImages.length > 0 && {
+    image: productImages,
+  }),
+  ...(schemaDescription && {
+    description: schemaDescription,
+  }),
+  brand: {
+    "@type": "Brand",
+    name: "Mèo Hoa",
+  },
+  offers: {
+    "@type": "Offer",
+    url: productUrl,
+    priceCurrency: "VND",
+    price: String(product.price),
+    seller: {
+      "@type": "Organization",
+      name: "Mèo Hoa",
+      url: siteUrl.toString(),
+    },
+    ...(badgeName && {
+      availability:
+        badgeName.toLocaleUpperCase("vi-VN") === "CÓ SẴN"
+          ? "https://schema.org/InStock"
+          : badgeName.toLocaleUpperCase("vi-VN") === "THEO YÊU CẦU"
+            ? "https://schema.org/PreOrder"
+            : undefined,
+    }),
+  },
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Trang chủ",
+      item: new URL("/", siteUrl).toString(),
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Bộ sưu tập",
+      item: new URL("/san-pham/", siteUrl).toString(),
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: product.name,
+      item: productUrl,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalPath={`/san-pham/${product.slug}/`}
+  ogImage={primaryImage?.image_url}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbSchema)}
+  />
+
+  <main class="mx-auto w-[calc(100%-32px)] max-w-[1200px] pb-20 md:pb-28">
+    <!-- Breadcrumb -->
+    <nav
+      class="flex flex-wrap gap-2 py-6 text-[11px] text-[#8a7b70]"
+      aria-label="Breadcrumb"
+    >
+      <a class="no-underline hover:text-[#794640]" href="/">Trang chủ</a>
+      <span aria-hidden="true">/</span>
+      <a class="no-underline hover:text-[#794640]" href="/san-pham/">
+        Bộ sưu tập
+      </a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{product.name}</span>
+    </nav>
+
+    <section
+      class="grid items-start gap-8 pt-2 md:grid-cols-[minmax(0,1.1fr)_minmax(0,.9fr)] md:gap-16 lg:gap-20"
+    >
+      <!-- Product Image Gallery -->
+      <div class="min-w-0">
+        <!-- Main image -->
+        <div class="relative overflow-hidden bg-[#f0e9df]" data-product-gallery>
+          {
+            primaryImage ? (
+              <img
+                data-main-image
+                class="aspect-[4/5] w-full object-cover transition-opacity duration-300"
+                src={primaryImage.image_url}
+                alt={primaryImage.alt?.trim() || product.name}
+                fetchpriority="high"
+                decoding="async"
+              />
+            ) : (
+              <div
+                class="grid aspect-[4/5] w-full place-items-center bg-[#f0e9df] font-heading text-3xl text-[#a58a73]"
+                role="img"
+                aria-label={`Hình ảnh minh họa cho ${product.name}`}
+              >
+                Mèo Hoa
+              </div>
+            )
+          }
+        </div>
+
+        <!-- Thumbnail list -->
+        {
+          product.product_images.length > 1 && (
+            <div
+              class="mt-3 flex gap-2 overflow-x-auto pb-2 sm:gap-3"
+              data-thumbnail-list
+            >
+              {product.product_images.map((image, index) => (
+                <button
+                  type="button"
+                  data-thumbnail
+                  data-image-src={image.image_url}
+                  data-image-alt={image.alt?.trim() || product.name}
+                  aria-label={`Xem ảnh ${index + 1} của ${product.name}`}
+                  aria-pressed={image.id === primaryImage?.id}
+                  class:list={[
+                    "group relative aspect-square w-[68px] shrink-0 overflow-hidden bg-[#f0e9df] transition-all duration-200 sm:w-[76px] lg:w-[84px]",
+                    "border",
+                    image.id === primaryImage?.id
+                      ? "border-[#794640] ring-1 ring-[#794640]"
+                      : "border-transparent hover:border-[#b99b85]",
+                  ]}
+                >
+                  <img
+                    src={image.image_url}
+                    alt={image.alt?.trim() || product.name}
+                    loading="lazy"
+                    decoding="async"
+                    class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </button>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Product information -->
+      <div class="md:sticky md:top-8">
+        <p class="text-[11px] font-semibold tracking-[0.18em] text-[#8a6257]">
+          MÈO HOA · GIFTS & FLOWERS
+        </p>
+
+        <!-- Product badge -->
+        {
+          badgeName && (
+            <span
+              class:list={[
+                "mt-5 inline-flex items-center rounded-xs px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.1em]",
+                isAvailable
+                  ? "bg-[#794640] text-white"
+                  : "bg-[#A66B32] text-white",
+              ]}
+            >
+              {badgeName}
+            </span>
+          )
+        }
+
+        <!-- Product name -->
+        <h1
+          class="mt-5 font-heading text-[clamp(34px,4vw,52px)] font-normal leading-[1.15] text-[#794640]"
+        >
+          {product.name}
+        </h1>
+
+        <!-- Price -->
+        <div
+          class="mt-5 flex flex-wrap items-baseline gap-3 border-b border-[#e8dfd5] pb-6"
+        >
+          <span class="text-2xl font-semibold text-[#794640]">
+            {formatPrice(product.price)}
+          </span>
+
+          {
+            product.original_price !== null &&
+              product.original_price > product.price && (
+                <span class="text-sm text-[#9b8d81] line-through">
+                  {formatPrice(product.original_price)}
+                </span>
+              )
+          }
+        </div>
+
+        <!-- Product details -->
+        <div class="mt-7 space-y-4 text-[15px] leading-7 text-[#74665d]">
+          <!-- Power sources + Waving -->
+          {
+            (powerLabels.length > 0 || details.waving !== null) && (
+              <div class="flex flex-wrap items-center gap-2">
+                {powerLabels.map((power) => (
+                  <span class="inline-flex items-center rounded-sm border border-[#e5d8ca] bg-[#f8f5f0] px-3 py-1.5 text-[13px] font-medium text-[#794640]">
+                    {power}
+                  </span>
+                ))}
+
+                {details.waving !== null && (
+                  <span class="inline-flex items-center rounded-sm border border-[#e5d8ca] bg-[#f8f5f0] px-3 py-1.5 text-[13px] font-medium text-[#794640]">
+                    {details.waving ? "Có vẫy tay" : "Không vẫy tay"}
+                  </span>
+                )}
+              </div>
+            )
+          }
+
+          <!-- Size and other features -->
+          {
+            otherDetails.length > 0 && (
+              <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] leading-7 text-[#74665d]">
+                {otherDetails.map((detail, index) => (
+                  <>
+                    {index > 0 && <span class="text-[#c4b5a5">·</span>}
+                    <span>{detail}</span>
+                  </>
+                ))}
+              </div>
+            )
+          }
+        </div>
+
+        <a
+          href="#lien-he"
+          class="mt-8 inline-flex w-full items-center justify-center gap-3 bg-[#794640] px-6 py-4 text-[12px] font-semibold text-white no-underline transition-colors hover:bg-[#603731] sm:w-auto"
+        >
+          Liên hệ đặt hàng
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const galleries = document.querySelectorAll<HTMLElement>(
+      "[data-product-gallery]",
+    );
+
+    galleries.forEach((gallery) => {
+      const mainImage =
+        gallery.querySelector<HTMLImageElement>("[data-main-image]");
+
+      const container = gallery.parentElement;
+      const thumbnails =
+        container?.querySelectorAll<HTMLButtonElement>("[data-thumbnail]");
+
+      if (!mainImage || !thumbnails?.length) return;
+
+      thumbnails.forEach((thumbnail) => {
+        thumbnail.addEventListener("click", () => {
+          const imageSrc = thumbnail.dataset.imageSrc;
+          const imageAlt = thumbnail.dataset.imageAlt || "";
+
+          if (!imageSrc) return;
+
+          mainImage.style.opacity = "0";
+
+          window.setTimeout(() => {
+            mainImage.src = imageSrc;
+            mainImage.alt = imageAlt;
+            mainImage.style.opacity = "1";
+          }, 150);
+
+          thumbnails.forEach((item) => {
+            const isActive = item === thumbnail;
+
+            item.setAttribute("aria-pressed", String(isActive));
+
+            item.classList.toggle("border-[#794640]", isActive);
+            item.classList.toggle("ring-1", isActive);
+            item.classList.toggle("ring-[#794640]", isActive);
+
+            item.classList.toggle("border-transparent", !isActive);
+          });
+        });
+      });
+    });
+  </script>
+</BaseLayout>

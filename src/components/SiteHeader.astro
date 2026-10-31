@@ -1,0 +1,354 @@
+---
+const navigation = [
+  { label: "Trang chủ", href: "/" },
+  { label: "Sản phẩm", href: "/san-pham/" },
+  {
+    label: "Mèo Hoa",
+    href: "/san-pham/?category=8af55872-69be-4363-a43f-4fbbdf3a2fe6&badge=co-san",
+  },
+  {
+    label: "Mèo Thần Tài",
+    href: "/san-pham/?category=f99923c3-8e77-4158-bac5-0aa243364452&badge=co-san",
+  },
+  {
+    label: "Liên Hệ",
+    href: "/#lien-he",
+  },
+];
+---
+
+<!-- DESKTOP HEADER -->
+<header class="hidden border-b border-border bg-[#faf8f4] lg:block">
+  <div
+    class="mx-auto flex min-h-23 w-[calc(100%-32px)] max-w-300 items-center justify-between gap-8"
+  >
+    <a
+      class="flex shrink-0 flex-col gap-1 no-underline"
+      href="/"
+      aria-label="Mèo Hoa - Trang chủ"
+    >
+      <span
+        class="font-heading text-[32px] font-medium leading-none tracking-[-0.045em] text-text-heading"
+      >
+        Mèo Hoa
+      </span>
+      <span
+        class="text-[11px] font-semibold tracking-[0.22em] text-text-section"
+      >
+        ART FLORAL & MANEKI-NEKO
+      </span>
+    </a>
+
+    <nav
+      class="flex items-center justify-center gap-8"
+      aria-label="Điều hướng chính"
+    >
+      {
+        navigation.map((item) => (
+          <a
+            class="whitespace-nowrap text-[11px] font-sans font-semibold uppercase text-text-navbar no-underline transition-colors hover:text-[#794640]"
+            href={item.href}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      class="inline-flex shrink-0 items-center gap-2 bg-badge-background px-4 py-3 text-[11px] font-semibold text-white no-underline transition-colors hover:bg-text-heading"
+      href="#lien-he"
+    >
+      TƯ VẤN ĐẶT HÀNG
+    </a>
+  </div>
+</header>
+
+<!-- MOBILE HEADER -->
+<header
+  id="mobile-header"
+  class="sticky top-0 z-50 border-b border-border bg-[#faf8f4] shadow-sm transition-transform duration-300 ease-in-out will-change-transform lg:hidden"
+>
+  <div class="relative flex items-center justify-between px-5 sm:px-8 py-2">
+    <!-- Hamburger -->
+    <button
+      id="mobile-menu-toggle"
+      type="button"
+      class="flex h-11 w-11 shrink-0 items-center justify-center text-text-black transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-text-heading"
+      aria-label="Mở menu"
+      aria-expanded="false"
+      aria-controls="mobile-navigation"
+    >
+      <svg
+        id="menu-icon"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        class="h-6 w-5"
+      >
+        <path
+          d="M3 6h18M3 12h18M3 18h18"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="square"></path>
+      </svg>
+
+      <svg
+        id="close-icon"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        fill="none"
+        class="hidden h-7 w-7"
+      >
+        <path
+          d="m6 6 12 12M18 6 6 18"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"></path>
+      </svg>
+    </button>
+
+    <!-- Centered brand -->
+    <a
+      href="/"
+      aria-label="Mèo Hoa - Trang chủ"
+      class="absolute left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 whitespace-nowrap text-center no-underline"
+    >
+      <span
+        class="font-heading text-[22px] font-medium leading-none tracking-[-0.04em] text-text-heading"
+      >
+        Mèo Hoa
+      </span>
+
+      <span
+        class="text-[11px] font-semibold tracking-[0.14em] text-text-section min-[390px]:text-[11px] min-[390px]:tracking-[0.18em]"
+      >
+        ART FLORAL &amp; MANEKI-NEKO
+      </span>
+    </a>
+
+    <!-- Concierge -->
+    <a
+      href="#lien-he"
+      class="flex h-8 w-8 shrink-0 items-center justify-center text-text-section transition-opacity hover:opacity-60"
+      aria-label="Tư vấn đặt hàng"
+    >
+      <svg
+        width="19"
+        height="17"
+        viewBox="0 0 19 17"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.25 16.5V14.6667H15.5833V14.6667V14.6667V8.15833C15.5833 6.37083 14.9608 4.85451 13.7156 3.60938C12.4705 2.36424 10.9542 1.74167 9.16667 1.74167C7.37917 1.74167 5.86285 2.36424 4.61771 3.60938C3.37257 4.85451 2.75 6.37083 2.75 8.15833V13.75H1.83333C1.32917 13.75 0.897569 13.5705 0.538542 13.2115C0.179514 12.8524 0 12.4208 0 11.9167V10.0833C0 9.7625 0.0802083 9.46076 0.240625 9.17813C0.401042 8.89549 0.626389 8.67014 0.916667 8.50208L0.985417 7.2875C1.10764 6.24861 1.40937 5.28611 1.89062 4.4C2.37188 3.51389 2.97535 2.74236 3.70104 2.08542C4.42674 1.42847 5.25938 0.916667 6.19896 0.55C7.13854 0.183333 8.12778 0 9.16667 0C10.2056 0 11.191 0.183333 12.1229 0.55C13.0549 0.916667 13.8875 1.42465 14.6208 2.07396C15.3542 2.72326 15.9576 3.49097 16.4312 4.37708C16.9049 5.26319 17.2104 6.22569 17.3479 7.26458L17.4167 8.45625C17.7069 8.59375 17.9323 8.8 18.0927 9.075C18.2531 9.35 18.3333 9.64028 18.3333 9.94583V12.0542C18.3333 12.3597 18.2531 12.65 18.0927 12.925C17.9323 13.2 17.7069 13.4062 17.4167 13.5437V14.6667C17.4167 15.1708 17.2372 15.6024 16.8781 15.9615C16.5191 16.3205 16.0875 16.5 15.5833 16.5H8.25V16.5M6.41667 10.0833C6.15694 10.0833 5.93924 9.99549 5.76354 9.81979C5.58785 9.6441 5.5 9.42639 5.5 9.16667C5.5 8.90694 5.58785 8.68924 5.76354 8.51354C5.93924 8.33785 6.15694 8.25 6.41667 8.25C6.67639 8.25 6.8941 8.33785 7.06979 8.51354C7.24549 8.68924 7.33333 8.90694 7.33333 9.16667C7.33333 9.42639 7.24549 9.6441 7.06979 9.81979C6.8941 9.99549 6.67639 10.0833 6.41667 10.0833V10.0833M11.9167 10.0833C11.6569 10.0833 11.4392 9.99549 11.2635 9.81979C11.0878 9.6441 11 9.42639 11 9.16667C11 8.90694 11.0878 8.68924 11.2635 8.51354C11.4392 8.33785 11.6569 8.25 11.9167 8.25C12.1764 8.25 12.3941 8.33785 12.5698 8.51354C12.7455 8.68924 12.8333 8.90694 12.8333 9.16667C12.8333 9.42639 12.7455 9.6441 12.5698 9.81979C12.3941 9.99549 12.1764 10.0833 11.9167 10.0833V10.0833M3.68958 8.6625C3.58264 7.04306 4.07153 5.65278 5.15625 4.49167C6.24097 3.33056 7.59306 2.75 9.2125 2.75C10.5722 2.75 11.7677 3.1816 12.799 4.04479C13.8302 4.90799 14.4528 6.01181 14.6667 7.35625C13.2764 7.34097 11.9969 6.96667 10.8281 6.23333C9.65938 5.5 8.76181 4.50694 8.13542 3.25417C7.89097 4.47639 7.37535 5.56493 6.58854 6.51979C5.80174 7.47465 4.83542 8.18889 3.68958 8.6625V8.6625"
+          fill="#735B30"></path>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Mobile dropdown menu -->
+  <nav
+    id="mobile-navigation"
+    aria-label="Điều hướng mobile"
+    aria-hidden="true"
+    inert
+    class="absolute left-0 right-0 top-full overflow-hidden border-t border-border
+     bg-[#faf8f4] opacity-0 shadow-lg transition-[opacity,visibility] duration-200
+     invisible"
+  >
+    <div class="mx-auto flex max-w-150 flex-col px-6 py-3">
+      {
+        navigation.map((item) => (
+          <a
+            class="border-b border-border py-4 text-sm font-medium text-text-navbar no-underline transition-colors last:border-b-0 hover:text-text-heading"
+            href={item.href}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+
+      <a
+        href="#lien-he"
+        class="mt-4 inline-flex min-h-12 items-center justify-center
+        ro
+         bg-badge-background px-5 py-3 text-xs font-semibold uppercase
+         tracking-wide text-white no-underline transition-colors
+          hover:bg-text-heading"
+      >
+        Tư vấn đặt hàng
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- SCROLL BACK TO TOP -->
+<button
+  id="scroll-to-top"
+  type="button"
+  aria-label="Cuộn về đầu trang"
+  title="Về đầu trang"
+  class="invisible pointer-events-none fixed bottom-6 right-5 z-60 flex h-12 w-12 translate-y-3 items-center justify-center rounded-full bg-badge-background text-white opacity-0 shadow-lg shadow-black/15 transition-[opacity,transform,visibility,background-color] duration-300 hover:bg-text-heading focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:bottom-8 sm:right-8 lg:bottom-8 lg:right-8"
+>
+  <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-6 w-6">
+    <path
+      d="M12 19V5m-7 7 7-7 7 7"
+      stroke="currentColor"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+  </svg>
+</button>
+
+<script>
+  const mobileHeader = document.querySelector("#mobile-header");
+  const menuToggle = document.querySelector("#mobile-menu-toggle");
+  const mobileNavigation = document.querySelector("#mobile-navigation");
+  const menuIcon = document.querySelector("#menu-icon");
+  const closeIcon = document.querySelector("#close-icon");
+  const scrollToTopButton = document.querySelector("#scroll-to-top");
+
+  if (
+    mobileHeader instanceof HTMLElement &&
+    menuToggle instanceof HTMLButtonElement &&
+    mobileNavigation instanceof HTMLElement &&
+    menuIcon instanceof SVGElement &&
+    closeIcon instanceof SVGElement &&
+    scrollToTopButton instanceof HTMLButtonElement
+  ) {
+    let previousScrollY = window.scrollY;
+    let menuOpen = false;
+    let ticking = false;
+
+    const showHeader = () => {
+      mobileHeader.classList.remove("-translate-y-full");
+    };
+
+    const hideHeader = () => {
+      if (!menuOpen) {
+        mobileHeader.classList.add("-translate-y-full");
+      }
+    };
+
+    const showScrollButton = () => {
+      scrollToTopButton.classList.remove(
+        "invisible",
+        "pointer-events-none",
+        "translate-y-3",
+        "opacity-0",
+      );
+    };
+
+    const hideScrollButton = () => {
+      scrollToTopButton.classList.add(
+        "invisible",
+        "pointer-events-none",
+        "translate-y-3",
+        "opacity-0",
+      );
+    };
+
+    const closeMenu = () => {
+      menuOpen = false;
+
+      mobileNavigation.classList.add("invisible", "opacity-0");
+      mobileNavigation.classList.remove("visible", "opacity-100");
+      mobileNavigation.setAttribute("aria-hidden", "true");
+      mobileNavigation.setAttribute("inert", "");
+
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Mở menu");
+
+      menuIcon.classList.remove("hidden");
+      closeIcon.classList.add("hidden");
+    };
+
+    const openMenu = () => {
+      menuOpen = true;
+
+      showHeader();
+
+      mobileNavigation.classList.remove("invisible", "opacity-0");
+      mobileNavigation.classList.add("visible", "opacity-100");
+      mobileNavigation.setAttribute("aria-hidden", "false");
+      mobileNavigation.removeAttribute("inert");
+
+      menuToggle.setAttribute("aria-expanded", "true");
+      menuToggle.setAttribute("aria-label", "Đóng menu");
+
+      menuIcon.classList.add("hidden");
+      closeIcon.classList.remove("hidden");
+    };
+
+    menuToggle.addEventListener("click", () => {
+      if (menuOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    mobileNavigation.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (ticking) return;
+
+        ticking = true;
+
+        window.requestAnimationFrame(() => {
+          const currentScrollY = Math.max(0, window.scrollY);
+          const scrollDifference = currentScrollY - previousScrollY;
+
+          // Luôn hiện header ở gần đầu trang.
+          if (currentScrollY < 80) {
+            showHeader();
+            hideScrollButton();
+          } else {
+            // Chỉ hiện nút về đầu trang trên mobile.
+            if (window.matchMedia("(max-width: 1023px)").matches) {
+              if (scrollDifference < -4) {
+                showScrollButton();
+              } else if (scrollDifference > 4) {
+                hideScrollButton();
+              }
+            }
+
+            // Cuộn xuống thì ẩn header, cuộn lên thì hiện.
+            if (scrollDifference > 5 && currentScrollY > 120) {
+              hideHeader();
+              closeMenu();
+            } else if (scrollDifference < -5) {
+              showHeader();
+            }
+          }
+
+          previousScrollY = currentScrollY;
+          ticking = false;
+        });
+      },
+      { passive: true },
+    );
+
+    scrollToTopButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
+    // Không giữ menu mobile mở khi chuyển sang desktop.
+    window
+      .matchMedia("(min-width: 1024px)")
+      .addEventListener("change", (event) => {
+        if (event.matches) {
+          closeMenu();
+          showHeader();
+        }
+      });
+  }
+</script>

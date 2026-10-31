@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meohoa.io.vn/sitemap-index.xml

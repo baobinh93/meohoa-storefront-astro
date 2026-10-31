@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+@import "tailwindcss";
+
+/* ========================================
+   MÈO HOA — DESIGN TOKENS
+   ======================================== */
+
+@theme {
+  /* Typography */
+  --font-heading: "Playfair Display", serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+
+  /* Brand colors */
+  --color-text-navbar: #524344;
+  --color-text-card: #524344;
+  --color-text-white: #ffffff;
+  --color-text-section: #735b30;
+  --color-text-heading: #5c2730;
+  --color-text-black: #1b1c1a;
+
+  /* Product badges */
+  --color-badge-text: #ffffff;
+  --color-badge-background: #783d46;
+
+  /* Background colors */
+  --color-background: #f5f3ef;
+  --color-surface: #fbf9f5;
+
+  /* Supporting colors */
+  --color-muted: #74665d;
+  --color-border: #e8dfd5;
+  --color-gold: #a58a73;
+}
+
+/* ========================================
+   CSS VARIABLES
+   Dùng cho CSS thông thường và các component
+   ======================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Brand */
+  --mh-burgundy: #5c2730;
+  --mh-burgundy-dark: #783d46;
+
+  /* Background */
+  --mh-ivory: #f5f3ef;
+  --mh-paper: #fbf9f5;
+
+  /* Text */
+  --mh-ink: #1b1c1a;
+  --mh-text-navbar: #524344;
+  --mh-text-card: #524344;
+  --mh-text-section: #735b30;
+  --mh-text-white: #ffffff;
+  --mh-muted: #74665d;
+
+  /* Border & accent */
+  --mh-line: #e8dfd5;
+  --mh-gold: #a58a73;
+
+  /* Badge */
+  --mh-badge-bg: #783d46;
+  --mh-badge-text: #ffffff;
+}
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+  background: var(--mh-ivory);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--mh-ivory);
+
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+select,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  color: var(--mh-text-white);
+  background: var(--mh-burgundy);
+}

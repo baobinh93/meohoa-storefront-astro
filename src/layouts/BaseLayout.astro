@@ -1,0 +1,85 @@
+---
+import "../styles/global.css";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Mèo Hoa | Hoa lụa và quà tặng tinh tế",
+  description = "Khám phá hoa lụa, mèo thần tài và giỏ quà tinh tế tại Mèo Hoa.",
+  canonicalPath,
+  ogImage,
+} = Astro.props;
+
+// Domain chính thức của website
+const siteUrl = Astro.site ?? new URL("https://meohoa.io");
+
+// Canonical URL
+const canonicalUrl = canonicalPath
+  ? new URL(canonicalPath, siteUrl).toString()
+  : new URL(Astro.url.pathname, siteUrl).toString();
+
+// Chuẩn hóa URL ảnh Open Graph thành URL tuyệt đối
+const absoluteOgImage = ogImage
+  ? new URL(ogImage, siteUrl).toString()
+  : undefined;
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO cơ bản -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#faf8f4" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:site_name" content="Mèo Hoa" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+
+    {
+      absoluteOgImage && (
+        <>
+          <meta property="og:image" content={absoluteOgImage} />
+          <meta property="og:image:alt" content={title} />
+        </>
+      )
+    }
+
+    <!-- Twitter Card -->
+    <meta
+      name="twitter:card"
+      content={absoluteOgImage ? "summary_large_image" : "summary"}
+    />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {absoluteOgImage && <meta name="twitter:image" content={absoluteOgImage} />}
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+
+  <body class="min-h-screen bg-[#faf8f4] text-[#423833] antialiased">
+    <SiteHeader />
+    <slot />
+    <SiteFooter />
+  </body>
+</html>

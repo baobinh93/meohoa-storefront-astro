@@ -1,0 +1,1472 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Mèo Hoa | Hoa lụa và quà tặng tinh tế";
+const pageDescription =
+  "Khám phá hoa lụa, mèo thần tài và giỏ quà tinh tế tại Mèo Hoa.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} canonicalPath="/">
+  <main>
+    <!-- SECTION 01: HERO | Mobile + Desktop -->
+
+    <section class="overflow-hidden bg-surface py-12 sm:py-16 lg:py-20">
+      <!-- MOBILE HERO: hiển thị dưới breakpoint lg -->
+      <div
+        class="mx-auto w-[calc(100%-32px)] max-w-105 sm:w-[calc(100%-48px)] lg:hidden"
+      >
+        <!-- Collection label -->
+        <div
+          class="mb-6 inline-flex items-center gap-2 rounded-lg bg-[#FCDBA6]/50 px-3 py-1"
+        >
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5.81875 11.6667C4.90486 11.55 4.08819 11.3167 3.36875 10.9667C2.64931 10.6167 2.03924 10.1597 1.53854 9.59583C1.03785 9.03195 0.65625 8.37813 0.39375 7.63438C0.13125 6.89062 0 6.06667 0 5.1625C1.06944 5.26944 1.97361 5.46389 2.7125 5.74583C3.45139 6.02778 4.05174 6.42639 4.51354 6.94167C4.97535 7.45694 5.30833 8.10104 5.5125 8.87396C5.71667 9.64688 5.81875 10.5778 5.81875 11.6667V11.6667M5.81875 6.75208C5.59514 6.41181 5.29132 6.07639 4.90729 5.74583C4.52326 5.41528 4.07847 5.11389 3.57292 4.84167C3.63125 4.43333 3.72847 4.01042 3.86458 3.57292C4.00069 3.13542 4.16597 2.70521 4.36042 2.28229C4.55486 1.85938 4.77604 1.45347 5.02396 1.06458C5.27187 0.675694 5.53681 0.320833 5.81875 0C6.10069 0.320833 6.36562 0.675694 6.61354 1.06458C6.86146 1.45347 7.08264 1.85938 7.27708 2.28229C7.47153 2.70521 7.63681 3.13542 7.77292 3.57292C7.90903 4.01042 8.00625 4.43333 8.06458 4.84167C7.55903 5.10417 7.11424 5.40069 6.73021 5.73125C6.34618 6.06181 6.04236 6.40208 5.81875 6.75208V6.75208M6.98542 11.4333C6.96597 10.7528 6.91493 10.1233 6.83229 9.54479C6.74965 8.96632 6.62083 8.41944 6.44583 7.90417C6.90278 7.11667 7.53229 6.475 8.33438 5.97917C9.13646 5.48333 10.2375 5.21111 11.6375 5.1625C11.6472 6.69861 11.2365 8.02326 10.4052 9.13646C9.57396 10.2497 8.43403 11.0153 6.98542 11.4333V11.4333"
+              fill="#775F34"></path>
+          </svg>
+
+          <span
+            class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#775f34]"
+          >
+            MÈO HOA COLLECTION
+          </span>
+        </div>
+
+        <!-- Heading -->
+        <h1
+          class="m-0 font-heading text-[clamp(2.5rem,10vw,3.4rem)] font-medium leading-[1.02]
+          tracking-[-0.045em] text-text-heading"
+        >
+          Trao gửi may mắn,
+          <span class="mt-1 block font-heading font-medium">
+            gửi trọn thành ý.
+          </span>
+        </h1>
+
+        <!-- Description -->
+        <p class="mb-0 mt-5 text-[15px] leading-[24.4px] text-text-navbar">
+          Hộp hoa lụa kết hợp Mèo Thần Tài tinh tế, chăm chút từng chi tiết cho
+          những dịp đặc biệt.
+        </p>
+
+        <!-- Featured product card -->
+        <div
+          class="mt-6 overflow-hidden rounded-2xl border border-border/40 bg-white shadow-lg shadow-text-black/10"
+        >
+          <!-- Image area -->
+          <div class="relative aspect-[0.82/1] overflow-hidden bg-[#E9E0D5]">
+            <img
+              src="/images/home/01-hero/hero-01.png"
+              alt="Hộp hoa kết hợp mèo thần tài Mèo Hoa"
+              class="absolute inset-0 h-full w-full object-contain"
+            />
+
+            <!-- Image label -->
+            <span
+              class="absolute left-4 top-4 rounded-xl bg-surface/90 pt-2.5 px-2.5 pb-1.5 text-[11px]
+              font-semibold uppercase tracking-wide text-text-heading shadow-sm"
+            >
+              Hoa lụa cao cấp
+            </span>
+
+            <!-- Gradient overlay -->
+            <div
+              class="absolute inset-x-0 bottom-0 h-36 bg-linear-to-t from-black/65 to-transparent"
+            >
+            </div>
+
+            <!-- Product name and price -->
+            <div
+              class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 sm:p-5"
+            >
+              <div class="min-w-0">
+                <h2
+                  class="m-0 font-heading text-[25px] leading-tight text-white sm:text-[28px]"
+                >
+                  Mèo Hoa Phú Quý
+                </h2>
+                <p
+                  class="mb-0 mt-2 text-[11px] font-medium uppercase tracking-[0.12em] text-white/85 sm:text-xs"
+                >
+                  SIGNATURE 2026
+                </p>
+              </div>
+
+              <p
+                class="m-0 shrink-0 font-heading text-[23px] font-semibold text-[#F5D7A0] sm:text-[27px]"
+              >
+                1.690.000đ
+              </p>
+            </div>
+          </div>
+
+          <!-- CTA buttons -->
+          <div class="flex flex-col gap-3 p-4 sm:p-5">
+            <a
+              href="/san-pham/"
+              class="inline-flex min-h-15 items-center justify-center gap-3 rounded-lg
+               bg-badge-background px-4 py-4 text-center text-[14px] font-medium
+                text-white transition-colors hover:bg-text-heading"
+            >
+              Khám phá Mèo Hoa
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="h-6 w-6 shrink-0"
+              >
+                <path
+                  d="M4 12h15M13 5l7 7-7 7"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+
+            <a
+              href="#bo-suu-tap"
+              class="inline-flex min-h-15 items-center justify-center rounded-lg
+               bg-[#F0EEEA] px-4 py-4 text-center text-[14px] font-medium text-text-black transition-colors hover:bg-border"
+            >
+              Xem hai bộ sưu tập đặc trưng
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="mx-auto hidden w-[calc(100%-32px)] max-w-360 items-center gap-10
+         sm:w-[calc(100%-48px)] lg:grid lg:grid-cols-[0.82fr_1.18fr]
+                lg:gap-10 xl:gap-12"
+      >
+        <!-- LEFT: Hero content -->
+        <div class="flex min-w-0 flex-col">
+          <!-- Eyebrow -->
+          <div class="mb-6 flex items-center gap-3">
+            <span class="h-px w-8 shrink-0 bg-gold"></span>
+            <p
+              class="m-0 text-[11px] font-semibold uppercase tracking-[0.2em] text-text-section sm:text-xs"
+            >
+              MÈO HOA COLLECTION
+            </p>
+          </div>
+
+          <!-- Heading -->
+          <h1
+            class="m-0 font-heading text-[clamp(2.6rem,5.2vw,4.5rem)] font-medium leading-[1.08] tracking-[-0.045em] text-text-heading"
+          >
+            Trao gửi may mắn,
+            <span
+              class="mt-1 block font-heading font-normal italic text-text-section"
+            >
+              gửi trọn thành ý.
+            </span>
+          </h1>
+
+          <!-- Description -->
+          <p
+            class="mb-0 mt-6 max-w-140 text-sm leading-7 text-text-navbar sm:text-base"
+          >
+            Sự kết hợp giữa hoa lụa cùng với Mèo Thần Tài đầy tinh tế, gửi trao
+            lời chúc may mắn, tài lộc và những điều tốt đẹp.
+          </p>
+
+          <!-- CTA buttons -->
+          <div class="mt-7 flex flex-col gap-3 min-[420px]:flex-row sm:mt-8">
+            <a
+              href="/san-pham/"
+              class="inline-flex min-h-14 items-center justify-center bg-badge-background px-6 py-4 text-center text-xs font-semibold uppercase tracking-wide text-white transition-colors duration-300 hover:bg-text-heading focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-w-[236px]"
+            >
+              KHÁM PHÁ MÈO HOA
+            </a>
+
+            <a
+              href="/san-pham/"
+              class="inline-flex min-h-14 items-center justify-center bg-surface px-6 py-4 text-center text-xs font-semibold uppercase tracking-wide text-text-black transition-colors duration-300 hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-w-[196px]"
+            >
+              XEM BỘ SƯU TẬP
+            </a>
+          </div>
+
+          <!-- Brand benefits -->
+          <div
+            class="mt-10 grid grid-cols-1 gap-4 rounded-xl bg-surface p-4 min-[420px]:grid-cols-3 min-[420px]:gap-3 sm:mt-14 sm:p-5"
+          >
+            <!-- Benefit 1 -->
+            <div class="flex items-center gap-3">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 32 32"
+                fill="none"
+                class="h-6 w-6 shrink-0 text-gold"
+              >
+                <path
+                  d="M16 2.5 18.5 9l6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5L7 11.5 13.5 9 16 2.5Z"
+                  fill="currentColor"></path>
+                <path
+                  d="m6 18 1.5 3.5L11 23l-3.5 1.5L6 28l-1.5-3.5L1 23l3.5-1.5L6 18Z"
+                  fill="currentColor"></path>
+                <path
+                  d="m25 17 1.5 3.5L30 22l-3.5 1.5L25 27l-1.5-3.5L20 22l3.5-1.5L25 17Z"
+                  fill="currentColor"></path>
+              </svg>
+              <p
+                class="m-0 text-[11px] font-medium uppercase leading-[1.6] tracking-wide text-text-navbar"
+              >
+                TƯ VẤN TẬN TÂM
+              </p>
+            </div>
+
+            <!-- Benefit 2 -->
+            <div
+              class="flex items-center gap-3 min-[420px]:border-l min-[420px]:border-border min-[420px]:pl-3"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 32 32"
+                fill="none"
+                class="h-6 w-6 shrink-0 text-gold"
+              >
+                <path
+                  d="M16 28C8 23 5 17 7 11c5 0 8 4 9 9 1-7 4-11 9-12 2 8-1 15-9 20Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M16 28V16M12 17l4 4m4-8-4 4"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"></path>
+              </svg>
+              <p
+                class="m-0 text-[11px] font-medium uppercase leading-[1.6] tracking-wide text-text-navbar"
+              >
+                THIẾT KẾ THỦ CÔNG
+              </p>
+            </div>
+
+            <!-- Benefit 3 -->
+            <div
+              class="flex items-center gap-3 min-[420px]:border-l min-[420px]:border-border min-[420px]:pl-3"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 32 32"
+                fill="none"
+                class="h-6 w-6 shrink-0 text-gold"
+              >
+                <rect
+                  x="5"
+                  y="5"
+                  width="22"
+                  height="23"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.8"></rect>
+                <path
+                  d="M5 11h22M11 17h10M11 21h10"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"></path>
+              </svg>
+              <p
+                class="m-0 text-[11px] font-medium uppercase leading-[1.6] tracking-wide text-text-navbar"
+              >
+                GIAO HÀNG CHỈN CHU
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Image placeholder -->
+        <div class="relative min-w-0">
+          <!-- Decorative circles -->
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -right-5 -top-5 hidden aspect-square w-36 rounded-full border border-gold/30 sm:block lg:-right-7 lg:-top-7 lg:w-44"
+          >
+          </div>
+
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -right-8 -top-8 hidden aspect-square
+            w-36 rounded-full border border-dashed border-gold/40 sm:block
+            lg:-right-10 lg:-top-10 lg:w-44"
+          >
+          </div>
+
+          <div
+            class="relative aspect-4/3 w-full overflow-hidden rounded-lg bg-surface shadow-xl shadow-text-black/10 sm:aspect-[5/4] lg:aspect-[1.08/1]"
+          >
+            <img
+              src="/images/home/01-hero/hero-01.png"
+              alt="Hộp hoa kết hợp mèo thần tài Mèo Hoa"
+              class="absolute inset-0 h-full w-full object-contain"
+            />
+
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p class="m-0 text-xs uppercase tracking-[0.2em] text-muted/60">
+                HÌNH ẢNH SẢN PHẨM
+              </p>
+            </div>
+          </div>
+
+          <!-- Signature label -->
+          <div
+            class="absolute bottom-4 left-4 flex max-w-[calc(100%-32px)] items-center gap-3 rounded-md bg-surface px-4 py-3 shadow-lg sm:bottom-6 sm:left-6 sm:gap-4 sm:px-6 sm:py-4 lg:bottom-8 lg:left-8"
+          >
+            <span class="h-3 w-3 shrink-0 rounded-full bg-[#F5D7A0]"></span>
+            <div class="min-w-0">
+              <p
+                class="m-0 text-[9px] font-medium uppercase tracking-[0.16em] text-text-section sm:text-[10px]"
+              >
+                SIGNATURE EDITION
+              </p>
+              <p
+                class="m-0 mt-1 truncate font-heading text-base text-text-heading sm:text-xl"
+              >
+                Phú Quý Cát Tường
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 02: FEATURED COLLECTIONS -->
+
+    <section id="bo-suu-tap" class="bg-background py-8 sm:py-16">
+      <div class="mx-auto w-[calc(100%-32px)] max-w-360 sm:w-[calc(100%-48px)]">
+        <!-- Section heading -->
+        <div
+          class="mb-8 flex flex-col gap-1 sm:mb-10 lg:mb-12 lg:flex-row lg:items-end lg:justify-between"
+        >
+          <div>
+            <p
+              class="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em]
+               text-text-section sm:text-xs"
+            >
+              ĐẶC TRƯNG MÈO HOA
+            </p>
+
+            <h2
+              class="m-0 font-heading text-[clamp(2rem,4vw,3rem)] font-medium
+               leading-tight tracking-[-0.035em] text-text-heading"
+            >
+              Hai Bộ Sưu Tập Đặc Trưng
+            </h2>
+          </div>
+
+          <p
+            class="m-0 max-w-120 text-[13px] leading-5
+             text-text-navbar sm:text-base sm:leading-7 lg:pb-1"
+          >
+            Sự kết hợp tinh tế giữa nghệ thuật cắm hoa và mèo thần tài, gửi trao
+            lời chúc may mắn, tài lộc và thịnh vượng.
+          </p>
+        </div>
+
+        <!-- Collection cards -->
+        <div
+          class="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[1.2fr_0.85fr] lg:gap-8"
+        >
+          <!-- Card 1: Mèo Hoa -->
+          <article
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/50
+             bg-surface shadow-sm transition-shadow duration-300 hover:shadow-lg"
+          >
+            <!-- Image placeholder -->
+            <div
+              class="relative aspect-4/3 w-full overflow-hidden bg-[#E9E0D5]
+              sm:aspect-[1.55/1] lg:aspect-[1.55/1]"
+            >
+              <img
+                src="/images/home/02-collections/meohoa-01.png"
+                alt="Bộ sưu tập Mèo Hoa"
+                class="absolute inset-0 h-full w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+
+              <span
+                class="absolute right-3 top-3 w-fit whitespace-nowrap rounded-xl bg-badge-background px-3 py-1
+  text-[11px] font-semibold uppercase tracking-wide text-white sm:left-5 sm:right-auto sm:top-5"
+              >
+                BỘ SƯU TẬP CHỦ ĐẠO
+              </span>
+            </div>
+
+            <!-- Card content -->
+            <div class="flex flex-1 flex-col p-5 sm:p-7 lg:p-8">
+              <div class="flex flex-wrap items-center gap-2">
+                <div class="">
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.70175 16.6667C6.91009 16.6667 6.2087 16.4167 5.59759 15.9167C4.98648 15.4167 4.60453 14.7778 4.45175 14C3.71564 14.2361 2.97259 14.2222 2.22259 13.9583C1.47259 13.6944 0.896199 13.2361 0.493421 12.5833C0.0767544 11.9167 -0.0760234 11.1771 0.0350877 10.3646C0.146199 9.55208 0.50731 8.875 1.11842 8.33333C0.535088 7.80556 0.184393 7.15278 0.0663377 6.375C-0.0517178 5.59722 0.0767544 4.875 0.451754 4.20833C0.826754 3.54167 1.39273 3.05903 2.14967 2.76042C2.90662 2.46181 3.66009 2.43056 4.41009 2.66667C4.56287 1.88889 4.94481 1.25 5.55592 0.75C6.16703 0.25 6.86842 0 7.66009 0C8.45175 0 9.15314 0.25 9.76425 0.75C10.3754 1.25 10.7573 1.88889 10.9101 2.66667C11.6879 2.43056 12.4413 2.45139 13.1705 2.72917C13.8997 3.00694 14.4656 3.5 14.8684 4.20833C15.2434 4.90278 15.3788 5.62847 15.2747 6.38542C15.1705 7.14236 14.8129 7.79167 14.2018 8.33333C14.8129 8.875 15.1774 9.54514 15.2955 10.3438C15.4136 11.1424 15.2851 11.8889 14.9101 12.5833C14.5073 13.2917 13.9413 13.7639 13.2122 14C12.483 14.2361 11.7295 14.2361 10.9518 14C10.799 14.7778 10.417 15.4167 9.80592 15.9167C9.19481 16.4167 8.49342 16.6667 7.70175 16.6667V16.6667M7.66009 11.6667C8.57675 11.6667 9.36148 11.3403 10.0143 10.6875C10.667 10.0347 10.9934 9.25 10.9934 8.33333C10.9934 7.41667 10.667 6.63194 10.0143 5.97917C9.36148 5.32639 8.57675 5 7.66009 5C6.74342 5 5.9587 5.32639 5.30592 5.97917C4.65314 6.63194 4.32675 7.41667 4.32675 8.33333C4.32675 9.25 4.65314 10.0347 5.30592 10.6875C5.9587 11.3403 6.74342 11.6667 7.66009 11.6667V11.6667"
+                      fill="#5C2730"></path>
+                  </svg>
+                </div>
+                <h3
+                  class="m-0 font-heading text-2xl font-normal text-text-black sm:text-[30px]"
+                >
+                  Mèo Hoa
+                </h3>
+              </div>
+
+              <p
+                class="mb-0 mt-2 text-[15px] leading-7 text-text-navbar sm:text-base sm:leading-6"
+              >
+                Những thiết kế quà tặng kết hợp vẻ đẹp tinh tế của hoa lụa cao
+                cấp cùng biểu tượng may mắn, gửi trao lời chúc tài lộc, thịnh
+                vượng trong những dịp trọng đại.
+              </p>
+
+              <a
+                href="/san-pham/"
+                class="mt-6 inline-flex w-fit items-center gap-2 py-2 text-[14px]
+                font-semibold uppercase tracking-widest text-text-heading
+                transition-colors hover:text-text-section focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:mt-7 sm:text-xs"
+              >
+                Khám phá bộ sưu tập
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  <path
+                    d="M4 12h15M13 5l7 7-7 7"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 2: Mèo Thần Tài -->
+          <article
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/50
+             bg-surface shadow-sm transition-shadow duration-300 hover:shadow-lg"
+          >
+            <!-- Image placeholder -->
+            <div
+              class="relative aspect-4/3 w-full overflow-hidden bg-[#E9E0D5]
+              sm:aspect-[1.55/1] lg:aspect-[1.55/1]"
+            >
+              <img
+                src="/images/home/02-collections/meothantai-01.png"
+                alt="Bộ sưu tập Mèo Hoa"
+                class="absolute inset-0 h-full w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                loading="lazy"
+              />
+
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span
+                  class="text-[10px] uppercase tracking-[0.2em] text-text-navbar/50"
+                >
+                  HÌNH ẢNH BỘ SƯU TẬP
+                </span>
+              </div>
+
+              <span
+                class="absolute right-3 top-3 w-fit whitespace-nowrap rounded-xl bg-[#735B30] px-3 py-1
+  text-[11px] font-semibold uppercase tracking-wide text-white sm:left-5 sm:right-auto sm:top-5"
+              >
+                SẢN PHẨM CAO CẤP
+              </span>
+            </div>
+
+            <!-- Card content -->
+            <div class="flex flex-1 flex-col p-5 sm:p-7 lg:p-8">
+              <div class="flex flex-wrap items-center gap-2">
+                <div class="">
+                  <svg
+                    width="17"
+                    height="16"
+                    viewBox="0 0 17 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.08333 7.5C1.5 7.5 1.00694 7.29861 0.604167 6.89583C0.201389 6.49306 0 6 0 5.41667C0 4.83333 0.201389 4.34028 0.604167 3.9375C1.00694 3.53472 1.5 3.33333 2.08333 3.33333C2.66667 3.33333 3.15972 3.53472 3.5625 3.9375C3.96528 4.34028 4.16667 4.83333 4.16667 5.41667C4.16667 6 3.96528 6.49306 3.5625 6.89583C3.15972 7.29861 2.66667 7.5 2.08333 7.5V7.5M5.83333 4.16667C5.25 4.16667 4.75694 3.96528 4.35417 3.5625C3.95139 3.15972 3.75 2.66667 3.75 2.08333C3.75 1.5 3.95139 1.00694 4.35417 0.604167C4.75694 0.201389 5.25 0 5.83333 0C6.41667 0 6.90972 0.201389 7.3125 0.604167C7.71528 1.00694 7.91667 1.5 7.91667 2.08333C7.91667 2.66667 7.71528 3.15972 7.3125 3.5625C6.90972 3.96528 6.41667 4.16667 5.83333 4.16667V4.16667M10.8333 4.16667C10.25 4.16667 9.75694 3.96528 9.35417 3.5625C8.95139 3.15972 8.75 2.66667 8.75 2.08333C8.75 1.5 8.95139 1.00694 9.35417 0.604167C9.75694 0.201389 10.25 0 10.8333 0C11.4167 0 11.9097 0.201389 12.3125 0.604167C12.7153 1.00694 12.9167 1.5 12.9167 2.08333C12.9167 2.66667 12.7153 3.15972 12.3125 3.5625C11.9097 3.96528 11.4167 4.16667 10.8333 4.16667V4.16667M14.5833 7.5C14 7.5 13.5069 7.29861 13.1042 6.89583C12.7014 6.49306 12.5 6 12.5 5.41667C12.5 4.83333 12.7014 4.34028 13.1042 3.9375C13.5069 3.53472 14 3.33333 14.5833 3.33333C15.1667 3.33333 15.6597 3.53472 16.0625 3.9375C16.4653 4.34028 16.6667 4.83333 16.6667 5.41667C16.6667 6 16.4653 6.49306 16.0625 6.89583C15.6597 7.29861 15.1667 7.5 14.5833 7.5V7.5M3.875 15.8333C3.25 15.8333 2.72569 15.5938 2.30208 15.1146C1.87847 14.6354 1.66667 14.0694 1.66667 13.4167C1.66667 12.6944 1.91319 12.0625 2.40625 11.5208C2.89931 10.9792 3.38889 10.4444 3.875 9.91667C4.27778 9.48611 4.625 9.01736 4.91667 8.51042C5.20833 8.00347 5.55556 7.52778 5.95833 7.08333C6.26389 6.72222 6.61806 6.42361 7.02083 6.1875C7.42361 5.95139 7.86111 5.83333 8.33333 5.83333C8.80556 5.83333 9.24306 5.94444 9.64583 6.16667C10.0486 6.38889 10.4028 6.68056 10.7083 7.04167C11.0972 7.48611 11.441 7.96528 11.7396 8.47917C12.0382 8.99306 12.3889 9.47222 12.7917 9.91667C13.2778 10.4444 13.7674 10.9792 14.2604 11.5208C14.7535 12.0625 15 12.6944 15 13.4167C15 14.0694 14.7882 14.6354 14.3646 15.1146C13.941 15.5938 13.4167 15.8333 12.7917 15.8333C12.0417 15.8333 11.2986 15.7708 10.5625 15.6458C9.82639 15.5208 9.08333 15.4583 8.33333 15.4583C7.58333 15.4583 6.84028 15.5208 6.10417 15.6458C5.36806 15.7708 4.625 15.8333 3.875 15.8333V15.8333"
+                      fill="#735B30"></path>
+                  </svg>
+                </div>
+                <h3
+                  class="m-0 font-heading text-2xl font-normal text-text-black sm:text-[30px]"
+                >
+                  Mèo Thần Tài
+                </h3>
+              </div>
+
+              <p
+                class="mb-0 mt-2 text-[15px] leading-7 text-text-navbar sm:text-base sm:leading-6"
+              >
+                Những chú Mèo Thần Tài được chăm chút tỉ mỉ đến từng đường nét,
+                sắc sảo trong từng chi tiết, mang ý nghĩa chiêu tài, đón lộc và
+                thu hút may mắn, thịnh vượng.
+              </p>
+
+              <a
+                href="/san-pham/"
+                class="mt-6 inline-flex w-fit items-center gap-2 py-2 text-[14px]
+                font-semibold tracking-widest text-text-section
+                transition-colors hover:text-text-section focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:mt-7 sm:text-xs"
+              >
+                Xem các mẫu mèo
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  <path
+                    d="M4 12h15M13 5l7 7-7 7"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SECTION 03: FEATURED PRODUCTS -->
+    <!-- ===================================================== -->
+    <section class="bg-surface py-8 sm:py-16">
+      <div class="mx-auto w-[calc(100%-32px)] max-w-360 sm:w-[calc(100%-48px)]">
+        <!-- Section heading -->
+        <div class="mx-auto mb-10 max-w-3xl sm:mb-12 lg:mb-16">
+          <p
+            class="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-text-section
+            sm:text-xs"
+          >
+            ĐƯỢC TUYỂN CHỌN
+          </p>
+
+          <h2
+            class="m-0 font-heading text-[28px] font-medium leading-tight tracking-[-0.035em] text-text-heading sm:text-[clamp(2rem,4vw,3rem)]"
+          >
+            Những Thiết Kế Nổi Bật
+          </h2>
+
+          <p
+            class="mx-auto mb-0 mt-1 max-w-180 text-[13px] leading-5
+             text-text-navbar sm:text-base"
+          >
+            Khám phá những mẫu Mèo Hoa được tuyển chọn từ bộ sưu tập của chúng
+            tôi, mỗi tác phẩm là một lời chúc khởi sắc và an yên.
+          </p>
+        </div>
+
+        <!-- Product cards -->
+        <div
+          class="grid grid-cols-2 items-stretch gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-7 lg:grid-cols-4 lg:gap-6"
+        >
+          <!-- Product 1 -->
+          <article
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/40 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
+          >
+            <!-- Product image -->
+            <a
+              href="/san-pham/"
+              class="relative block aspect-[0.82/1] overflow-hidden bg-background sm:aspect-[0.9/1] lg:aspect-[0.78/1]"
+              aria-label="Khám phá Mèo Hoa Như Ý Cát Tường"
+            >
+              <img
+                src="/images/home/03-featured-products/product-01.png"
+                alt="Mèo Hoa Như Ý Cát Tường"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+
+              <span
+                class="absolute left-2 top-2 rounded-xl bg-[#5c2730] px-2 py-0.5 text-[10px] font-semibold uppercase leading-6 tracking-wide text-white"
+              >
+                BÁN CHẠY
+              </span>
+            </a>
+
+            <!-- Product information -->
+            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-4 lg:p-5">
+              <p
+                class="m-0 text-[8px] font-medium uppercase tracking-wide text-text-section sm:text-[10px]"
+              >
+                CHIÊU TÀI • CÁT VẬN
+              </p>
+
+              <h3
+                class="m-0 font-heading text-base font-normal leading-6 text-text-black sm:text-xl"
+              >
+                <a
+                  href="/san-pham/"
+                  class="no-underline transition-colors hover:text-text-section"
+                >
+                  Mèo Hoa Cát Tường
+                </a>
+              </h3>
+
+              <p
+                class="mb-0 mt-2 line-clamp-3 text-[12px] leading-6 text-text-navbar"
+              >
+                Hộp hoa hồng kết hợp với lan cùng mẫu mèo Đế Vương xanh. Tông
+                màu thanh nhã, tượng trưng cho may mắn, tài lộc và khởi đầu
+                thuận lợi.
+              </p>
+
+              <!-- Price pinned to bottom -->
+              <div class="mt-auto flex items-end justify-between gap-2 pt-4">
+                <p
+                  class="m-0 font-heading text-base font-semibold text-text-heading sm:text-xl"
+                >
+                  950.000đ
+                </p>
+
+                <a
+                  href="/san-pham/"
+                  aria-label="Xem Mèo Hoa Như Ý Cát Tường"
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-lg text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
+                >
+                  +
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 2 -->
+          <article
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/40 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
+          >
+            <!-- Product image -->
+            <a
+              href="/san-pham/"
+              class="relative block aspect-[0.82/1] overflow-hidden bg-background sm:aspect-[0.9/1] lg:aspect-[0.78/1]"
+              aria-label="Khám phá Mèo Hoa Khai Trương Đại Phát"
+            >
+              <img
+                src="/images/home/03-featured-products/product-02.png"
+                alt="Mèo Hoa Như Ý Cát Tường"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+
+              <span
+                class="absolute left-2 top-2 rounded-xl bg-[#735B30] px-2 py-0.5 text-[10px] font-semibold uppercase leading-6 tracking-wide text-white"
+              >
+                KHAI TRƯƠNG
+              </span>
+            </a>
+
+            <!-- Product information -->
+            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-4 lg:p-5">
+              <p
+                class="m-0 text-[8px] font-medium uppercase tracking-wide text-text-section sm:text-[10px]"
+              >
+                TÀI LỘC • HANH THÔNG
+              </p>
+
+              <h3
+                class="m-0 font-heading text-base font-normal leading-6 text-text-black sm:text-xl"
+              >
+                <a
+                  href="/san-pham/"
+                  class="no-underline transition-colors hover:text-text-section"
+                >
+                  Mèo Hoa Khai Phúc
+                </a>
+              </h3>
+
+              <p
+                class="mb-0 mt-2 line-clamp-3 text-[12px] leading-6 text-text-navbar"
+              >
+                Hộp hoa tone hồng điểm xuyết nơ voan mềm mại cùng mèo thần tài.
+                Sắc hồng ngọt ngào gửi gắm lời chúc tài lộc và mọi việc hanh
+                thông.
+              </p>
+
+              <!-- Price pinned to bottom -->
+              <div class="mt-auto flex items-end justify-between gap-2 pt-4">
+                <p
+                  class="m-0 font-heading text-base font-semibold text-text-heading sm:text-xl"
+                >
+                  400.000đ
+                </p>
+
+                <a
+                  href="/san-pham/"
+                  aria-label="Xem Mèo Hoa Khai Trương Đại Phát"
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-lg text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
+                >
+                  +
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 3 -->
+          <article
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/40 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
+          >
+            <!-- Product image -->
+            <a
+              href="/san-pham/"
+              class="relative block aspect-[0.82/1] overflow-hidden bg-background sm:aspect-[0.9/1] lg:aspect-[0.78/1]"
+              aria-label="Khám phá Mèo Hoa An Nhiên Thanh Nhã"
+            >
+              <img
+                src="/images/home/03-featured-products/product-03.png"
+                alt="Mèo Hoa Như Ý Cát Tường"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+
+              <span
+                class="absolute left-2 top-2 rounded-xl bg-[#594D34] px-2 py-0.5 text-[10px] font-semibold uppercase leading-6 tracking-wide text-white"
+              >
+                TÂN GIA
+              </span>
+            </a>
+
+            <!-- Product information -->
+            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-4 lg:p-5">
+              <p
+                class="m-0 text-[8px] font-medium uppercase tracking-wide text-text-section sm:text-[10px]"
+              >
+                GIA ĐẠO • BÌNH AN
+              </p>
+
+              <h3
+                class="m-0 font-heading text-base font-normal leading-6 text-text-black sm:text-xl"
+              >
+                <a
+                  href="/san-pham/"
+                  class="no-underline transition-colors hover:text-text-section"
+                >
+                  Mèo Hoa An Nhiên
+                </a>
+              </h3>
+
+              <p
+                class="mb-0 mt-2 line-clamp-3 text-[12px] leading-6 text-text-navbar"
+              >
+                Giỏ hoa vàng rực rỡ kết hợp sắc đỏ may mắn, hoa cúc và hoa trang
+                trí ánh kim cùng mèo thần tài. Món quà mang lời chúc bình an,
+                sung túc và gia đình luôn ấm êm.
+              </p>
+
+              <!-- Price pinned to bottom -->
+              <div class="mt-auto flex items-end justify-between gap-2 pt-4">
+                <p
+                  class="m-0 font-heading text-base font-semibold text-text-heading sm:text-xl"
+                >
+                  590.000đ
+                </p>
+
+                <a
+                  href="/san-pham/"
+                  aria-label="Xem Mèo Hoa An Nhiên Thanh Nhã"
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-lg text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
+                >
+                  +
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Product 4 -->
+
+          <article
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/40 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
+          >
+            <!-- Product image -->
+            <a
+              href="/san-pham/"
+              class="relative block aspect-[0.82/1] overflow-hidden bg-background sm:aspect-[0.9/1] lg:aspect-[0.78/1]"
+              aria-label="Khám phá Mèo Hoa Như Ý Cát Tường"
+            >
+              <img
+                src="/images/home/03-featured-products/product-04.png"
+                alt="Mèo Hoa Như Ý Cát Tường"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+
+              <!-- Product badge -->
+              <span
+                class="absolute left-2 top-2 rounded-xl bg-[#FCDBA6] px-2 py-0.5 text-[10px] font-semibold uppercase leading-6 tracking-wide text-[#775F34]"
+              >
+                ĐẶC BIỆT
+              </span>
+            </a>
+
+            <!-- Product information -->
+            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-4 lg:p-5">
+              <p
+                class="m-0 text-[8px] font-medium uppercase tracking-wide text-text-section sm:text-[10px]"
+              >
+                PHÚ QUÝ • THỊNH VƯỢNG
+              </p>
+
+              <!-- Product name -->
+              <h3
+                class="m-0 font-heading text-base font-normal leading-6 text-text-black sm:text-xl"
+              >
+                <a
+                  href="/san-pham/"
+                  class="no-underline transition-colors hover:text-text-section"
+                >
+                  Mèo Hoa Kim Thịnh
+                </a>
+              </h3>
+
+              <!-- Product description -->
+              <p
+                class="mb-0 mt-2 line-clamp-3 text-[12px] leading-6 text-text-navbar"
+              >
+                Hộp hoa trong suốt phối hoa lan cam, hoa vàng và mèo thần tài
+                sắc vàng nổi bật. Thiết kế sang trọng, tượng trưng cho phú quý,
+                phát đạt và thịnh vượng dài lâu.
+              </p>
+
+              <!-- Price and detail button: always at the bottom -->
+              <div class="mt-auto flex items-end justify-between gap-2 pt-4">
+                <p
+                  class="m-0 font-heading text-base font-semibold text-text-heading sm:text-xl"
+                >
+                  890.000đ
+                </p>
+
+                <a
+                  href="/san-pham/"
+                  aria-label="Xem Mèo Hoa Thịnh Vượng Hoàng Kim"
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-lg text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
+                >
+                  +
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- View all button -->
+        <div class="mt-5 flex justify-center sm:mt-14">
+          <a
+            href="/san-pham/"
+            class="inline-flex min-h-12 items-center justify-center gap-3 rounded-sm
+             bg-[#EAE8E4] px-6 py-4 text-center text-[12px] font-semibold
+              tracking-widest text-text-heading transition-colors
+              hover:bg-border sm:min-h-14 sm:px-9 sm:text-xs"
+          >
+            Xem tất cả thiết kế Mèo Hoa
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              fill="none"
+              class="h-4 w-4 transition-transform duration-300 hover:translate-x-1"
+            >
+              <path
+                d="M4 12h15M13 5l7 7-7 7"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- ===================================================== -->
+    <!-- SECTION 04: ABOUT MÈO HOA | Desktop + Mobile quote -->
+    <!-- ===================================================== -->
+
+    <section class="overflow-hidden bg-background py-8 sm:py-16">
+      <div
+        class="mx-auto grid w-[calc(100%-32px)] max-w-360 items-center gap-12 sm:w-[calc(100%-48px)] lg:grid-cols-2 lg:gap-16 xl:gap-20"
+      >
+        <!-- LEFT: Desktop  image -->
+        <div class="relative hidden min-w-0 pb-8 sm:pb-9 lg:block lg:pb-5">
+          <div
+            class="relative aspect-[0.82/1] max-h-205 w-full overflow-hidden rounded-lg bg-[#E9E0D5] sm:aspect-[0.95/1] lg:aspect-[0.82/1]"
+          >
+            <img
+              src="/images/home/04-about/about-01.PNG"
+              alt="Không gian sáng tạo và chế tác hoa tại  Mèo Hoa"
+              class="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Desktop floating philosophy card -->
+          <div
+            class="absolute bottom-0 right-0 z-10 w-[min(290px,85%)] rounded-md bg-white p-5 shadow-xl shadow-text-black/10 sm:right-2 sm:p-6 lg:right-[-20px]"
+          >
+            <p
+              class="mb-2 text-[9px] font-medium uppercase tracking-[0.16em] text-text-section sm:text-[10px]"
+            >
+              TRIẾT LÝ CỐT LÕI
+            </p>
+
+            <p
+              class="m-0 font-heading text-lg leading-snug text-text-heading sm:text-xl"
+            >
+              "Mỗi món quà là một cách lưu giữ những điều tốt đẹp."
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT: Desktop about content -->
+        <div class="hidden min-w-0 flex-col justify-center lg:flex lg:py-8">
+          <p
+            class="mb-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-text-section sm:text-xs"
+          >
+            VỀ MÈO HOA
+          </p>
+
+          <h2
+            class="m-0 max-w-[650px] font-heading text-[clamp(2rem,4vw,3.25rem)] font-normal leading-[1.15] tracking-[-0.035em] text-text-heading"
+          >
+            Một món quà đẹp bắt đầu từ sự chăm chút.
+          </h2>
+
+          <div
+            class="mt-6 space-y-4 text-sm leading-7 text-text-navbar sm:mt-7 sm:text-base sm:leading-[1.9]"
+          >
+            <p class="m-0">
+              Chúng tôi tin rằng một món quà ý nghĩa không chỉ nằm ở điều nó
+              tượng trưng, mà còn ở cách nó được lựa chọn và trao gửi.
+            </p>
+
+            <p class="m-0">
+              Từ những mẫu Mèo thần tài đến các thiết kế Mèo Hoa, chúng tôi
+              hướng đến những món quà hài hòa về thẩm mỹ, giàu ý nghĩa và được
+              chuẩn bị với sự chỉn chu trong từng chi tiết. Để mỗi khi người
+              nhận mở nắp hộp, đó là một niềm hoan hỷ thuần khiết và chân thành.
+            </p>
+          </div>
+
+          <div
+            class="mt-7 flex flex-col items-start gap-5 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6"
+          >
+            <a
+              href="/san-pham/"
+              class="inline-flex min-h-12 items-center justify-center gap-3 bg-badge-background px-6 py-4 text-[10px] font-semibold uppercase tracking-wide text-white shadow-md shadow-text-black/10 transition-colors hover:bg-text-heading focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-h-14 sm:px-8 sm:text-xs"
+            >
+              TÌM HIỂU VỀ CHÚNG TÔI
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="h-4 w-4"
+              >
+                <path
+                  d="M4 12h15M13 5l7 7-7 7"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+
+            <div class="flex items-center gap-3 text-text-navbar">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 32 32"
+                fill="none"
+                class="h-6 w-6 shrink-0 text-text-section"
+              >
+                <path
+                  d="M16 2.5 19 5l4-.2.8 3.9 3.2 2.4-1.6 3.7 1.1 3.9-3.6 1.8-1.4 3.7-4-.5-3.3 2.2-3-2.7-4 .1-.9-3.9-3.2-2.5 1.5-3.7-1.1-3.9 3.6-1.7 1.4-3.8 4 .5L16 2.5Z"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="m11.5 15.5 3 3 6-6"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+
+              <span
+                class="text-[10px] font-medium uppercase leading-5 tracking-wide sm:text-xs"
+              >
+                TỈ MỈ TRONG TỪNG CHI TIẾT
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MOBILE: Philosophy quote card -->
+        <div class="min-w-0 lg:hidden">
+          <div
+            class="rounded-[28px] bg-[#EAE8E4] px-5 py-8 text-center sm:rounded-4xl sm:px-10 sm:py-10"
+          >
+            <!-- Quote icon -->
+            <div
+              class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm"
+              aria-hidden="true"
+            >
+              <svg
+                width="17"
+                height="12"
+                viewBox="0 0 17 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1.7 12L4 8V8V8C2.9 8 1.95833 7.60833 1.175 6.825C0.391667 6.04167 0 5.1 0 4C0 2.9 0.391667 1.95833 1.175 1.175C1.95833 0.391667 2.9 0 4 0C5.1 0 6.04167 0.391667 6.825 1.175C7.60833 1.95833 8 2.9 8 4C8 4.38333 7.95417 4.7375 7.8625 5.0625C7.77083 5.3875 7.63333 5.7 7.45 6L4 12H1.7V12M10.7 12L13 8V8V8C11.9 8 10.9583 7.60833 10.175 6.825C9.39167 6.04167 9 5.1 9 4C9 2.9 9.39167 1.95833 10.175 1.175C10.9583 0.391667 11.9 0 13 0C14.1 0 15.0417 0.391667 15.825 1.175C16.6083 1.95833 17 2.9 17 4C17 4.38333 16.9542 4.7375 16.8625 5.0625C16.7708 5.3875 16.6333 5.7 16.45 6L13 12H10.7V12M4 5.5C4.41667 5.5 4.77083 5.35417 5.0625 5.0625C5.35417 4.77083 5.5 4.41667 5.5 4C5.5 3.58333 5.35417 3.22917 5.0625 2.9375C4.77083 2.64583 4.41667 2.5 4 2.5C3.58333 2.5 3.22917 2.64583 2.9375 2.9375C2.64583 3.22917 2.5 3.58333 2.5 4C2.5 4.41667 2.64583 4.77083 2.9375 5.0625C3.22917 5.35417 3.58333 5.5 4 5.5V5.5M13 5.5C13.4167 5.5 13.7708 5.35417 14.0625 5.0625C14.3542 4.77083 14.5 4.41667 14.5 4C14.5 3.58333 14.3542 3.22917 14.0625 2.9375C13.7708 2.64583 13.4167 2.5 13 2.5C12.5833 2.5 12.2292 2.64583 11.9375 2.9375C11.6458 3.22917 11.5 3.58333 11.5 4C11.5 4.41667 11.6458 4.77083 11.9375 5.0625C12.2292 5.35417 12.5833 5.5 13 5.5V5.5M13 4V4V4V4V4V4V4V4V4V4M4 4V4V4V4V4V4V4V4V4V4"
+                  fill="#5C2730"></path>
+              </svg>
+            </div>
+
+            <!-- Main quote -->
+            <blockquote class="m-0">
+              <p
+                class="font-heading text-[24px] sm:text-[30px] italic
+    leading-[1.5] tracking-tight text-text-heading"
+              >
+                “Một món quà đẹp bắt đầu từ sự chăm chút, và hoàn hảo khi mang
+                lại niềm vui may mắn dài lâu.”
+              </p>
+            </blockquote>
+
+            <!-- Supporting paragraph -->
+            <p
+              class="mx-auto mb-0 mt-4 max-w-135 text-[14px]
+  leading-[1.8] text-text-navbar sm:text-[15px]"
+            >
+              Khác với hoa tươi thông thường sẽ chóng tàn, tượng Mèo thần tài sẽ
+              đồng hành cùng người nhận như một lời chúc bình an, may mắn trong
+              công việc và cuộc sống.
+            </p>
+
+            <!-- Divider -->
+            <div class="my-4 h-px w-full bg-[#E3DCD5]"></div>
+
+            <!-- Founder signature -->
+            <div
+              class="mx-auto flex max-w-105 items-center justify-center gap-3 text-left sm:gap-4"
+            >
+              <div
+                class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px]
+                 bg-[#813F4A] font-heading text-[18px] font-bold text-white sm:h-10 sm:w-10"
+                aria-hidden="true"
+              >
+                H
+              </div>
+
+              <div class="min-w-0">
+                <p
+                  class="m-0 text-[14px] font-medium leading-snug text-text-black sm:text-lg"
+                >
+                  Master Florist Ngân Hà
+                </p>
+
+                <p
+                  class="mb-0 mt-1 text-[10px] font-semibold uppercase leading-relaxed tracking-[0.06em] text-text-section sm:text-xs"
+                >
+                  NGƯỜI SÁNG LẬP MÈO HOA
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- SECTION 05: GIFT CONCIERGE CTA | Desktop + Mobile -->
+    <!-- ===================================================== -->
+
+    <section
+      class="overflow-hidden
+      bg-background lg:bg-[#EAE8E4]
+      px-4 py-8 sm:py-16 lg:px-8 lg:py-16"
+    >
+      <div class="mx-auto max-w-360">
+        <!-- DESKTOP VERSION -->
+        <div
+          class="hidden rounded-xl bg-surface px-8 py-10 shadow-sm lg:block lg:px-12 lg:py-14 xl:px-16"
+        >
+          <div
+            class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12"
+          >
+            <!-- Content -->
+            <div class="min-w-0 max-w-190">
+              <div class="mb-4 flex items-center gap-3 text-text-section">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  class="h-6 w-6 shrink-0"
+                >
+                  <path
+                    d="M5 18v-3a11 11 0 0 1 22 0v3"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"></path>
+                  <path
+                    d="M5 17h5v8H7a2 2 0 0 1-2-2v-6Zm22 0h-5v8h3a2 2 0 0 0 2-2v-6Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M12 12a5 5 0 0 1 8 0"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"></path>
+                </svg>
+
+                <p
+                  class="m-0 text-[11px] font-semibold uppercase tracking-[0.12em]
+                  sm:text-sm sm:tracking-[0.15em]"
+                >
+                  DỊCH VỤ QUÀ TẶNG
+                </p>
+              </div>
+
+              <h2
+                class="m-0 font-heading text-[clamp(1.65rem,3vw,2.25rem)]
+                font-normal leading-tight tracking-tight text-text-heading"
+              >
+                Bạn cần tư vấn quà tặng cho dịp đặc biệt?
+              </h2>
+
+              <p
+                class="mb-0 mt-4 max-w-190 text-sm leading-7 text-text-navbar sm:text-base sm:leading-[1.8]"
+              >
+                Trò chuyện trực tiếp qua Zalo hoặc Facebook cùng Mèo Hoa để được
+                tư vấn kích thước, phối tone hoa và gửi thiệp chúc phúc theo tên
+                người nhận.
+              </p>
+            </div>
+
+            <!-- Contact buttons -->
+            <div
+              class="flex shrink-0 flex-col gap-3 min-[480px]:flex-row lg:gap-4"
+            >
+              <a
+                href="https://zalo.me/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex min-h-14 items-center justify-center
+                gap-3 bg-[#0866FF] px-5 py-4 text-xs font-semibold uppercase
+                 tracking-wide text-white transition-colors hover:bg-[#0052D4]
+                  focus-visible:outline-2 focus-visible:outline-offset-4
+                   focus-visible:outline-text-heading sm:min-w-55 sm:px-6"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="h-6 w-6 shrink-0"
+                >
+                  <path
+                    d="M4 4.5h16v12H9l-5 3v-15Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M7.5 8h9M7.5 11.5h9M7.5 15h5"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"></path>
+                </svg>
+                TƯ VẤN QUA ZALO
+              </a>
+
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex min-h-14 items-center justify-center gap-3
+                 bg-badge-background px-5 py-4 text-xs font-semibold uppercase
+                  tracking-wide text-white transition-colors hover:bg-text-heading
+                   focus-visible:outline-2 focus-visible:outline-offset-4
+                    focus-visible:outline-text-heading sm:min-w-62.5 sm:px-6"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="h-6 w-6 shrink-0"
+                >
+                  <path
+                    d="M4 5h16v12H9l-5 3V5Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M8 9h8M8 12.5h5"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"></path>
+                </svg>
+                NHẮN TIN FACEBOOK
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- MOBILE VERSION -->
+        <div
+          class="relative overflow-hidden rounded-2xl bg-[#602A32] px-5
+          py-5 shadow-xl shadow-text-black/15 sm:rounded-4xl sm:px-8 sm:py-10 lg:hidden"
+        >
+          <!-- Subtle decorative shape -->
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute -bottom-16 -right-12 h-64 w-64 rounded-full bg-white/[0.035]"
+          >
+          </div>
+
+          <div class="relative z-10">
+            <!-- Heading label -->
+            <div class="mb-4 flex items-center gap-3 text-[#F3B6B9]">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 32 32"
+                fill="none"
+                class="h-5 w-5 shrink-0 text-[#F4D7A0]"
+              >
+                <path
+                  d="M5 18v-3a11 11 0 0 1 22 0v3"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"></path>
+                <path
+                  d="M5 17h5v8H7a2 2 0 0 1-2-2v-6Zm22 0h-5v8h3a2 2 0 0 0 2-2v-6Z"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M12 12a5 5 0 0 1 8 0"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"></path>
+              </svg>
+
+              <p
+                class="m-0 text-[11px] font-semibold uppercase tracking-[0.13em]
+                 sm:tracking-[0.15em]"
+              >
+                DỊCH VỤ QUÀ TẶNG
+              </p>
+            </div>
+
+            <!-- Main title -->
+            <h2
+              class="m-0 max-w-155 font-heading text-[22px]
+              font-medium leading-[30px] tracking-tight text-white"
+            >
+              Cần tư vấn quà tặng khai trương hay tân gia?
+            </h2>
+
+            <!-- Description -->
+            <p
+              class="mb-0 mt-3 text-[13px] leading-[1.8] text-[#EAE8E4] sm:text-lg sm:leading-[1.8]"
+            >
+              Hãy để chúng tôi gợi ý những mẫu hoa và dáng mèo phù hợp với nhu
+              cầu và quy mô cho quý khách.
+            </p>
+
+            <!-- Contact buttons -->
+            <div class="mt-7 grid grid-cols-2 gap-3 sm:gap-4">
+              <a
+                href="https://zalo.me/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm px-3 py-3
+                 bg-white text-center text-sm font-semibold text-[#602A32]
+                  transition-colors hover:bg-[#F8F3EE] focus-visible:outline-2
+                   focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="h-6 w-6 shrink-0"
+                >
+                  <path
+                    d="M4 4.5h16v12H9l-5 3v-15Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M7.5 8h9M7.5 11.5h9M7.5 15h5"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"></path>
+                </svg>
+                <span>Tư vấn Zalo</span>
+              </a>
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 rounded-sm px-3 py-3
+                 bg-badge-background text-center text-sm font-semibold text-white
+                  transition-colors hover:bg-text-heading focus-visible:outline-2
+                   focus-visible:outline-offset-4 focus-visible:outline-white"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="h-6 w-6 shrink-0"
+                >
+                  <path
+                    d="M4 4.5h16v12H9l-5 3v-15Z"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"></path>
+                  <path
+                    d="M7.5 8h9M7.5 11.5h9M7.5 15h5"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"></path>
+                </svg>
+                <span>Tư vấn Facebook</span>
+              </a>
+            </div>
+
+            <!-- Hotline divider -->
+            <div class="my-6 h-px bg-white/15 sm:my-7"></div>
+
+            <!-- Hotline -->
+            <div
+              class="flex flex-col gap-2 min-[420px]:flex-row min-[420px]:items-center min-[420px]:justify-between"
+            >
+              <p
+                class="m-0 text-sm leading-relaxed text-[#E4CFD0] sm:text-base"
+              >
+                Hotline đặt mèo:
+              </p>
+
+              <a
+                href="tel:0908888668"
+                class="font-heading text-[20px] font-semibold
+                leading-tight tracking-wide text-[#F4D7A0] transition-opacity hover:opacity-80"
+              >
+                035 505 1303
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===================================================== -->
+    <!-- SCRIPT: Featured product filtering and sorting -->
+    <!-- ===================================================== -->
+    <script>
+      const searchInput =
+        document.querySelector<HTMLInputElement>("[data-search]");
+      const categorySelect =
+        document.querySelector<HTMLSelectElement>("[data-category]");
+      const colorSelect =
+        document.querySelector<HTMLSelectElement>("[data-color]");
+      const badgeSelect =
+        document.querySelector<HTMLSelectElement>("[data-badge]");
+      const sortSelect =
+        document.querySelector<HTMLSelectElement>("[data-sort]");
+      const resetButton =
+        document.querySelector<HTMLButtonElement>("[data-reset]");
+      const resetEmptyButton =
+        document.querySelector<HTMLButtonElement>("[data-reset-empty]");
+      const grid = document.querySelector<HTMLElement>("[data-product-grid]");
+      const resultCount = document.querySelector<HTMLElement>(
+        "[data-result-count]",
+      );
+      const emptyResults = document.querySelector<HTMLElement>(
+        "[data-empty-results]",
+      );
+
+      const normalize = (value: string) =>
+        value
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLocaleLowerCase("vi-VN")
+          .trim();
+
+      const cards = grid
+        ? Array.from(grid.querySelectorAll<HTMLElement>("[data-product-card]"))
+        : [];
+
+      function applyFilters() {
+        const query = normalize(searchInput?.value ?? "");
+        const category = categorySelect?.value ?? "";
+        const color = colorSelect?.value ?? "";
+        const badge = badgeSelect?.value ?? "";
+        const sort = sortSelect?.value ?? "";
+
+        const visibleCards = cards.filter((card) => {
+          const haystack = normalize(
+            [card.dataset.name, card.dataset.slug, card.dataset.description]
+              .filter(Boolean)
+              .join(" "),
+          );
+          const matchesQuery = !query || haystack.includes(query);
+          const matchesCategory =
+            !category || card.dataset.category === category;
+          const matchesColor = !color || card.dataset.color === color;
+          const matchesBadge = !badge || card.dataset.badge === badge;
+          const visible =
+            matchesQuery && matchesCategory && matchesColor && matchesBadge;
+          card.hidden = !visible;
+          return visible;
+        });
+
+        visibleCards.sort((a, b) => {
+          if (sort === "price-asc")
+            return Number(a.dataset.price) - Number(b.dataset.price);
+          if (sort === "price-desc")
+            return Number(b.dataset.price) - Number(a.dataset.price);
+          if (sort === "name-asc")
+            return (a.dataset.name ?? "").localeCompare(
+              b.dataset.name ?? "",
+              "vi",
+            );
+          return Number(a.dataset.order) - Number(b.dataset.order);
+        });
+
+        visibleCards.forEach((card) => grid?.append(card));
+        if (resultCount) resultCount.textContent = String(visibleCards.length);
+        if (emptyResults) emptyResults.hidden = visibleCards.length > 0;
+        if (grid) grid.hidden = visibleCards.length === 0;
+      }
+
+      function resetFilters() {
+        if (searchInput) searchInput.value = "";
+        if (categorySelect) categorySelect.value = "";
+        if (colorSelect) colorSelect.value = "";
+        if (badgeSelect) badgeSelect.value = "";
+        if (sortSelect) sortSelect.value = "default";
+        applyFilters();
+      }
+
+      searchInput?.addEventListener("input", applyFilters);
+      categorySelect?.addEventListener("change", applyFilters);
+      colorSelect?.addEventListener("change", applyFilters);
+      badgeSelect?.addEventListener("change", applyFilters);
+      sortSelect?.addEventListener("change", applyFilters);
+      resetButton?.addEventListener("click", resetFilters);
+      resetEmptyButton?.addEventListener("click", resetFilters);
+    </script>
+  </main>
+</BaseLayout>
