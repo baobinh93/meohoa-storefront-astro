@@ -60,7 +60,7 @@ const otherDetails = [
   <!-- Product image -->
   <a
     class="relative p-2 block aspect-4/5 shrink-0 overflow-hidden bg-[#EFEEEA]"
-    href={productUrl}
+    href={`${import.meta.env.BASE_URL}${productUrl}`}
     aria-label={`Xem sản phẩm ${product.name}`}
   >
     {
@@ -120,7 +120,7 @@ const otherDetails = [
     >
       <a
         class="no-underline transition-colors duration-200 hover:text-[#794640]"
-        href={productUrl}
+        href={`${import.meta.env.BASE_URL}${productUrl}`}
       >
         {product.name}
       </a>
@@ -195,7 +195,7 @@ const otherDetails = [
 
       <!-- Detail button -->
       <a
-        href={productUrl}
+        href={`${import.meta.env.BASE_URL}${productUrl}`}
         class="mt-3 inline-flex min-h-10 w-full items-center justify-center gap-2 rounded-xs bg-[#EFEEEA] px-3 text-[14px] font-medium tracking-[0.04em] text-text-black no-underline transition-all duration-300 hover:bg-[#794640] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#794640]"
         aria-label={`Xem chi tiết ${product.name}`}
       >
