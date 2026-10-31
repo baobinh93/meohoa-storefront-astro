@@ -1,20 +1,24 @@
 ---
+const BASE_URL = import.meta.env.BASE_URL;
+
 const navigation = [
-  { label: "Trang chủ", href: "/" },
-  { label: "Sản phẩm", href: "/san-pham/" },
+  { label: "Trang chủ", href: BASE_URL },
+  { label: "Sản phẩm", href: `${BASE_URL}san-pham/` },
   {
     label: "Mèo Hoa",
-    href: "/san-pham/?category=8af55872-69be-4363-a43f-4fbbdf3a2fe6&badge=co-san",
+    href: `${BASE_URL}san-pham/?category=8af55872-69be-4363-a43f-4fbbdf3a2fe6&badge=co-san`,
   },
   {
     label: "Mèo Thần Tài",
-    href: "/san-pham/?category=f99923c3-8e77-4158-bac5-0aa243364452&badge=co-san",
+    href: `${BASE_URL}san-pham/?category=f99923c3-8e77-4158-bac5-0aa243364452&badge=co-san`,
   },
   {
     label: "Liên Hệ",
-    href: "/#lien-he",
+    href: `${BASE_URL}#lien-he`,
   },
 ];
+---
+
 ---
 
 <!-- DESKTOP HEADER -->
@@ -24,7 +28,7 @@ const navigation = [
   >
     <a
       class="flex shrink-0 flex-col gap-1 no-underline"
-      href="/"
+      href={import.meta.env.BASE_URL}
       aria-label="Mèo Hoa - Trang chủ"
     >
       <span
@@ -110,7 +114,7 @@ const navigation = [
 
     <!-- Centered brand -->
     <a
-      href="/"
+      href={import.meta.env.BASE_URL}
       aria-label="Mèo Hoa - Trang chủ"
       class="absolute left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 whitespace-nowrap text-center no-underline"
     >
