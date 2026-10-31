@@ -1,0 +1,806 @@
+---
+interface Props {
+  product: {
+    id: string;
+    name: string;
+    price: number;
+  };
+  imageUrl?: string;
+  powerLabels: string[];
+  waving: boolean | null;
+}
+
+const { product, imageUrl, powerLabels, waving } = Astro.props;
+
+const formatPrice = (price: number) =>
+  new Intl.NumberFormat("vi-VN", {
+    maximumFractionDigits: 0,
+  }).format(price) + " ₫";
+---
+
+<div
+  data-order-modal
+  class="fixed inset-0 z-[100] hidden items-end justify-center bg-[#30241f]/55 p-0 backdrop-blur-[3px] sm:items-center sm:p-5"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="order-modal-title"
+  aria-hidden="true"
+>
+  <div
+    data-order-panel
+    class="relative flex max-h-[94dvh] w-full max-w-[950px] flex-col overflow-hidden rounded-t-2xl bg-[#faf8f4] shadow-2xl sm:max-h-[92dvh] sm:rounded-xl"
+  >
+    <!-- Header -->
+    <header
+      class="relative shrink-0 border-b border-[#e8dfd5] px-5 py-5 sm:px-8 sm:py-6"
+    >
+      <div class="text-[10px] font-semibold tracking-[0.2em] text-[#92703d]">
+        <span class="mr-1.5">●</span>MÈO HOA
+      </div>
+
+      <h2
+        id="order-modal-title"
+        class="mt-2 font-heading text-2xl text-[#794640] sm:text-3xl"
+      >
+        Đặt Hàng Sản Phẩm
+      </h2>
+
+      <p class="mt-1 text-xs leading-5 text-[#74665d] sm:text-sm">
+        Vui lòng để lại thông tin, chúng tôi sẽ liên hệ và tư vấn cho bạn trong
+        thời gian sớm nhất.
+      </p>
+
+      <button
+        type="button"
+        data-close-order-modal
+        aria-label="Đóng cửa sổ đặt hàng"
+        class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#74665d] transition hover:bg-[#eee8e0] sm:right-6 sm:top-6"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path
+            d="m18 6-12 12M6 6l12 12"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Scrollable content -->
+    <div
+      class="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5 sm:px-8 sm:py-6"
+    >
+      <form data-order-form novalidate class="space-y-5 sm:space-y-6">
+        <!-- Product -->
+        <section class="rounded-xl border border-[#eee7de] bg-white p-4 sm:p-6">
+          <div
+            class="mb-4 flex items-center gap-2 text-xs font-semibold tracking-wide text-[#66543a]"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <rect
+                x="4"
+                y="4"
+                width="16"
+                height="16"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="1.7"></rect>
+              <path
+                d="M8 8h8M8 12h5"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"></path>
+            </svg>
+            1. SẢN PHẨM ĐÃ LỰA CHỌN
+          </div>
+
+          <input type="hidden" name="product_id" value={product.id} />
+
+          <div class="flex items-center gap-4 sm:gap-5">
+            <div
+              class="h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-[#f3eee9] sm:h-32 sm:w-32"
+            >
+              {
+                imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt={product.name}
+                    class="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div class="grid h-full place-items-center font-heading text-sm text-[#a58a73]">
+                    Mèo Hoa
+                  </div>
+                )
+              }
+            </div>
+
+            <div class="min-w-0 flex-1">
+              <h3
+                class="font-heading text-lg leading-snug text-[#794640] sm:text-2xl"
+              >
+                {product.name}
+              </h3>
+
+              <div class="mt-2 flex flex-wrap items-center gap-1.5">
+                {
+                  powerLabels.map((power) => (
+                    <span class="inline-flex items-center rounded-sm border border-[#e8dfd5] bg-[#f8f5f0] px-2.5 py-1 text-[11px] font-medium text-[#794640]">
+                      {power}
+                    </span>
+                  ))
+                }
+
+                {
+                  waving !== null && (
+                    <span
+                      class:list={[
+                        "inline-flex items-center rounded-sm border px-2.5 py-1 text-[11px] font-medium",
+                        waving
+                          ? "border-[#d9e5d7] bg-[#f3f7f1] text-[#61775b]"
+                          : "border-[#e8dfd5] bg-[#f8f5f0] text-[#74665d]",
+                      ]}
+                    >
+                      {waving ? "Có vẫy tay" : "Không vẫy tay"}
+                    </span>
+                  )
+                }
+              </div>
+
+              <p
+                class="mt-3 font-heading text-xl font-semibold text-[#794640] sm:text-2xl"
+              >
+                {formatPrice(product.price)}
+              </p>
+            </div>
+          </div>
+
+          <input type="hidden" name="product_name" value={product.name} />
+          <input type="hidden" name="price_snapshot" value={product.price} />
+
+          <!-- Greeting message -->
+          <div class="mt-5 rounded-lg bg-[#faf8f4] p-4 sm:p-5">
+            <label
+              for="order-greeting"
+              class="mb-3 flex items-center gap-2 text-xs font-semibold text-[#423833]"
+            >
+              <span class="text-[#92703d]">✎</span>
+              NỘI DUNG BẢNG CHÚC MỪNG
+            </label>
+
+            <textarea
+              id="order-greeting"
+              name="greeting_message"
+              rows="3"
+              maxlength="1000"
+              placeholder="Ghi thông điệp chúc mừng (Ví dụ: Chúc mừng khai trương Hồng Phát - Công ty ABC kính tặng)..."
+              class="w-full resize-y rounded-lg border border-transparent bg-white px-4 py-3 text-sm leading-6 text-[#423833] outline-none transition placeholder:text-[#b5aaa2] focus:border-[#b99b85]"
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- Customer information -->
+        <section class="rounded-xl border border-[#eee7de] bg-white p-4 sm:p-6">
+          <div
+            class="mb-5 flex items-center gap-2 text-xs font-semibold tracking-wide text-[#66543a]"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <rect
+                x="4"
+                y="3"
+                width="16"
+                height="18"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="1.7"></rect>
+              <circle
+                cx="12"
+                cy="9"
+                r="2.5"
+                stroke="currentColor"
+                stroke-width="1.5"></circle>
+              <path
+                d="M8 17c.8-2 2.1-3 4-3s3.2 1 4 3"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"></path>
+            </svg>
+            2. THÔNG TIN KHÁCH HÀNG
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 sm:gap-5">
+            <div>
+              <label
+                for="order-customer-name"
+                class="mb-2 block text-xs font-medium text-[#423833]"
+              >
+                HỌ VÀ TÊN <span class="text-[#794640]">*</span>
+              </label>
+              <input
+                id="order-customer-name"
+                name="customer_name"
+                type="text"
+                required
+                maxlength="150"
+                autocomplete="name"
+                placeholder="Ví dụ: Nguyễn Thanh Thảo"
+                class="h-12 w-full rounded-lg border border-[#eee7de] bg-[#faf8f4] px-4 text-sm text-[#423833] outline-none transition placeholder:text-[#b5aaa2] focus:border-[#b99b85] focus:bg-white"
+              />
+              <span
+                data-error-for="customer_name"
+                class="mt-1.5 hidden text-xs text-red-600"
+                role="alert"></span>
+            </div>
+
+            <div>
+              <label
+                for="order-phone"
+                class="mb-2 block text-xs font-medium text-[#423833]"
+              >
+                SỐ ĐIỆN THOẠI LIÊN HỆ (ZALO) <span class="text-[#794640]"
+                  >*</span
+                >
+              </label>
+              <input
+                id="order-phone"
+                name="customer_phone"
+                type="tel"
+                required
+                maxlength="20"
+                autocomplete="tel"
+                placeholder="Ví dụ: 0908 xxx xxx"
+                class="h-12 w-full rounded-lg border border-[#eee7de] bg-[#faf8f4] px-4 text-sm text-[#423833] outline-none transition placeholder:text-[#b5aaa2] focus:border-[#b99b85] focus:bg-white"
+              />
+              <span
+                data-error-for="customer_phone"
+                class="mt-1.5 hidden text-xs text-red-600"
+                role="alert"></span>
+            </div>
+          </div>
+
+          <div
+            class="mt-4 flex items-start gap-3 rounded-lg bg-[#f5f3ef] p-3 text-xs leading-5 text-[#74665d]"
+          >
+            <svg
+              class="mt-0.5 shrink-0 text-[#92703d]"
+              width="17"
+              height="17"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <rect
+                x="3"
+                y="5"
+                width="18"
+                height="14"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="1.7"></rect>
+              <circle
+                cx="12"
+                cy="12"
+                r="3"
+                stroke="currentColor"
+                stroke-width="1.7"></circle>
+              <path d="M7 5V3m10 2V3" stroke="currentColor" stroke-width="1.7"
+              ></path>
+            </svg>
+            Chúng tôi sẽ gửi ảnh chụp thành phẩm thực tế qua Zalo trước khi giao để
+            quý khách duyệt.
+          </div>
+        </section>
+
+        <!-- Delivery method -->
+        <section class="rounded-xl border border-[#eee7de] bg-white p-4 sm:p-6">
+          <div
+            class="mb-5 flex items-center gap-2 text-xs font-semibold tracking-wide text-[#66543a]"
+          >
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M3 7h12v11H3zM15 11h4l3 4v3h-7z"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linejoin="round"></path>
+              <circle
+                cx="7"
+                cy="19"
+                r="2"
+                stroke="currentColor"
+                stroke-width="1.7"></circle>
+              <circle
+                cx="18"
+                cy="19"
+                r="2"
+                stroke="currentColor"
+                stroke-width="1.7"></circle>
+            </svg>
+            3. HÌNH THỨC NHẬN HÀNG
+          </div>
+
+          <div class="grid gap-3 sm:grid-cols-2 sm:gap-4">
+            <label
+              class="relative flex cursor-pointer gap-3 rounded-xl border border-[#e8dfd5] bg-[#faf8f4] p-4 transition hover:border-[#b99b85]"
+            >
+              <input
+                type="radio"
+                name="pickup_method"
+                value="delivery"
+                checked
+                class="mt-1 h-4 w-4 shrink-0 accent-[#794640]"
+              />
+              <span class="min-w-0">
+                <span class="block text-sm font-semibold text-[#794640]">
+                  Giao tận nơi
+                </span>
+                <span class="mt-1 block text-xs leading-5 text-[#74665d]">
+                  Đóng gói cẩn thận và giao đến tận địa chỉ của bạn
+                </span>
+              </span>
+            </label>
+
+            <label
+              class="relative flex cursor-pointer gap-3 rounded-xl border border-[#eee7de] bg-white p-4 transition hover:border-[#b99b85]"
+            >
+              <input
+                type="radio"
+                name="pickup_method"
+                value="pickup"
+                class="mt-1 h-4 w-4 shrink-0 accent-[#794640]"
+              />
+              <span class="min-w-0">
+                <span class="block text-sm font-semibold text-[#423833]">
+                  Nhận tại cửa hàng
+                </span>
+                <span class="mt-1 block text-xs leading-5 text-[#74665d]">
+                  Tiệm Mèo Hoa: <br /> LKI-09, Nguyễn Bảo Đức, Tam Hiệp, Đồng Nai
+                </span>
+              </span>
+            </label>
+          </div>
+
+          <div class="mt-5">
+            <label
+              for="order-address"
+              class="mb-2 block text-xs font-medium text-[#423833]"
+            >
+              ĐỊA CHỈ NHẬN HÀNG <span class="text-[#794640]">*</span>
+            </label>
+
+            <textarea
+              id="order-address"
+              name="delivery_address"
+              rows="2"
+              required
+              maxlength="500"
+              autocomplete="street-address"
+              placeholder="Số nhà, tên đường, phường/xã, quận/huyện, TP. Hồ Chí Minh..."
+              class="w-full resize-y rounded-lg border border-[#eee7de] bg-[#faf8f4] px-4 py-3 text-sm leading-6 text-[#423833] outline-none transition placeholder:text-[#b5aaa2] focus:border-[#b99b85] focus:bg-white"
+            ></textarea>
+            <span
+              data-error-for="delivery_address"
+              class="mt-1.5 hidden text-xs text-red-600"
+              role="alert"></span>
+          </div>
+        </section>
+        <footer
+          class="mt-6 border-t border-[#e8dfd5] bg-[#faf8f4] px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-4 sm:px-8 sm:py-5"
+        >
+          <div
+            class="mb-3 flex items-center justify-center gap-2 text-center text-[11px] leading-5 text-[#80643b] sm:text-xs"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 3 4 6v5c0 5 3.4 8.3 8 10 4.6-1.7 8-5 8-10V6l-8-3Z"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linejoin="round"></path>
+              <path
+                d="m9 12 2 2 4-4"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+            Thanh toán khi nhận hàng hoặc chuyển khoản sau khi duyệt ảnh thực tế.
+          </div>
+
+          <button
+            type="submit"
+            data-order-submit
+            class="flex min-h-12 w-full items-center justify-center gap-3 rounded-lg bg-[#794640] px-5 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-[#603731] sm:min-h-14 sm:text-base"
+          >
+            XÁC NHẬN ĐẶT HÀNG & NHẬN TƯ VẤN
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M5 12h14m-7-7 7 7-7 7"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </footer>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div
+  data-order-success
+  class="fixed inset-0 z-[110] hidden items-center justify-center bg-[#30241f]/55 p-4 backdrop-blur-[3px]"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="order-success-title"
+  aria-hidden="true"
+>
+  <section
+    class="w-full max-w-[420px] rounded-2xl bg-[#faf8f4] px-6 py-8 text-center shadow-2xl sm:px-8"
+  >
+    <div
+      class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#eaf5ec] text-[#32834a]"
+    >
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="m5 12 4.5 4.5L19 7"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </div>
+
+    <h2
+      id="order-success-title"
+      class="mt-5 font-heading text-2xl text-[#603731]"
+    >
+      Đặt hàng thành công!
+    </h2>
+    <p class="mt-2 text-sm leading-6 text-[#74665d]">
+      Cảm ơn bạn đã tin tưởng và lựa chọn Mèo Hoa.
+    </p>
+
+    <div class="mt-6 rounded-xl bg-white px-4 py-5">
+      <p class="text-[10px] font-semibold tracking-[0.18em] text-[#92703d]">
+        MÃ ĐƠN HÀNG CỦA BẠN
+      </p>
+      <p
+        data-success-order-number
+        class="mt-2 break-all text-2xl font-semibold tracking-wide text-[#794640]"
+      >
+      </p>
+      <span
+        class="mt-3 inline-flex rounded-full bg-[#eaf5ec] px-3 py-1 text-xs font-medium text-[#32834a]"
+      >
+        Đã ghi nhận đơn hàng
+      </span>
+    </div>
+
+    <p class="mt-5 text-xs leading-5 text-[#74665d]">
+      Mèo Hoa sẽ liên hệ với bạn trong thời gian sớm nhất.
+    </p>
+
+    <button
+      type="button"
+      data-close-order-success
+      class="mt-7 min-h-12 w-full rounded-lg bg-[#794640] px-5 py-3 text-sm font-semibold tracking-wide text-white transition hover:bg-[#603731]"
+    >
+      HOÀN TẤT
+    </button>
+  </section>
+</div>
+
+<script>
+  import { supabase } from "../lib/supabase-client";
+  const modal = document.querySelector<HTMLElement>("[data-order-modal]");
+  const panel = modal?.querySelector<HTMLElement>("[data-order-panel]");
+  const successModal = document.querySelector<HTMLElement>(
+    "[data-order-success]",
+  );
+  const successOrderNumber = successModal?.querySelector<HTMLElement>(
+    "[data-success-order-number]",
+  );
+  const closeSuccessButton = successModal?.querySelector<HTMLButtonElement>(
+    "[data-close-order-success]",
+  );
+
+  if (modal && panel && successModal && !modal.dataset.initialized) {
+    modal.dataset.initialized = "true";
+
+    const form = modal.querySelector<HTMLFormElement>("[data-order-form]");
+    const openButtons = document.querySelectorAll<HTMLButtonElement>(
+      "[data-open-order-modal]",
+    );
+    const closeButtons = modal.querySelectorAll<HTMLButtonElement>(
+      "[data-close-order-modal]",
+    );
+    const pickupInputs = modal.querySelectorAll<HTMLInputElement>(
+      'input[name="pickup_method"]',
+    );
+    const nameInput = modal.querySelector<HTMLInputElement>(
+      '[name="customer_name"]',
+    );
+    const phoneInput = modal.querySelector<HTMLInputElement>(
+      '[name="customer_phone"]',
+    );
+    const addressInput = modal.querySelector<HTMLTextAreaElement>(
+      '[name="delivery_address"]',
+    );
+    const greetingInput = modal.querySelector<HTMLTextAreaElement>(
+      '[name="greeting_message"]',
+    );
+    const addressSection = addressInput?.parentElement;
+    let previousActiveElement: HTMLElement | null = null;
+
+    const closeModal = () => {
+      modal.classList.remove("is-open");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      previousActiveElement?.focus();
+    };
+
+    const closeSuccessModal = () => {
+      successModal.classList.add("hidden");
+      successModal.classList.remove("flex");
+      successModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      previousActiveElement?.focus();
+    };
+
+    const openSuccessModal = (orderNumber: string) => {
+      if (successOrderNumber) successOrderNumber.textContent = orderNumber;
+      successModal.classList.remove("hidden");
+      successModal.classList.add("flex");
+      successModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeSuccessButton?.focus();
+    };
+
+    closeSuccessButton?.addEventListener("click", closeSuccessModal);
+    successModal.addEventListener("click", (event) => {
+      if (event.target === successModal) closeSuccessModal();
+    });
+
+    const openModal = () => {
+      previousActiveElement =
+        document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null;
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      requestAnimationFrame(() => {
+        modal.classList.add("is-open");
+        nameInput?.focus();
+      });
+    };
+
+    openButtons.forEach((button) =>
+      button.addEventListener("click", openModal),
+    );
+    closeButtons.forEach((button) =>
+      button.addEventListener("click", closeModal),
+    );
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        if (!successModal.classList.contains("hidden")) closeSuccessModal();
+        else if (!modal.classList.contains("hidden")) closeModal();
+      }
+    });
+
+    const setError = (
+      input: HTMLInputElement | HTMLTextAreaElement | null,
+      message = "",
+    ) => {
+      if (!input) return;
+      const label = modal.querySelector<HTMLLabelElement>(
+        `label[for="${input.id}"]`,
+      );
+      const error = modal.querySelector<HTMLElement>(
+        `[data-error-for="${input.name}"]`,
+      );
+      const hasError = Boolean(message);
+      input.classList.toggle("!border-red-500", hasError);
+
+      if (error) {
+        error.textContent = message;
+        error.classList.toggle("hidden", !hasError);
+      }
+      input.setAttribute("aria-invalid", String(hasError));
+    };
+
+    const normalizePhone = (value: string) => {
+      let digits = value.replace(/\D/g, "");
+      if (digits.startsWith("84")) digits = `0${digits.slice(2)}`;
+      return digits;
+    };
+
+    const validateName = () => {
+      if (!nameInput) return false;
+
+      const message = !nameInput.value.trim() ? "Vui lòng nhập họ và tên." : "";
+
+      setError(nameInput, message);
+      return !message;
+    };
+
+    const validatePhone = () => {
+      if (!phoneInput) return false;
+
+      const raw = phoneInput.value.trim();
+      const normalized = normalizePhone(raw);
+
+      const message = !raw
+        ? "Vui lòng nhập số điện thoại."
+        : !/^0(3|5|7|8|9)\d{8}$/.test(normalized)
+          ? "Số điện thoại không hợp lệ. Vui lòng nhập số di động Việt Nam gồm 10 chữ số."
+          : "";
+
+      setError(phoneInput, message);
+      return !message;
+    };
+
+    const validateAddress = () => {
+      if (!addressInput) return true;
+
+      const method = modal.querySelector<HTMLInputElement>(
+        'input[name="pickup_method"]:checked',
+      )?.value;
+
+      const isDelivery = method === "delivery";
+
+      const message =
+        isDelivery && !addressInput.value.trim()
+          ? "Vui lòng nhập địa chỉ nhận hàng."
+          : "";
+
+      setError(addressInput, message);
+      return !message;
+    };
+
+    const updatePickupMethod = () => {
+      const method = modal.querySelector<HTMLInputElement>(
+        'input[name="pickup_method"]:checked',
+      )?.value;
+      const isDelivery = method === "delivery";
+      addressSection?.classList.toggle("hidden", !isDelivery);
+      if (addressInput) {
+        addressInput.required = isDelivery;
+        if (!isDelivery) {
+          addressInput.value = "";
+          setError(addressInput);
+        }
+      }
+      pickupInputs.forEach((input) => {
+        const label = input.closest("label");
+        if (!label) return;
+        label.classList.toggle("border-[#794640]", input.checked);
+        label.classList.toggle("bg-[#faf8f4]", input.checked);
+        label.classList.toggle("border-[#eee7de]", !input.checked);
+        label.classList.toggle("bg-white", !input.checked);
+      });
+    };
+
+    pickupInputs.forEach((input) =>
+      input.addEventListener("change", updatePickupMethod),
+    );
+    nameInput?.addEventListener("input", validateName);
+    phoneInput?.addEventListener("input", validatePhone);
+    addressInput?.addEventListener("input", validateAddress);
+
+    const submitButton = modal.querySelector<HTMLButtonElement>(
+      "[data-order-submit]",
+    );
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      // 1. Kiểm tra dữ liệu
+      const validName = validateName();
+      const validPhone = validatePhone();
+      const validAddress = validateAddress();
+
+      if (!validName || !validPhone || !validAddress) {
+        const firstInvalid = [nameInput, phoneInput, addressInput].find(
+          (input) =>
+            input?.getAttribute("aria-invalid") === "true" &&
+            !input.closest(".hidden"),
+        );
+
+        firstInvalid?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+
+        firstInvalid?.focus({ preventScroll: true });
+        return;
+      }
+
+      if (!supabase) {
+        alert("Không thể kết nối hệ thống. Vui lòng thử lại sau.");
+        return;
+      }
+
+      // 2. Chuẩn hóa dữ liệu
+      const pickupMethod = modal.querySelector<HTMLInputElement>(
+        'input[name="pickup_method"]:checked',
+      )?.value;
+
+      const payload = {
+        p_product_id: form.querySelector<HTMLInputElement>(
+          '[name="product_id"]',
+        )?.value,
+
+        p_customer_name: nameInput!.value.replace(/\s+/g, " ").trim(),
+
+        p_phone: normalizePhone(phoneInput!.value),
+
+        p_pickup_method: pickupMethod,
+
+        p_delivery_address:
+          pickupMethod === "delivery" ? addressInput!.value.trim() : null,
+
+        p_greeting_message: greetingInput?.value.trim() || null,
+      };
+
+      // 3. Ngăn gửi nhiều lần
+      if (submitButton?.disabled) return;
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.setAttribute("aria-busy", "true");
+        submitButton.classList.add("opacity-60", "cursor-not-allowed");
+      }
+
+      try {
+        // 4. Gửi đơn hàng lên Supabase RPC
+        const { data, error } = await supabase.rpc("create_order", payload);
+
+        if (error) throw error;
+
+        const order = Array.isArray(data) ? data[0] : data;
+
+        if (!order?.order_number) {
+          throw new Error("Không nhận được mã đơn hàng.");
+        }
+
+        // 5. Reset form, đóng form đặt hàng và hiện mã đơn hàng
+        form.reset();
+
+        setError(nameInput);
+        setError(phoneInput);
+        setError(addressInput);
+
+        updatePickupMethod();
+        closeModal();
+        openSuccessModal(order.order_number);
+      } catch (error) {
+        console.error("Create order error:", error);
+
+        alert(
+          "Chưa thể gửi đơn hàng. Vui lòng thử lại sau hoặc liên hệ Mèo Hoa.",
+        );
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.removeAttribute("aria-busy");
+          submitButton.classList.remove("opacity-60", "cursor-not-allowed");
+        }
+      }
+    });
+
+    updatePickupMethod();
+  }
+</script>

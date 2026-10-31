@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getPublishedProducts } from "../../lib/products";
 import { normalizeProductDescription } from "../../utils/product-description";
-
+import OrderModal from "../../components/OrderModal.astro";
 export async function getStaticPaths() {
   const products = await getPublishedProducts();
 
@@ -311,16 +311,23 @@ const breadcrumbSchema = {
           }
         </div>
 
-        <a
-          href="#lien-he"
-          class="mt-8 inline-flex w-full items-center justify-center gap-3 bg-[#794640] px-6 py-4 text-[12px] font-semibold text-white no-underline transition-colors hover:bg-[#603731] sm:w-auto"
+        <button
+          type="button"
+          data-open-order-modal
+          aria-haspopup="dialog"
+          class="mt-8 inline-flex w-full items-center justify-center gap-3 bg-[#794640] px-6 py-4 text-[12px] font-semibold text-white transition-colors hover:bg-[#603731] sm:w-auto"
         >
           Liên hệ đặt hàng
-        </a>
+        </button>
       </div>
     </section>
   </main>
-
+  <OrderModal
+    product={product}
+    imageUrl={primaryImage?.image_url}
+    powerLabels={powerLabels}
+    waving={details.waving}
+  />
   <script>
     const galleries = document.querySelectorAll<HTMLElement>(
       "[data-product-gallery]",
