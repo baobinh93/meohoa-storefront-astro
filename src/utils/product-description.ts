@@ -17,7 +17,6 @@ export function normalizeProductDescription(
 
   if (!description?.trim()) return result;
 
-  // Tách nội dung theo dấu phẩy hoặc xuống dòng
   const items = description
     .split(/[,\n]+/)
     .map((item) => item.trim())
@@ -29,13 +28,17 @@ export function normalizeProductDescription(
       .replace(/\s+/g, " ")
       .trim();
 
-    // Kích thước: Size 10, Size 10cm, Mèo size 25cm
+    // Size: chuẩn hóa về inch
     const sizeMatch = normalized.match(
-      /(?:mèo\s*)?size\s*(\d+(?:[.,]\d+)?)\s*(?:cm)?/,
+      /(?:mèo\s*)?size\s*(\d+(?:[.,]\d+)?)\s*(cm|inch|in)?\b/,
     );
 
     if (sizeMatch) {
-      result.size = Number(sizeMatch[1].replace(",", "."));
+      const value = Number(sizeMatch[1].replace(",", "."));
+      const unit = sizeMatch[2];
+
+      result.size = unit === "cm" ? Number((value / 2.54).toFixed(2)) : value;
+
       continue;
     }
 
@@ -71,7 +74,7 @@ export function normalizeProductDescription(
       continue;
     }
 
-    // Những thông tin chưa nhận diện
+    // Mô tả sản phẩm
     result.features.push(item);
   }
 

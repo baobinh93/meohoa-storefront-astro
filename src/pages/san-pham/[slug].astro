@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getPublishedProducts } from "../../lib/products";
 import { normalizeProductDescription } from "../../utils/product-description";
 import OrderModal from "../../components/OrderModal.astro";
+const BASE_URL = import.meta.env.BASE_URL;
 export async function getStaticPaths() {
   const products = await getPublishedProducts();
 
@@ -37,7 +38,7 @@ const formatPrice = (price: number) =>
 // Chuẩn hóa thông tin mô tả sản phẩm
 const details = normalizeProductDescription(product.description);
 
-// Dòng 1: Nguồn năng lượng
+// Nguồn năng lượng
 const powerLabels = details.power.map((power) => {
   if (power.toLocaleLowerCase("vi-VN") === "năng lượng mặt trời") {
     return "Mặt trời";
@@ -46,11 +47,19 @@ const powerLabels = details.power.map((power) => {
   return power;
 });
 
-// Dòng 2: Kích thước và các đặc điểm khác
-const otherDetails = [
-  details.size !== null ? `Size ${details.size}cm` : null,
-  ...details.features,
+// Các thẻ thông tin sản phẩm: Power + Size + Waving
+const productTags = [
+  ...powerLabels,
+  details.size !== null ? `Size ${details.size}` : null,
+  details.waving !== null
+    ? details.waving
+      ? "Vẫy tay"
+      : "Không vẫy tay"
+    : null,
 ].filter(Boolean);
+
+// Mô tả và đặc điểm còn lại
+const otherDetails = details.features;
 
 // URL website và URL sản phẩm
 const siteUrl = Astro.site ?? new URL("https://meohoa.io.vn");
@@ -122,7 +131,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 2,
       name: "Bộ sưu tập",
-      item: new URL("/san-pham/", siteUrl).toString(),
+      item: new URL(`${BASE_URL}/san-pham/`, siteUrl).toString(),
     },
     {
       "@type": "ListItem",
@@ -153,12 +162,21 @@ const breadcrumbSchema = {
       class="flex flex-wrap gap-2 py-6 text-[11px] text-[#8a7b70]"
       aria-label="Breadcrumb"
     >
-      <a class="no-underline hover:text-[#794640]" href="/">Trang chủ</a>
+      <a class="no-underline hover:text-[#794640]" href={BASE_URL}>
+        Trang chủ
+      </a>
+
       <span aria-hidden="true">/</span>
-      <a class="no-underline hover:text-[#794640]" href="/san-pham/">
+
+      <a
+        class="no-underline hover:text-[#794640]"
+        href={`${BASE_URL}/san-pham/`}
+      >
         Bộ sưu tập
       </a>
+
       <span aria-hidden="true">/</span>
+
       <span aria-current="page">{product.name}</span>
     </nav>
 
@@ -277,32 +295,26 @@ const breadcrumbSchema = {
 
         <!-- Product details -->
         <div class="mt-7 space-y-4 text-[15px] leading-7 text-[#74665d]">
-          <!-- Power sources + Waving -->
+          <!-- Product tags: Power + Size + Waving -->
           {
-            (powerLabels.length > 0 || details.waving !== null) && (
+            productTags.length > 0 && (
               <div class="flex flex-wrap items-center gap-2">
-                {powerLabels.map((power) => (
+                {productTags.map((tag) => (
                   <span class="inline-flex items-center rounded-sm border border-[#e5d8ca] bg-[#f8f5f0] px-3 py-1.5 text-[13px] font-medium text-[#794640]">
-                    {power}
+                    {tag}
                   </span>
                 ))}
-
-                {details.waving !== null && (
-                  <span class="inline-flex items-center rounded-sm border border-[#e5d8ca] bg-[#f8f5f0] px-3 py-1.5 text-[13px] font-medium text-[#794640]">
-                    {details.waving ? "Có vẫy tay" : "Không vẫy tay"}
-                  </span>
-                )}
               </div>
             )
           }
 
-          <!-- Size and other features -->
+          <!-- Remaining description -->
           {
             otherDetails.length > 0 && (
               <div class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px] leading-7 text-[#74665d]">
                 {otherDetails.map((detail, index) => (
                   <>
-                    {index > 0 && <span class="text-[#c4b5a5">·</span>}
+                    {index > 0 && <span class="text-[#c4b5a5]">·</span>}
                     <span>{detail}</span>
                   </>
                 ))}
@@ -322,12 +334,14 @@ const breadcrumbSchema = {
       </div>
     </section>
   </main>
+
   <OrderModal
     product={product}
     imageUrl={primaryImage?.image_url}
     powerLabels={powerLabels}
     waving={details.waving}
   />
+
   <script>
     const galleries = document.querySelectorAll<HTMLElement>(
       "[data-product-gallery]",

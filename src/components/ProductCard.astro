@@ -29,7 +29,7 @@ const productUrl = `/san-pham/${product.slug}/`;
 // Normalize product description
 const details = normalizeProductDescription(product.description);
 
-// Line 1: Power sources
+// Power labels
 const powerLabels = details.power.map((power) => {
   const normalized = power.toLocaleLowerCase("vi-VN");
 
@@ -38,11 +38,19 @@ const powerLabels = details.power.map((power) => {
   return power;
 });
 
-// Line 3: Size and features
-const otherDetails = [
-  details.size !== null ? `Size ${details.size}cm` : null,
-  ...details.features,
+// All product tags: Power + Size + Waving
+const productTags = [
+  ...powerLabels,
+  details.size !== null ? `Size ${details.size}` : null,
+  details.waving !== null
+    ? details.waving
+      ? "Vẫy tay"
+      : "Không vẫy tay"
+    : null,
 ].filter(Boolean);
+
+// Remaining description
+const otherDetails = details.features;
 ---
 
 <article
@@ -62,14 +70,14 @@ const otherDetails = [
 >
   <!-- Product image -->
   <a
-    class="relative block aspect-4/5 shrink-0 overflow-hidden bg-[#EFEEEA] p-2"
+    class="relative block aspect-4/5 shrink-0 overflow-hidden bg-[#EFEEEA] p-0 lg:p-2"
     href={`${BASE_URL}${productUrl}`}
     aria-label={`Xem sản phẩm ${product.name}`}
   >
     {
       primaryImage ? (
         <img
-          class="h-full w-full rounded-xs object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          class="h-full w-full rounded-xs object-cover transition-transform duration-700 ease-out sm:group-hover:scale-[1.04]"
           src={primaryImage.image_url}
           alt={primaryImage.alt?.trim() || product.name}
           loading="lazy"
@@ -124,28 +132,16 @@ const otherDetails = [
     <div
       class="mt-1 min-h-[3.25rem] space-y-0.5 text-[11px] font-normal leading-4 text-[#524344] sm:min-h-[3.75rem] sm:space-y-1 sm:text-[13px] sm:leading-5"
     >
-      <!-- Line 1: Power sources + Waving -->
+      <!-- Line 1: Product tags -->
       <div class="flex items-center gap-1 overflow-hidden whitespace-nowrap">
         {
-          powerLabels.length > 0
-            ? powerLabels.map((power) => (
-                <span class="inline-flex shrink-0 items-center rounded-xs bg-[#EFEEEA] px-1.5 py-0.5 text-[10px] leading-3.5 sm:px-2 sm:text-[11px] sm:leading-4">
-                  {power}
-                </span>
-              ))
-            : null
-        }
-
-        {
-          details.waving !== null ? (
-            <span class="inline-flex shrink-0 items-center rounded-xs bg-[#EFEEEA] px-1.5 py-0.5 text-[10px] leading-3.5 sm:px-2 sm:text-[11px] sm:leading-4">
-              {details.waving ? "Lắc tay" : "Không Lắc tay"}
-            </span>
-          ) : null
-        }
-
-        {
-          powerLabels.length === 0 && details.waving === null && (
+          productTags.length > 0 ? (
+            productTags.map((tag) => (
+              <span class="inline-flex shrink-0 items-center rounded-xs bg-[#EFEEEA] px-1.5 py-0.5 text-[10px] leading-3.5 sm:px-2 sm:text-[11px] sm:leading-4">
+                {tag}
+              </span>
+            ))
+          ) : (
             <span class="invisible" aria-hidden="true">
               Thông tin sản phẩm
             </span>
@@ -156,7 +152,7 @@ const otherDetails = [
       <!-- Line 2: Reserved -->
       <div class="invisible" aria-hidden="true">Thông tin bổ sung</div>
 
-      <!-- Line 3: Size and features -->
+      <!-- Line 3: Remaining description -->
       <div class="overflow-hidden text-ellipsis whitespace-nowrap">
         {
           otherDetails.length > 0 ? (
