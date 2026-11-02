@@ -3,7 +3,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getPublishedProducts } from "../../lib/products";
 import { normalizeProductDescription } from "../../utils/product-description";
 import OrderModal from "../../components/OrderModal.astro";
+
 const BASE_URL = import.meta.env.BASE_URL;
+
 export async function getStaticPaths() {
   const products = await getPublishedProducts();
 
@@ -156,7 +158,9 @@ const breadcrumbSchema = {
     set:html={JSON.stringify(breadcrumbSchema)}
   />
 
-  <main class="mx-auto w-[calc(100%-32px)] max-w-[1200px] pb-20 md:pb-28">
+  <main
+    class="mx-auto w-[calc(100%-32px)] max-w-[1200px] pb-16 sm:pb-20 md:pb-28"
+  >
     <!-- Breadcrumb -->
     <nav
       class="flex flex-wrap gap-2 py-6 text-[11px] text-[#8a7b70]"
@@ -187,11 +191,27 @@ const breadcrumbSchema = {
       <div class="min-w-0">
         <!-- Main image -->
         <div class="relative overflow-hidden bg-[#f0e9df]" data-product-gallery>
+          <!-- Product badge: góc trên bên trái ảnh -->
+          {
+            badgeName && (
+              <span
+                class:list={[
+                  "absolute left-3 top-3 z-10 inline-flex items-center px-3 py-2 text-[10px] font-semibold tracking-[0.14em] shadow-sm sm:left-5 sm:top-5 sm:px-4 sm:py-2.5 sm:text-[11px]",
+                  isAvailable
+                    ? "bg-[#794640] text-white"
+                    : "bg-[#A66B32] text-white",
+                ]}
+              >
+                {badgeName}
+              </span>
+            )
+          }
+
           {
             primaryImage ? (
               <img
                 data-main-image
-                class="aspect-[4/5] w-full object-cover transition-opacity duration-300"
+                class="aspect-[4/3] w-full object-cover transition-opacity duration-300 md:aspect-[4/5]"
                 src={primaryImage.image_url}
                 alt={primaryImage.alt?.trim() || product.name}
                 fetchpriority="high"
@@ -199,7 +219,7 @@ const breadcrumbSchema = {
               />
             ) : (
               <div
-                class="grid aspect-[4/5] w-full place-items-center bg-[#f0e9df] font-heading text-3xl text-[#a58a73]"
+                class="grid aspect-[4/3] w-full place-items-center bg-[#f0e9df] font-heading text-3xl text-[#a58a73] md:aspect-[4/5]"
                 role="img"
                 aria-label={`Hình ảnh minh họa cho ${product.name}`}
               >
@@ -252,22 +272,6 @@ const breadcrumbSchema = {
           MÈO HOA · GIFTS & FLOWERS
         </p>
 
-        <!-- Product badge -->
-        {
-          badgeName && (
-            <span
-              class:list={[
-                "mt-5 inline-flex items-center rounded-xs px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.1em]",
-                isAvailable
-                  ? "bg-[#794640] text-white"
-                  : "bg-[#A66B32] text-white",
-              ]}
-            >
-              {badgeName}
-            </span>
-          )
-        }
-
         <!-- Product name -->
         <h1
           class="mt-5 font-heading text-[clamp(34px,4vw,52px)] font-normal leading-[1.15] text-[#794640]"
@@ -300,7 +304,11 @@ const breadcrumbSchema = {
             productTags.length > 0 && (
               <div class="flex flex-wrap items-center gap-2">
                 {productTags.map((tag) => (
-                  <span class="inline-flex items-center rounded-sm border border-[#e5d8ca] bg-[#f8f5f0] px-3 py-1.5 text-[13px] font-medium text-[#794640]">
+                  <span
+                    class="inline-flex items-center rounded-sm border border-[#e5d8ca] bg-[#f8f5f0]
+                    px-2 py-0                    md:px-3 md:py-1.5
+                   text-[11px] md:text-[13px] font-medium text-[#794640]"
+                  >
                     {tag}
                   </span>
                 ))}
@@ -323,17 +331,32 @@ const breadcrumbSchema = {
           }
         </div>
 
+        <!-- Order button: desktop and tablet -->
         <button
           type="button"
           data-open-order-modal
           aria-haspopup="dialog"
-          class="mt-8 inline-flex w-full items-center justify-center gap-3 bg-[#794640] px-6 py-4 text-[12px] font-semibold text-white transition-colors hover:bg-[#603731] sm:w-auto"
+          class="mt-8 hidden items-center justify-center gap-3 bg-[#794640] px-6 py-4 text-[12px] font-semibold tracking-wide text-white transition-colors hover:bg-[#603731] sm:inline-flex sm:w-auto"
         >
           Liên hệ đặt hàng
         </button>
       </div>
     </section>
   </main>
+
+  <!-- Mobile fixed order button -->
+  <div
+    class="fixed inset-x-0 bottom-0 z-40 border-t border-[#e8dfd5] bg-[#fffdfa]/95 px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:hidden"
+  >
+    <button
+      type="button"
+      data-open-order-modal
+      aria-haspopup="dialog"
+      class="flex w-full items-center justify-center gap-3 bg-[#794640] px-6 py-4 text-[12px] font-semibold tracking-wide text-white shadow-sm transition-colors hover:bg-[#603731]"
+    >
+      Liên hệ đặt hàng
+    </button>
+  </div>
 
   <OrderModal
     product={product}

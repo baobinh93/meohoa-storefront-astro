@@ -32,7 +32,7 @@ const { data: badgeRows, error: badgesError } =
   hasSupabaseConfig && supabase
     ? await supabase
         .from("badges")
-        .select("id, name, sort_order")
+        .select("id, name, slug, sort_order")
         .eq("is_active", true)
         .order("sort_order", { ascending: true })
         .order("name", { ascending: true })
@@ -59,7 +59,7 @@ const pageDescription =
   <main class="bg-[#fbf8f3] text-[#493a35]">
     <section
       aria-labelledby="products-heading"
-      class="relative overflow-hidden bg-[radial-gradient(ellipse_at_top,#f8eee2_0%,#fbf8f3_70%)] py-12 text-center md:py-16"
+      class="hidden md:block relative overflow-hidden bg-[radial-gradient(ellipse_at_top,#f8eee2_0%,#fbf8f3_70%)] py-12 text-center md:py-16"
     >
       <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-10">
         <div class="mx-auto max-w-3xl">
@@ -76,46 +76,18 @@ const pageDescription =
             id="products-heading"
             class="mt-4 font-heading text-[30px] leading-tight text-[#6a2935] md:text-[42px]"
           >
-            Hoa Lụa, Mèo Thần Tài & Quà Tặng Tinh Tế
+            Mèo Thần Tài & Giỏ Mèo Hoa Cao Cấp
           </h1>
 
           <p
             class="mx-auto mt-3 max-w-2xl text-[13px] leading-7 text-[#81716a] md:text-[15px]"
           >
-            Khám phá bộ sưu tập hoa lụa, mèo thần tài, giỏ quà và quà tặng tại
-            Mèo Hoa. Mỗi sản phẩm được chăm chút tỉ mỉ, mang vẻ đẹp tinh tế và
-            gửi trao những lời chúc may mắn, ý nghĩa trong các dịp đặc biệt.
+            Khám phá bộ sưu tập Mèo Thần Tài, giỏ mèo hoa và quà tặng trang trí
+            tại Mèo Hoa. Những mẫu mèo may mắn được kết hợp cùng hoa lụa tinh
+            tế, thiết kế chỉn chu và giàu ý nghĩa, thích hợp làm quà khai
+            trương, tân gia, chúc mừng hoặc trang trí không gian sống và kinh
+            doanh.
           </p>
-
-          <label
-            class="mx-auto mt-6 flex max-w-3xl items-center gap-3 rounded-md border border-[#eee7df] bg-white p-1.5 pl-3 shadow-sm md:mt-7"
-          >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              class="h-4 w-4 shrink-0 stroke-[#8c7049]"
-              stroke-width="1.8"
-            >
-              <circle cx="10.8" cy="10.8" r="6.8"></circle>
-              <path d="m16 16 4.3 4.3"></path>
-            </svg>
-
-            <input
-              data-search
-              type="search"
-              aria-label="Tìm kiếm sản phẩm"
-              class="h-8 min-w-0 flex-1 bg-transparent text-left text-[12px] outline-none placeholder:text-[#a89b92]"
-            />
-
-            <button
-              data-search-submit
-              type="button"
-              class="inline-flex h-8 shrink-0 items-center gap-2 rounded-sm bg-[#783b46] px-4 text-[11px] text-white transition hover:bg-[#5f2934]"
-            >
-              Tìm kiếm <span aria-hidden="true">→</span>
-            </button>
-          </label>
         </div>
       </div>
     </section>
@@ -206,7 +178,7 @@ const pageDescription =
           type="button"
           class="mb-3 flex w-full items-center justify-between rounded-lg border border-[#eee8e0] bg-white px-4 py-3 text-left text-[14px]! text-[#6a2935] shadow-sm"
         >
-          <span class="font-heading text-[14px]">⚲ Bộ Lọc Tác Phẩm</span>
+          <span class="font-heading text-[14px]">⚲ Bộ Lọc Sản Phẩm</span>
           <span data-mobile-filter-label class="text-[11px]">
             Mở bộ lọc +
           </span>
@@ -301,6 +273,7 @@ const pageDescription =
                         name="badge-filter"
                         data-badge-value={String(badge.id)}
                         data-badge-label={badge.name}
+                        data-badge-slug={badge.slug}
                         class="accent-[#783b46]"
                       />
                       {badge.name}
@@ -333,25 +306,44 @@ const pageDescription =
           </select>
         </label>
       </div>
+      <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-10">
+        <div
+          class="mb-5 flex flex-wrap items-center gap-2 text-[11px] text-[#8c8078]"
+        >
+          <span class="mr-1">Bộ lọc đang áp dụng:</span>
+
+          <div data-active-filters class="flex flex-wrap gap-2"></div>
+
+          <button
+            data-reset
+            type="button"
+            aria-label="Xóa tất cả bộ lọc"
+            class="ml-auto inline-flex min-h-11 min-w-11 items-center justify-center gap-1.5 rounded-md px-2
+         font-semibold tracking-wide text-[#783b46]
+         transition-opacity hover:opacity-70
+         active:opacity-60"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1920 1920"
+              width="12"
+              height="12"
+              fill="currentColor"
+              aria-hidden="true"
+              class="shrink-0"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M960 0v112.941c467.125 0 847.059 379.934 847.059 847.059 0 467.125-379.934 847.059-847.059 847.059-467.125 0-847.059-379.934-847.059-847.059 0-267.106 126.607-515.915 338.824-675.727v393.374h112.94V112.941H0v112.941h342.89C127.058 407.38 0 674.711 0 960c0 529.355 430.645 960 960 960s960-430.645 960-960S1489.355 0 960 0"
+              ></path>
+            </svg>
+
+            <span class="hidden text-[10px] md:inline-block"> XÓA TẤT CẢ </span>
+          </button>
+        </div>
+      </div>
     </section>
 
-    <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-10">
-      <div
-        class="mb-5 flex flex-wrap items-center gap-2 text-[11px] text-[#8c8078]"
-      >
-        <span class="mr-1">Bộ lọc đang áp dụng:</span>
-
-        <div data-active-filters class="flex flex-wrap gap-2"></div>
-
-        <button
-          data-reset
-          type="button"
-          class="ml-auto text-[11px] font-semibold tracking-wide text-[#783b46] underline underline-offset-4"
-        >
-          XÓA TẤT CẢ (RESET)
-        </button>
-      </div>
-    </div>
     <div class="mx-auto w-full max-w-[1440px] px-4 md:px-8 lg:px-10">
       {
         products.length > 0 ? (
@@ -715,24 +707,73 @@ const pageDescription =
         .replace(/[\u0300-\u036f]/g, "")
         .toLocaleLowerCase("vi-VN")
         .trim();
+    // Chuyển UUID <-> slug dựa trên dữ liệu badges từ Supabase.
+    function getBadgeSlug(badgeId: string): string {
+      const badgeInput = badgeInputs.find(
+        (input) => input.dataset.badgeValue === badgeId,
+      );
+
+      return badgeInput?.dataset.badgeSlug ?? "";
+    }
+
+    function getBadgeId(badgeSlug: string): string {
+      const badgeInput = badgeInputs.find(
+        (input) => input.dataset.badgeSlug === badgeSlug,
+      );
+
+      return badgeInput?.dataset.badgeValue ?? "";
+    }
     function updateUrl(mode: "push" | "replace" = "push") {
       const params = new URLSearchParams(window.location.search);
+
       const values: Record<string, string> = {
         search: searchInput?.value.trim() ?? "",
         category: state.category,
         color: state.color,
-        badge: state.badge,
+        badge: state.badge ? getBadgeSlug(state.badge) : "",
         sort: state.sort === "default" ? "" : state.sort,
       };
+
       Object.entries(values).forEach(([k, v]) =>
         v ? params.set(k, v) : params.delete(k),
       );
+
       const q = params.toString();
       const next = `${location.pathname}${q ? `?${q}` : ""}${location.hash}`;
+
       if (next === `${location.pathname}${location.search}${location.hash}`)
         return;
+
       if (mode === "replace") history.replaceState({}, "", next);
       else history.pushState({}, "", next);
+    }
+    function restoreFromUrl() {
+      const p = new URLSearchParams(location.search);
+
+      if (searchInput) {
+        searchInput.value = p.get("search") ?? "";
+      }
+
+      state.category = p.get("category") ?? "";
+      state.color = p.get("color") ?? "";
+
+      const badgeValue = p.get("badge") ?? "";
+      state.badge = badgeValue ? getBadgeId(badgeValue) : "";
+
+      const s = p.get("sort") ?? "default";
+
+      state.sort = [
+        "default",
+        "newest",
+        "price-asc",
+        "price-desc",
+        "name-asc",
+      ].includes(s)
+        ? s
+        : "default";
+
+      syncControls();
+      applyFilters();
     }
     function syncControls() {
       categoryButtons.forEach((b) => {
@@ -852,25 +893,7 @@ const pageDescription =
       }
       renderActiveFilters();
     }
-    function restoreFromUrl() {
-      const p = new URLSearchParams(location.search);
-      if (searchInput) searchInput.value = p.get("search") ?? "";
-      state.category = p.get("category") ?? "";
-      state.color = p.get("color") ?? "";
-      state.badge = p.get("badge") ?? "";
-      const s = p.get("sort") ?? "default";
-      state.sort = [
-        "default",
-        "newest",
-        "price-asc",
-        "price-desc",
-        "name-asc",
-      ].includes(s)
-        ? s
-        : "default";
-      syncControls();
-      applyFilters();
-    }
+
     categoryButtons.forEach((b) =>
       b.addEventListener("click", () => {
         state.category = b.dataset.categoryValue ?? "";
