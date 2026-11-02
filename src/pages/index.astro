@@ -10,14 +10,16 @@ const pageDescription =
   <main>
     <!-- SECTION 01: HERO | Mobile + Desktop -->
 
-    <section class="overflow-hidden bg-surface py-12 sm:py-16 lg:py-20">
+    <section
+      class="overflow-hidden bg-background-cream py-12 sm:py-16 lg:py-20"
+    >
       <!-- MOBILE HERO: hiển thị dưới breakpoint lg -->
       <div
         class="mx-auto w-[calc(100%-32px)] max-w-105 sm:w-[calc(100%-48px)] lg:hidden"
       >
         <!-- Collection label -->
         <div
-          class="mb-6 inline-flex items-center gap-2 rounded-lg bg-[#FCDBA6]/50 px-3 py-1"
+          class="mb-2 inline-flex items-center gap-2 rounded-lg bg-badge-yellow/50 px-3 py-1"
         >
           <svg
             width="12"
@@ -32,7 +34,7 @@ const pageDescription =
           </svg>
 
           <span
-            class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#775f34]"
+            class="text-[11px] font-semibold uppercase tracking-[0.12em] text-text-accent"
           >
             MÈO HOA COLLECTION
           </span>
@@ -40,36 +42,37 @@ const pageDescription =
 
         <!-- Heading -->
         <h1
-          class="m-0 font-heading text-[clamp(2.5rem,10vw,3.4rem)] font-medium leading-[1.02]
+          class="m-0 font-heading text-[28px] font-medium leading-[35px]
           tracking-[-0.045em] text-text-heading"
         >
-          Quà tặng ý nghĩa
+          Quà tặng ý nghĩa,
           <span class="mt-1 block font-heading font-medium">
-            Trọn vẹn lời chúc.
+            trọn vẹn lời chúc.
           </span>
         </h1>
 
         <!-- Description -->
-        <p class="mb-0 mt-5 text-[15px] leading-[24.4px] text-text-navbar">
+        <p class="mb-0 mt-2 text-[15px] leading-[24.4px] text-text-navbar">
           Sự kết hợp giữa Mèo thần tài và hoa lụa cao cấp, chăm chút từng chi
           tiết tạo nên món quà ý nghĩa cho những dịp đặc biệt.
         </p>
 
         <!-- Featured product card -->
         <div
-          class="mt-6 overflow-hidden rounded-2xl border border-border/40 bg-white shadow-lg shadow-text-black/10"
+          class="mt-5 overflow-hidden rounded-2xl bg-background-gray-light shadow-[0_4px_6px_-1px_rgb(0_0_0_/_10%)]"
         >
           <!-- Image area -->
           <div class="relative aspect-[0.82/1] overflow-hidden bg-[#E9E0D5]">
             <img
               src={`${import.meta.env.BASE_URL}/images/home/01-hero/hero-01.png`}
               alt="Hộp hoa kết hợp mèo thần tài Mèo Hoa"
-              class="absolute inset-0 h-full w-full object-contain"
+              class="absolute inset-0 h-full w-full object-cover"
             />
 
             <!-- Image label -->
             <span
-              class="absolute left-4 top-4 rounded-xl bg-surface/90 pt-2.5 px-2.5 pb-1.5 text-[11px]
+              class="absolute left-4 top-4 rounded-xl bg-background-cream/90 pt-2.5 px-2.5 pb-1.5
+              text-[11px]
               font-semibold uppercase tracking-wide text-text-heading shadow-sm"
             >
               Hoa lụa cao cấp
@@ -87,32 +90,32 @@ const pageDescription =
             >
               <div class="min-w-0">
                 <h2
-                  class="m-0 font-heading text-[25px] leading-tight text-white sm:text-[28px]"
+                  class="m-0 font-heading text-[18px] leading-tight text-white font-medium"
                 >
                   Mèo Hoa Phú Quý
                 </h2>
                 <p
-                  class="mb-0 mt-2 text-[11px] font-medium uppercase tracking-[0.12em] text-white/85 sm:text-xs"
+                  class="mb-0 mt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#e4e2de]/80 sm:text-xs"
                 >
                   SIGNATURE 2026
                 </p>
               </div>
 
               <p
-                class="m-0 shrink-0 font-heading text-[23px] font-semibold text-[#F5D7A0] sm:text-[27px]"
+                class="m-0 shrink-0 font-heading text-[23px] font-semibold text-[#ffdea9] sm:text-[27px]"
               >
-                1.690.000đ
+                1.690.000
               </p>
             </div>
           </div>
 
           <!-- CTA buttons -->
-          <div class="flex flex-col gap-3 p-4 sm:p-5">
+          <div class="flex flex-col gap-3 p-4 sm:p-5 bg-white">
             <a
               href={`${import.meta.env.BASE_URL}/san-pham/`}
               class="inline-flex min-h-15 items-center justify-center gap-3 rounded-lg
                bg-badge-background px-4 py-4 text-center text-[14px] font-medium
-                text-white transition-colors hover:bg-text-heading"
+                text-white transition-colors hover:bg-brand-primary"
             >
               Khám phá Mèo Hoa
               <svg
@@ -133,14 +136,15 @@ const pageDescription =
             <a
               href="#bo-suu-tap"
               class="inline-flex min-h-15 items-center justify-center rounded-lg
-               bg-[#F0EEEA] px-4 py-4 text-center text-[14px] font-medium text-text-black transition-colors hover:bg-border"
+               bg-background-gray-light hover:bg-background-gray
+                px-4 py-4 text-center text-[14px] font-medium text-text-black transition-colors hover:bg-border"
             >
               Xem hai bộ sưu tập đặc trưng
             </a>
           </div>
         </div>
       </div>
-
+      <!-- Destop HERO -->
       <div
         class="mx-auto hidden w-[calc(100%-32px)] max-w-360 items-center gap-10
          sm:w-[calc(100%-48px)] lg:grid lg:grid-cols-[0.82fr_1.18fr]
@@ -150,9 +154,10 @@ const pageDescription =
         <div class="flex min-w-0 flex-col">
           <!-- Eyebrow -->
           <div class="mb-6 flex items-center gap-3">
-            <span class="h-px w-8 shrink-0 bg-gold"></span>
+            <span class="h-px w-8 shrink-0 bg-brand-gold"></span>
             <p
-              class="m-0 text-[11px] font-semibold uppercase tracking-[0.2em] text-text-section sm:text-xs"
+              class="m-0 text-[14px] font-semibold uppercase tracking-[0.2em]
+               text-text-accent"
             >
               MÈO HOA COLLECTION
             </p>
@@ -160,11 +165,11 @@ const pageDescription =
 
           <!-- Heading -->
           <h1
-            class="m-0 font-heading text-[clamp(2.6rem,5.2vw,4.5rem)] font-medium leading-[1.08] tracking-[-0.045em] text-text-heading"
+            class="m-0 font-heading text-[56px] font-medium leading-[1.08] tracking-[-0.045em] text-text-heading"
           >
             Quà tặng ý nghĩa,
             <span
-              class="mt-1 block font-heading font-normal italic text-text-section"
+              class="mt-1 block font-heading font-normal italic text-text-accent"
             >
               trọn vẹn lời chúc.
             </span>
@@ -172,7 +177,7 @@ const pageDescription =
 
           <!-- Description -->
           <p
-            class="mb-0 mt-6 max-w-140 text-sm leading-7 text-text-navbar sm:text-base"
+            class="mb-0 mt-6 max-w-140 text-[17px] leading-7 text-text-secondary"
           >
             Sự kết hợp giữa Mèo thần tài và hoa lụa cao cấp, chăm chút từng chi
             tiết tạo nên món quà ý nghĩa cho những dịp đặc biệt.
@@ -182,14 +187,21 @@ const pageDescription =
           <div class="mt-7 flex flex-col gap-3 min-[420px]:flex-row sm:mt-8">
             <a
               href={`${import.meta.env.BASE_URL}/san-pham/`}
-              class="inline-flex min-h-14 items-center justify-center bg-badge-background px-6 py-4 text-center text-xs font-semibold uppercase tracking-wide text-white transition-colors duration-300 hover:bg-text-heading focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-w-[236px]"
+              class="inline-flex min-h-14 items-center justify-center bg-badge-background
+              px-6 py-4 text-center text-[11px] font-semibold uppercase tracking-wide
+               text-white transition-colors duration-300 hover:bg-brand-primary
+               focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-w-[236px]"
             >
               KHÁM PHÁ MÈO HOA
             </a>
 
             <a
               href={`${import.meta.env.BASE_URL}/san-pham/`}
-              class="inline-flex min-h-14 items-center justify-center bg-surface px-6 py-4 text-center text-xs font-semibold uppercase tracking-wide text-text-black transition-colors duration-300 hover:bg-border focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-w-[196px]"
+              class="inline-flex min-h-14 items-center justify-center bg-surface px-6 py-4
+              text-center text-xs font-semibold uppercase tracking-wide text-text-primary
+               transition-colors duration-300 hover:bg-border focus-visible:outline-2
+               focus-visible:outline-offset-4 focus-visible:outline-text-heading
+               sm:min-w-[196px] hover:bg-background-gray"
             >
               XEM BỘ SƯU TẬP
             </a>
@@ -205,7 +217,7 @@ const pageDescription =
                 aria-hidden="true"
                 viewBox="0 0 32 32"
                 fill="none"
-                class="h-6 w-6 shrink-0 text-gold"
+                class="h-6 w-6 shrink-0 text-text-accent"
               >
                 <path
                   d="M16 2.5 18.5 9l6.5 2.5-6.5 2.5-2.5 6.5-2.5-6.5L7 11.5 13.5 9 16 2.5Z"
@@ -218,7 +230,8 @@ const pageDescription =
                   fill="currentColor"></path>
               </svg>
               <p
-                class="m-0 text-[11px] font-medium uppercase leading-[1.6] tracking-wide text-text-navbar"
+                class="m-0 text-[11px] font-medium uppercase leading-[1.6] tracking-wide
+                 text-text-accent"
               >
                 TƯ VẤN TẬN TÂM
               </p>
@@ -226,13 +239,13 @@ const pageDescription =
 
             <!-- Benefit 2 -->
             <div
-              class="flex items-center gap-3 min-[420px]:border-l min-[420px]:border-border min-[420px]:pl-3"
+              class="flex items-center gap-3 min-[420px]:border-l min-[420px]:border-text-accent min-[420px]:pl-3"
             >
               <svg
                 aria-hidden="true"
                 viewBox="0 0 32 32"
                 fill="none"
-                class="h-6 w-6 shrink-0 text-gold"
+                class="h-6 w-6 shrink-0 text-text-accent"
               >
                 <path
                   d="M16 28C8 23 5 17 7 11c5 0 8 4 9 9 1-7 4-11 9-12 2 8-1 15-9 20Z"
@@ -246,7 +259,7 @@ const pageDescription =
                   stroke-linecap="round"></path>
               </svg>
               <p
-                class="m-0 text-[11px] font-medium uppercase leading-[1.6] tracking-wide text-text-navbar"
+                class="m-0 text-[11px] font-medium uppercase leading-[1.6] tracking-wide text-text-accent"
               >
                 THIẾT KẾ THỦ CÔNG
               </p>
@@ -254,13 +267,13 @@ const pageDescription =
 
             <!-- Benefit 3 -->
             <div
-              class="flex items-center gap-3 min-[420px]:border-l min-[420px]:border-border min-[420px]:pl-3"
+              class="flex items-center gap-3 min-[420px]:border-l min-[420px]:border-text-accent min-[420px]:pl-3"
             >
               <svg
                 aria-hidden="true"
                 viewBox="0 0 32 32"
                 fill="none"
-                class="h-6 w-6 shrink-0 text-gold"
+                class="h-6 w-6 shrink-0 text-text-accent"
               >
                 <rect
                   x="5"
@@ -277,7 +290,7 @@ const pageDescription =
                   stroke-linecap="round"></path>
               </svg>
               <p
-                class="m-0 text-[11px] font-medium uppercase leading-[1.6] tracking-wide text-text-navbar"
+                class="m-0 text-[11px] font-medium uppercase leading-[1.6] tracking-wide text-text-accent"
               >
                 GIAO HÀNG CHỈN CHU
               </p>
@@ -308,29 +321,24 @@ const pageDescription =
             <img
               src={`${import.meta.env.BASE_URL}/images/home/01-hero/hero-01.png`}
               alt="Hộp hoa kết hợp mèo thần tài Mèo Hoa"
-              class="absolute inset-0 h-full w-full object-contain"
+              class="absolute inset-0 h-full w-full object-cover"
             />
-
-            <div class="absolute inset-0 flex items-center justify-center">
-              <p class="m-0 text-xs uppercase tracking-[0.2em] text-muted/60">
-                HÌNH ẢNH SẢN PHẨM
-              </p>
-            </div>
           </div>
 
           <!-- Signature label -->
           <div
-            class="absolute bottom-4 left-4 flex max-w-[calc(100%-32px)] items-center gap-3 rounded-md bg-surface px-4 py-3 shadow-lg sm:bottom-6 sm:left-6 sm:gap-4 sm:px-6 sm:py-4 lg:bottom-8 lg:left-8"
+            class="absolute bottom-4 left-4 flex max-w-[calc(100%-32px)] items-center gap-3 bg-white
+             rounded-md bg-surface px-4 py-3 shadow-lg sm:bottom-6 sm:left-6 sm:gap-4 sm:px-6 sm:py-4 lg:bottom-8 lg:left-8"
           >
             <span class="h-3 w-3 shrink-0 rounded-full bg-[#F5D7A0]"></span>
             <div class="min-w-0">
               <p
-                class="m-0 text-[9px] font-medium uppercase tracking-[0.16em] text-text-section sm:text-[10px]"
+                class="m-0 text-[10px] font-medium uppercase tracking-[0.16em] text-text-accent sm:text-[10px]"
               >
                 SIGNATURE EDITION
               </p>
               <p
-                class="m-0 mt-1 truncate font-heading text-base text-text-heading sm:text-xl"
+                class="m-0 mt-1 truncate font-heading text-[18px] text-text-heading"
               >
                 Phú Quý Cát Tường
               </p>
@@ -342,22 +350,22 @@ const pageDescription =
 
     <!-- SECTION 02: FEATURED COLLECTIONS -->
 
-    <section id="bo-suu-tap" class="bg-background py-8 sm:py-16">
+    <section id="bo-suu-tap" class="bg-background-ivory py-8 sm:py-16">
       <div class="mx-auto w-[calc(100%-32px)] max-w-360 sm:w-[calc(100%-48px)]">
         <!-- Section heading -->
         <div
-          class="mb-8 flex flex-col gap-1 sm:mb-10 lg:mb-12 lg:flex-row lg:items-end lg:justify-between"
+          class="mb-8 flex flex-col gap-1 sm:mb-14 lg:flex-row lg:items-end lg:justify-between"
         >
           <div>
             <p
-              class="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em]
-               text-text-section sm:text-xs"
+              class="mb-1 sm:mb-2 text-[11px] font-semibold uppercase tracking-[0.18em]
+               text-text-accent"
             >
               ĐẶC TRƯNG MÈO HOA
             </p>
 
             <h2
-              class="m-0 font-heading text-[clamp(2rem,4vw,3rem)] font-medium
+              class="font-heading text-[28px] sm:text-[40px] sm:font-normal font-medium
                leading-tight tracking-[-0.035em] text-text-heading"
             >
               Hai Bộ Sưu Tập Đặc Trưng
@@ -365,8 +373,10 @@ const pageDescription =
           </div>
 
           <p
-            class="m-0 max-w-120 text-[13px] leading-5
-             text-text-navbar sm:text-base sm:leading-7 lg:pb-1"
+            class="m-0 max-w-120
+            text-[13px] leading-5
+             sm:text-[15px] sm:leading-6
+             text-text-secondary"
           >
             Sự kết hợp tinh tế giữa nghệ thuật cắm hoa và mèo thần tài, gửi trao
             lời chúc may mắn, tài lộc và thịnh vượng.
@@ -379,8 +389,8 @@ const pageDescription =
         >
           <!-- Card 1: Mèo Hoa -->
           <article
-            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/50
-             bg-surface shadow-sm transition-shadow duration-300 hover:shadow-lg"
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg
+             bg-background-cream shadow-sm transition-shadow duration-300 hover:shadow-lg"
           >
             <!-- Image placeholder -->
             <div
@@ -390,7 +400,7 @@ const pageDescription =
               <img
                 src={`${import.meta.env.BASE_URL}/images/home/02-collections/meohoa-01.png`}
                 alt="Bộ sưu tập Mèo Hoa"
-                class="absolute inset-0 h-full w-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
               />
 
@@ -419,15 +429,13 @@ const pageDescription =
                   </svg>
                 </div>
                 <h3
-                  class="m-0 font-heading text-2xl font-normal text-text-black sm:text-[30px]"
+                  class="m-0 font-heading text-[22px] font-medium text-text-primary"
                 >
                   Mèo Hoa
                 </h3>
               </div>
 
-              <p
-                class="mb-0 mt-2 text-[15px] leading-7 text-text-navbar sm:text-base sm:leading-6"
-              >
+              <p class="mb-0 mt-1.5 text-[15px] leading-6 text-text-secondary">
                 Những thiết kế quà tặng kết hợp vẻ đẹp tinh tế của hoa lụa cao
                 cấp cùng biểu tượng may mắn, gửi trao lời chúc tài lộc, thịnh
                 vượng trong những dịp trọng đại.
@@ -435,7 +443,7 @@ const pageDescription =
 
               <a
                 href={`${import.meta.env.BASE_URL}/san-pham/`}
-                class="mt-6 inline-flex w-fit items-center gap-2 py-2 text-[14px]
+                class="mt-2.5 inline-flex w-fit items-center gap-2 py-2 text-[14px]
                 font-semibold uppercase tracking-widest text-text-heading
                 transition-colors hover:text-text-section focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:mt-7 sm:text-xs"
               >
@@ -459,12 +467,12 @@ const pageDescription =
 
           <!-- Card 2: Mèo Thần Tài -->
           <article
-            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/50
-             bg-surface shadow-sm transition-shadow duration-300 hover:shadow-lg"
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg
+             bg-background-cream shadow-sm transition-shadow duration-300 hover:shadow-lg"
           >
             <!-- Image placeholder -->
             <div
-              class="relative aspect-4/3 w-full overflow-hidden bg-[#E9E0D5]
+              class="relative aspect-4/3 w-full overflow-hidden bg-background-ivory
               sm:aspect-[1.55/1] lg:aspect-[1.55/1]"
             >
               <img
@@ -474,16 +482,8 @@ const pageDescription =
                 loading="lazy"
               />
 
-              <div class="absolute inset-0 flex items-center justify-center">
-                <span
-                  class="text-[10px] uppercase tracking-[0.2em] text-text-navbar/50"
-                >
-                  HÌNH ẢNH BỘ SƯU TẬP
-                </span>
-              </div>
-
               <span
-                class="absolute right-3 top-3 w-fit whitespace-nowrap rounded-xl bg-[#735B30] px-3 py-1
+                class="absolute right-3 top-3 w-fit whitespace-nowrap rounded-xl bg-brand-gold px-3 py-1
   text-[11px] font-semibold uppercase tracking-wide text-white sm:left-5 sm:right-auto sm:top-5"
               >
                 SẢN PHẨM CAO CẤP
@@ -497,25 +497,36 @@ const pageDescription =
                   <svg
                     width="17"
                     height="16"
-                    viewBox="0 0 17 16"
-                    fill="none"
+                    viewBox="0 0 297 297"
+                    fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    class="shrink-0 text-brand-primary"
                   >
-                    <path
-                      d="M2.08333 7.5C1.5 7.5 1.00694 7.29861 0.604167 6.89583C0.201389 6.49306 0 6 0 5.41667C0 4.83333 0.201389 4.34028 0.604167 3.9375C1.00694 3.53472 1.5 3.33333 2.08333 3.33333C2.66667 3.33333 3.15972 3.53472 3.5625 3.9375C3.96528 4.34028 4.16667 4.83333 4.16667 5.41667C4.16667 6 3.96528 6.49306 3.5625 6.89583C3.15972 7.29861 2.66667 7.5 2.08333 7.5V7.5M5.83333 4.16667C5.25 4.16667 4.75694 3.96528 4.35417 3.5625C3.95139 3.15972 3.75 2.66667 3.75 2.08333C3.75 1.5 3.95139 1.00694 4.35417 0.604167C4.75694 0.201389 5.25 0 5.83333 0C6.41667 0 6.90972 0.201389 7.3125 0.604167C7.71528 1.00694 7.91667 1.5 7.91667 2.08333C7.91667 2.66667 7.71528 3.15972 7.3125 3.5625C6.90972 3.96528 6.41667 4.16667 5.83333 4.16667V4.16667M10.8333 4.16667C10.25 4.16667 9.75694 3.96528 9.35417 3.5625C8.95139 3.15972 8.75 2.66667 8.75 2.08333C8.75 1.5 8.95139 1.00694 9.35417 0.604167C9.75694 0.201389 10.25 0 10.8333 0C11.4167 0 11.9097 0.201389 12.3125 0.604167C12.7153 1.00694 12.9167 1.5 12.9167 2.08333C12.9167 2.66667 12.7153 3.15972 12.3125 3.5625C11.9097 3.96528 11.4167 4.16667 10.8333 4.16667V4.16667M14.5833 7.5C14 7.5 13.5069 7.29861 13.1042 6.89583C12.7014 6.49306 12.5 6 12.5 5.41667C12.5 4.83333 12.7014 4.34028 13.1042 3.9375C13.5069 3.53472 14 3.33333 14.5833 3.33333C15.1667 3.33333 15.6597 3.53472 16.0625 3.9375C16.4653 4.34028 16.6667 4.83333 16.6667 5.41667C16.6667 6 16.4653 6.49306 16.0625 6.89583C15.6597 7.29861 15.1667 7.5 14.5833 7.5V7.5M3.875 15.8333C3.25 15.8333 2.72569 15.5938 2.30208 15.1146C1.87847 14.6354 1.66667 14.0694 1.66667 13.4167C1.66667 12.6944 1.91319 12.0625 2.40625 11.5208C2.89931 10.9792 3.38889 10.4444 3.875 9.91667C4.27778 9.48611 4.625 9.01736 4.91667 8.51042C5.20833 8.00347 5.55556 7.52778 5.95833 7.08333C6.26389 6.72222 6.61806 6.42361 7.02083 6.1875C7.42361 5.95139 7.86111 5.83333 8.33333 5.83333C8.80556 5.83333 9.24306 5.94444 9.64583 6.16667C10.0486 6.38889 10.4028 6.68056 10.7083 7.04167C11.0972 7.48611 11.441 7.96528 11.7396 8.47917C12.0382 8.99306 12.3889 9.47222 12.7917 9.91667C13.2778 10.4444 13.7674 10.9792 14.2604 11.5208C14.7535 12.0625 15 12.6944 15 13.4167C15 14.0694 14.7882 14.6354 14.3646 15.1146C13.941 15.5938 13.4167 15.8333 12.7917 15.8333C12.0417 15.8333 11.2986 15.7708 10.5625 15.6458C9.82639 15.5208 9.08333 15.4583 8.33333 15.4583C7.58333 15.4583 6.84028 15.5208 6.10417 15.6458C5.36806 15.7708 4.625 15.8333 3.875 15.8333V15.8333"
-                      fill="#735B30"></path>
+                    <g>
+                      <path
+                        d="M149.134,91.569c2.987,2.68,7.579,2.429,10.255-0.557c1.464-1.632,3.462-2.53,5.627-2.53s4.163,0.898,5.627,2.53c1.434,1.599,3.417,2.413,5.409,2.413c1.727,0,3.46-0.613,4.846-1.856c2.985-2.678,3.235-7.269,0.557-10.255c-4.194-4.675-10.185-7.357-16.439-7.357c-6.254,0-12.245,2.682-16.439,7.357C145.899,84.3,146.149,88.891,149.134,91.569z"
+                      ></path>
+                      <path
+                        d="M82.118,91.569c1.387,1.244,3.12,1.856,4.846,1.856c1.991,0,3.975-0.814,5.409-2.413c1.464-1.632,3.462-2.53,5.627-2.53s4.163,0.898,5.625,2.529c2.676,2.985,7.268,3.237,10.255,0.559c2.986-2.677,3.237-7.269,0.559-10.255c-4.193-4.676-10.184-7.358-16.439-7.358c-6.254,0-12.246,2.682-16.439,7.357C78.883,84.3,79.132,88.891,82.118,91.569z"
+                      ></path>
+                      <path
+                        d="M125.698,105.704v21.952c0,1.199-1.466,2.421-2.905,2.421c-1.335,0-2.421-1.086-2.421-2.421c0-3.208-2.601-5.81-5.81-5.81c-3.208,0-5.81,2.601-5.81,5.81c0,7.742,6.299,14.04,14.04,14.04c3.242,0,6.266-1.102,8.715-2.916c2.448,1.814,5.473,2.916,8.715,2.916c7.742,0,14.04-6.299,14.04-14.04c0-3.208-2.601-5.81-5.81-5.81c-3.208,0-5.81,2.601-5.81,5.81c0,1.335-1.086,2.421-2.421,2.421c-1.439,0-2.905-1.222-2.905-2.421v-21.952c4.222-1.375,9.199-3.499,9.199-5.886c0-4.145-6.72-7.504-15.009-7.504c-8.289,0-15.009,3.36-15.009,7.504C116.499,102.205,121.476,104.33,125.698,105.704z"
+                      ></path>
+                      <path
+                        d="M221.075,94.069V27.247c0-9.007-4.44-17.417-11.877-22.497c-7.44-5.082-16.889-6.156-25.279-2.882l-25.164,9.826c-8.596-2.506-17.75-3.864-27.247-3.864c-9.497,0-18.651,1.358-27.247,3.864L79.095,1.868C70.703-1.408,61.255-.33,53.818,4.75C46.38,9.83,41.941,18.24,41.941,27.247v62.162c0,10.821,2.331,21.154,6.55,30.611c-18.033,16.922-29.294,40.288-31.217,65.286c-1.128,15.789,2.508,30.228,6.214,42.269c.108.352.236.697.384,1.034c7.334,16.765,19.048,31.784,33.874,43.433c.057.044.114.089.172.132c21.92,16.44,47.673,24.828,73.522,24.826c18.704-.001,37.46-4.393,54.838-13.305c.073-.038.146-.077.217-.115c23.356-12.74,40.948-31.088,51.103-53.19c23.903-3.431,42.337-24.035,42.337-48.872v-64.149c0-16.628-15.949-29.654-36.311-29.654C234.961,87.714,227.252,90.078,221.075,94.069z M190.964,19.908c2.463-.962,5.127-.658,7.311.833c2.182,1.491,3.434,3.862,3.434,6.506v11.557c-5.275-6.058-11.47-11.421-18.395-15.909L190.964,19.908z M201.709,89.409c0,34.304-31.492,62.213-70.201,62.213s-70.201-27.908-70.201-62.213s31.492-62.213,70.201-62.213S201.709,55.104,201.709,89.409z M137.802,177.282c0,3.47-2.824,6.294-6.294,6.294c-3.47,0-6.294-2.824-6.294-6.294c0-3.47,2.824-6.294,6.294-6.294C134.978,170.988,137.802,173.811,137.802,177.282z M61.307,27.247c0-2.644,1.252-5.015,3.434-6.506s4.848-1.795,7.31-.833l7.65,2.987c-6.925,4.488-13.12,9.852-18.395,15.909V27.247z M42.59,201.486c-3.763-10.754-1.795-22.612,1.595-32.527c.076.168.152.338.229.507c6.239,13.631,19.445,31.116,46.932,37.004c6.041,1.295,10.427,6.716,10.427,12.89c0,3.944-1.452,7.033-4.317,9.183c-4.011,3.012-10.26,3.788-16.308,2.029h.001C60.181,224.472,47.208,214.686,42.59,201.486z M58.84,137.042c11.767,14.85,28.876,25.964,48.742,30.985c-1.115,2.873-1.734,5.992-1.734,9.254c0,14.149,11.511,25.66,25.66,25.66c14.149,0,25.66-11.511,25.66-25.66c0-3.262-.618-6.381-1.734-9.254c22.192-5.61,40.948-18.819,52.655-36.348c.006.742.007,1.482.013,2.224c.061,6.82.123,13.872-.06,20.705-.044,1.643-.514,3.917-2.502,5.424c-4.261,3.232-5.095,9.306-1.864,13.566c1.904,2.512,4.796,3.833,7.723,3.833c2.039,0,4.094-.642,5.844-1.969c6.235-4.729,9.938-12.141,10.158-20.334c.099-3.693.129-7.398.128-11.078c4.827,1.906,10.28,2.972,16.095,2.972c5.347,0,9.683-4.336,9.683-9.683c0-5.347-4.336-9.683-9.683-9.683c-9.986,0-16.945-5.422-16.945-10.288c0-4.866,6.959-10.288,16.945-10.288s16.945,5.422,16.945,10.288v64.149c0,16.552-13.465,30.017-30.017,30.017h-19.16c-5.347,0-9.683,4.336-9.683,9.683s4.336,9.683,9.683,9.683h4.068c-8.714,14.457-21.697,26.633-38.131,35.619c-34.697,17.742-75.945,13.998-107.706-9.773c-6.285-4.95-11.882-10.622-16.667-16.827c6.594,3.661,14.192,6.748,22.782,9.247h.001c3.928,1.143,7.909,1.703,11.803,1.703c7.96,0,15.549-2.342,21.539-6.838c7.776-5.835,12.057-14.597,12.057-24.672c0-15.247-10.823-28.632-25.736-31.827C58.148,179.553,57.873,143.149,58.84,137.042z"
+                      ></path>
+                    </g>
                   </svg>
                 </div>
                 <h3
-                  class="m-0 font-heading text-2xl font-normal text-text-black sm:text-[30px]"
+                  class="m-0 font-heading text-[22px] font-medium text-text-primary"
                 >
                   Mèo Thần Tài
                 </h3>
               </div>
 
-              <p
-                class="mb-0 mt-2 text-[15px] leading-7 text-text-navbar sm:text-base sm:leading-6"
-              >
+              <p class="mt-1.5 text-[15px] leading-6 text-text-secondary">
                 Những chú Mèo Thần Tài được chăm chút tỉ mỉ đến từng đường nét,
                 sắc sảo trong từng chi tiết, mang ý nghĩa chiêu tài, đón lộc và
                 thu hút may mắn, thịnh vượng.
@@ -524,8 +535,9 @@ const pageDescription =
               <a
                 href={`${import.meta.env.BASE_URL}/san-pham/`}
                 class="mt-6 inline-flex w-fit items-center gap-2 py-2 text-[14px]
-                font-semibold tracking-widest text-text-section
-                transition-colors hover:text-text-section focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:mt-7 sm:text-xs"
+                font-semibold tracking-widest text-text-heading
+                transition-colors focus-visible:outline-2 focus-visible:outline-offset-4
+                 focus-visible:outline-text-heading"
               >
                 Xem các mẫu mèo
                 <svg
@@ -554,23 +566,29 @@ const pageDescription =
     <section class="bg-surface py-8 sm:py-16">
       <div class="mx-auto w-[calc(100%-32px)] max-w-360 sm:w-[calc(100%-48px)]">
         <!-- Section heading -->
-        <div class="mx-auto mb-10 max-w-3xl sm:mb-12 lg:mb-16">
+        <div class="mx-auto max-w-3xl">
           <p
-            class="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-text-section
-            sm:text-xs"
+            class="mb-1 sm:mb-2
+            text-[11px] font-semibold text-left sm:text-center
+           uppercase tracking-[0.18em] text-text-accent"
           >
             ĐƯỢC TUYỂN CHỌN
           </p>
 
           <h2
-            class="m-0 font-heading text-[28px] font-medium leading-tight tracking-[-0.035em] text-text-heading sm:text-[clamp(2rem,4vw,3rem)]"
+            class="mb-1 sm:mb-2 font-heading
+            text-left sm:text-center
+            text-[28px] font-medium sm:text-[40] sm:font-normal
+             leading-tight tracking-[-0.035em] text-text-heading"
           >
             Những Thiết Kế Nổi Bật
           </h2>
 
           <p
-            class="mx-auto mb-0 mt-1 max-w-180 text-[13px] leading-5
-             text-text-navbar sm:text-base"
+            class="mb-0 mt-1 px-0 sm:px-3 max-w-180
+            text-[13px] leading-5 text-left
+            sm:text-[15px] sm:leading-6 sm:text-center
+             text-text-secondary"
           >
             Khám phá những mẫu Mèo Hoa được tuyển chọn từ bộ sưu tập của chúng
             tôi, mỗi tác phẩm là một lời chúc khởi sắc và an yên.
@@ -579,11 +597,14 @@ const pageDescription =
 
         <!-- Product cards -->
         <div
-          class="grid grid-cols-2 items-stretch gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-7 lg:grid-cols-4 lg:gap-6"
+          class="grid grid-cols-2 items-stretch gap-x-3 gap-y-3
+          md:gap-x-6 md:gap-y-6 md:grid-cols-4
+          my-5 md:my-14"
         >
           <!-- Product 1 -->
           <article
-            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/40 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg
+             bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
           >
             <!-- Product image -->
             <a
@@ -599,16 +620,21 @@ const pageDescription =
               />
 
               <span
-                class="absolute left-2 top-2 rounded-xl bg-[#5c2730] px-2 py-0.5 text-[10px] font-semibold uppercase leading-6 tracking-wide text-white"
+                class="absolute left-2 top-2 rounded-xl sm:rounded-none bg-[#5c2730]
+                 px-2 sm:px-2.5 pt-1 pb-0.5 sm:py-1
+                 text-[10px] leading-6 font-semibold
+                 sm:leading-4 sm:font-normal
+              uppercase tracking-wide text-white"
               >
                 BÁN CHẠY
               </span>
             </a>
 
             <!-- Product information -->
-            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-4 lg:p-5">
+            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-5">
               <p
-                class="m-0 text-[8px] font-medium uppercase tracking-wide text-text-section sm:text-[10px]"
+                class="m-0 font-medium uppercase tracking-wide text-text-accent
+                 text-[10px] sm:text-[10px]"
               >
                 CHIÊU TÀI • CÁT VẬN
               </p>
@@ -633,9 +659,9 @@ const pageDescription =
               </p>
 
               <!-- Price pinned to bottom -->
-              <div class="mt-auto flex items-end justify-between gap-2 pt-4">
+              <div class="mt-auto flex items-center justify-between gap-2 pt-4">
                 <p
-                  class="m-0 font-heading text-base font-semibold text-text-heading sm:text-xl"
+                  class="m-0 font-heading text-[16px] font-semibold leading-none text-text-heading sm:text-[20px]"
                 >
                   950.000đ
                 </p>
@@ -643,7 +669,7 @@ const pageDescription =
                 <a
                   href={`${import.meta.env.BASE_URL}/san-pham/`}
                   aria-label="Xem Mèo Hoa Như Ý Cát Tường"
-                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-lg text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
                 >
                   <svg
                     width="18"
@@ -667,7 +693,8 @@ const pageDescription =
 
           <!-- Product 2 -->
           <article
-            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/40 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg
+  bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
           >
             <!-- Product image -->
             <a
@@ -677,22 +704,27 @@ const pageDescription =
             >
               <img
                 src={`${import.meta.env.BASE_URL}/images/home/03-featured-products/product-02.png`}
-                alt="Mèo Hoa Như Ý Cát Tường"
+                alt="Mèo Hoa Khai Phúc"
                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
 
               <span
-                class="absolute left-2 top-2 rounded-xl bg-[#735B30] px-2 py-0.5 text-[10px] font-semibold uppercase leading-6 tracking-wide text-white"
+                class="absolute left-2 top-2 rounded-xl sm:rounded-none bg-[#735B30]
+      px-2 sm:px-2.5 pt-1 pb-0.5 sm:py-1
+      text-[10px] leading-6 font-semibold
+      sm:leading-4 sm:font-normal
+      uppercase tracking-wide text-white"
               >
                 KHAI TRƯƠNG
               </span>
             </a>
 
             <!-- Product information -->
-            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-4 lg:p-5">
+            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-5">
               <p
-                class="m-0 text-[8px] font-medium uppercase tracking-wide text-text-section sm:text-[10px]"
+                class="m-0 font-medium uppercase tracking-wide text-text-accent
+      text-[10px] sm:text-[10px]"
               >
                 TÀI LỘC • HANH THÔNG
               </p>
@@ -717,9 +749,9 @@ const pageDescription =
               </p>
 
               <!-- Price pinned to bottom -->
-              <div class="mt-auto flex items-end justify-between gap-2 pt-4">
+              <div class="mt-auto flex items-center justify-between gap-2 pt-4">
                 <p
-                  class="m-0 font-heading text-base font-semibold text-text-heading sm:text-xl"
+                  class="m-0 font-heading text-[16px] font-semibold leading-none text-text-heading sm:text-[20px]"
                 >
                   400.000đ
                 </p>
@@ -727,7 +759,7 @@ const pageDescription =
                 <a
                   href={`${import.meta.env.BASE_URL}/san-pham/`}
                   aria-label="Xem Mèo Hoa Khai Trương Đại Phát"
-                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-lg text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
                 >
                   <svg
                     width="18"
@@ -751,7 +783,8 @@ const pageDescription =
 
           <!-- Product 3 -->
           <article
-            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/40 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg
+  bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
           >
             <!-- Product image -->
             <a
@@ -761,22 +794,27 @@ const pageDescription =
             >
               <img
                 src={`${import.meta.env.BASE_URL}/images/home/03-featured-products/product-03.png`}
-                alt="Mèo Hoa Như Ý Cát Tường"
+                alt="Mèo Hoa An Nhiên"
                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
 
               <span
-                class="absolute left-2 top-2 rounded-xl bg-[#594D34] px-2 py-0.5 text-[10px] font-semibold uppercase leading-6 tracking-wide text-white"
+                class="absolute left-2 top-2 rounded-xl sm:rounded-none bg-[#594D34]
+      px-2 sm:px-2.5 pt-1 pb-0.5 sm:py-1
+      text-[10px] leading-6 font-semibold
+      sm:leading-4 sm:font-normal
+      uppercase tracking-wide text-white"
               >
                 TÂN GIA
               </span>
             </a>
 
             <!-- Product information -->
-            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-4 lg:p-5">
+            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-5">
               <p
-                class="m-0 text-[8px] font-medium uppercase tracking-wide text-text-section sm:text-[10px]"
+                class="m-0 font-medium uppercase tracking-wide text-text-accent
+      text-[10px] sm:text-[10px]"
               >
                 GIA ĐẠO • BÌNH AN
               </p>
@@ -801,9 +839,9 @@ const pageDescription =
               </p>
 
               <!-- Price pinned to bottom -->
-              <div class="mt-auto flex items-end justify-between gap-2 pt-4">
+              <div class="mt-auto flex items-center justify-between gap-2 pt-4">
                 <p
-                  class="m-0 font-heading text-base font-semibold text-text-heading sm:text-xl"
+                  class="m-0 font-heading text-[16px] font-semibold leading-none text-text-heading sm:text-[20px]"
                 >
                   590.000đ
                 </p>
@@ -811,7 +849,7 @@ const pageDescription =
                 <a
                   href={`${import.meta.env.BASE_URL}/san-pham/`}
                   aria-label="Xem Mèo Hoa An Nhiên Thanh Nhã"
-                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-lg text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
                 >
                   <svg
                     width="18"
@@ -835,34 +873,41 @@ const pageDescription =
 
           <!-- Product 4 -->
 
+          <!-- Product 4 -->
           <article
-            class="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border/40 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
+            class="group flex min-w-0 flex-col overflow-hidden rounded-lg
+  bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
           >
             <!-- Product image -->
             <a
               href={`${import.meta.env.BASE_URL}/san-pham/`}
               class="relative block aspect-[0.82/1] overflow-hidden bg-background sm:aspect-[0.9/1] lg:aspect-[0.78/1]"
-              aria-label="Khám phá Mèo Hoa Như Ý Cát Tường"
+              aria-label="Khám phá Mèo Hoa Kim Thịnh"
             >
               <img
                 src={`${import.meta.env.BASE_URL}/images/home/03-featured-products/product-04.png`}
-                alt="Mèo Hoa Như Ý Cát Tường"
+                alt="Mèo Hoa Kim Thịnh"
                 class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
 
               <!-- Product badge -->
               <span
-                class="absolute left-2 top-2 rounded-xl bg-[#FCDBA6] px-2 py-0.5 text-[10px] font-semibold uppercase leading-6 tracking-wide text-[#775F34]"
+                class="absolute left-2 top-2 rounded-xl sm:rounded-none bg-[#FCDBA6]
+      px-2 sm:px-2.5 pt-1 pb-0.5 sm:py-1
+      text-[10px] leading-6 font-semibold
+      sm:leading-4 sm:font-normal
+      uppercase tracking-wide text-[#775F34]"
               >
                 ĐẶC BIỆT
               </span>
             </a>
 
             <!-- Product information -->
-            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-4 lg:p-5">
+            <div class="flex flex-1 flex-col gap-0.5 p-3 sm:p-5">
               <p
-                class="m-0 text-[8px] font-medium uppercase tracking-wide text-text-section sm:text-[10px]"
+                class="m-0 font-medium uppercase tracking-wide text-text-accent
+      text-[10px] sm:text-[10px]"
               >
                 PHÚ QUÝ • THỊNH VƯỢNG
               </p>
@@ -888,18 +933,18 @@ const pageDescription =
                 phát đạt và thịnh vượng dài lâu.
               </p>
 
-              <!-- Price and detail button: always at the bottom -->
-              <div class="mt-auto flex items-end justify-between gap-2 pt-4">
+              <!-- Price pinned to bottom -->
+              <div class="mt-auto flex items-center justify-between gap-2 pt-4">
                 <p
-                  class="m-0 font-heading text-base font-semibold text-text-heading sm:text-xl"
+                  class="m-0 font-heading text-[16px] font-semibold leading-none text-text-heading sm:text-[20px]"
                 >
                   890.000đ
                 </p>
 
                 <a
                   href={`${import.meta.env.BASE_URL}/san-pham/`}
-                  aria-label="Xem Mèo Hoa Thịnh Vượng Hoàng Kim"
-                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-lg text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
+                  aria-label="Xem Mèo Hoa Kim Thịnh"
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-background text-text-heading transition-colors hover:bg-border sm:h-10 sm:w-10"
                 >
                   <svg
                     width="18"
@@ -922,20 +967,23 @@ const pageDescription =
           </article>
         </div>
         <!-- View all button -->
-        <div class="mt-5 flex justify-center sm:mt-14">
+        <div class="flex justify-center">
           <a
             href={`${import.meta.env.BASE_URL}/san-pham/`}
-            class="inline-flex min-h-12 items-center justify-center gap-3 rounded-sm
-             bg-[#EAE8E4] px-6 py-4 text-center text-[12px] font-semibold
-              tracking-widest text-text-heading transition-colors
-              hover:bg-border sm:min-h-14 sm:px-9 sm:text-xs"
+            class="group inline-flex items-center justify-center sm:gap-3 gap-2
+    bg-background-gray sm:px-8 sm:py-3 py-[14px] text-center text-[14px] font-semibold
+    tracking-widest text-text-heading transition-all duration-300 ease-out
+    hover:bg-background-gray-light hover:-translate-y-0.5
+    hover:shadow-[0_4px_12px_rgb(0_0_0_/_6%)]
+    w-full sm:w-fit sm:text-[12px]"
           >
             Xem tất cả thiết kế Mèo Hoa
+
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
               fill="none"
-              class="h-4 w-4 transition-transform duration-300 hover:translate-x-1"
+              class="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1"
             >
               <path
                 d="M4 12h15M13 5l7 7-7 7"
@@ -971,16 +1019,17 @@ const pageDescription =
 
           <!-- Desktop floating philosophy card -->
           <div
-            class="absolute bottom-0 right-0 z-10 w-[min(290px,85%)] rounded-md bg-white p-5 shadow-xl shadow-text-black/10 sm:right-2 sm:p-6 lg:right-[-20px]"
+            class="absolute bottom-0 right-0 z-10 w-[min(290px,85%)] rounded-[4px] bg-white p-5
+            shadow-xl shadow-text-black/10 sm:right-2 lg:right-[-20px]"
           >
             <p
-              class="mb-2 text-[9px] font-medium uppercase tracking-[0.16em] text-text-section sm:text-[10px]"
+              class="mb-2 text-[10px] uppercase tracking-[0.16em] text-text-accent"
             >
               TRIẾT LÝ CỐT LÕI
             </p>
 
             <p
-              class="m-0 font-heading text-lg leading-snug text-text-heading sm:text-xl"
+              class="m-0 font-heading leading-[22px] text-text-heading text-[16px]"
             >
               "Mỗi món quà là một cách lưu giữ những điều tốt đẹp."
             </p>
@@ -990,21 +1039,26 @@ const pageDescription =
         <!-- RIGHT: Desktop about content -->
         <div class="hidden min-w-0 flex-col justify-center lg:flex lg:py-8">
           <p
-            class="mb-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-text-section sm:text-xs"
+            class="font-semibold uppercase tracking-[0.18em] text-text-accent
+            text-[11px] mb-1 sm:mb-2"
           >
             VỀ MÈO HOA
           </p>
 
           <h2
-            class="m-0 max-w-[650px] font-heading text-[clamp(2rem,4vw,3.25rem)] font-normal leading-[1.15] tracking-[-0.035em] text-text-heading"
+            class="m-0 max-w-[650px] font-heading tracking-[-0.035em] text-text-heading
+            text-[28px] leading-9 font-medium
+            sm:text-[40px] sm:leading-[50px] sm:font-normal"
           >
             Một món quà đẹp bắt đầu từ sự chăm chút.
           </h2>
 
           <div
-            class="mt-6 space-y-4 text-sm leading-7 text-text-navbar sm:mt-7 sm:text-base sm:leading-[1.9]"
+            class="text-[13px] leading-5 text-text-secondary
+                     sm:text-[17px] sm:leading-8
+                     sm:mt-[24px] sm:mb-[32px]"
           >
-            <p class="m-0">
+            <p class="mb-4">
               Chúng tôi tin rằng một món quà ý nghĩa không chỉ nằm ở điều nó
               tượng trưng, mà còn ở cách nó được lựa chọn và trao gửi.
             </p>
@@ -1018,11 +1072,11 @@ const pageDescription =
           </div>
 
           <div
-            class="mt-7 flex flex-col items-start gap-5 sm:mt-8 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6"
+            class="flex flex-col items-start gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6"
           >
             <a
               href={`${import.meta.env.BASE_URL}/san-pham/`}
-              class="inline-flex min-h-12 items-center justify-center gap-3 bg-badge-background px-6 py-4 text-[10px] font-semibold uppercase tracking-wide text-white shadow-md shadow-text-black/10 transition-colors hover:bg-text-heading focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-h-14 sm:px-8 sm:text-xs"
+              class="inline-flex min-h-12 items-center justify-center gap-3 bg-brand-primary hover:bg-brand-secondary px-8 py-[14px] text-[11px] font-semibold uppercase tracking-wide text-white shadow-md shadow-text-black/10 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-text-heading sm:min-h-14 sm:px-8 sm:text-xs"
             >
               TÌM HIỂU VỀ CHÚNG TÔI
               <svg
@@ -1045,7 +1099,7 @@ const pageDescription =
                 aria-hidden="true"
                 viewBox="0 0 32 32"
                 fill="none"
-                class="h-6 w-6 shrink-0 text-text-section"
+                class="h-6 w-6 shrink-0 text-text-accent"
               >
                 <path
                   d="M16 2.5 19 5l4-.2.8 3.9 3.2 2.4-1.6 3.7 1.1 3.9-3.6 1.8-1.4 3.7-4-.5-3.3 2.2-3-2.7-4 .1-.9-3.9-3.2-2.5 1.5-3.7-1.1-3.9 3.6-1.7 1.4-3.8 4 .5L16 2.5Z"
@@ -1061,7 +1115,7 @@ const pageDescription =
               </svg>
 
               <span
-                class="text-[10px] font-medium uppercase leading-5 tracking-wide sm:text-xs"
+                class="text-[12px] font-normal uppercase tracking-wide text-text-secondary"
               >
                 TỈ MỈ TRONG TỪNG CHI TIẾT
               </span>
@@ -1153,20 +1207,18 @@ const pageDescription =
 
     <section
       class="overflow-hidden
-      bg-background lg:bg-[#EAE8E4]
+      bg-background-cream lg:bg-background-gray
       px-4 py-8 sm:py-16 lg:px-8 lg:py-16"
     >
       <div class="mx-auto max-w-360">
         <!-- DESKTOP VERSION -->
         <div
-          class="hidden rounded-xl bg-surface px-8 py-10 shadow-sm lg:block lg:px-12 lg:py-14 xl:px-16"
+          class="hidden lg:block rounded-[8px] px-10 py-10 shadow-sm bg-background-cream"
         >
-          <div
-            class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12"
-          >
+          <div class="flex flex-row items-center justify-between">
             <!-- Content -->
-            <div class="min-w-0 max-w-190">
-              <div class="mb-4 flex items-center gap-3 text-text-section">
+            <div class="min-w-0 max-w-190 bg-background-cream">
+              <div class="mb-2 flex items-center gap-3 text-text-accent">
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 32 32"
@@ -1191,23 +1243,20 @@ const pageDescription =
                 </svg>
 
                 <p
-                  class="m-0 text-[11px] font-semibold uppercase tracking-[0.12em]
-                  sm:text-sm sm:tracking-[0.15em]"
+                  class="m-0 text-[11px] font-semibold uppercase tracking-[0.12em]"
                 >
                   DỊCH VỤ QUÀ TẶNG
                 </p>
               </div>
 
               <h2
-                class="m-0 font-heading text-[clamp(1.65rem,3vw,2.25rem)]
-                font-normal leading-tight tracking-tight text-text-heading"
+                class="mb-2 font-heading text-[22px]
+                font-medium text-text-heading"
               >
                 Bạn cần tư vấn quà tặng cho dịp đặc biệt?
               </h2>
 
-              <p
-                class="mb-0 mt-4 max-w-190 text-sm leading-7 text-text-navbar sm:text-base sm:leading-[1.8]"
-              >
+              <p class="text-[15px] leading-6 text-text-secondary max-w-135">
                 Trò chuyện trực tiếp qua Zalo hoặc Facebook cùng Mèo Hoa để được
                 tư vấn kích thước, phối tone hoa và gửi thiệp chúc phúc theo tên
                 người nhận.
@@ -1215,24 +1264,22 @@ const pageDescription =
             </div>
 
             <!-- Contact buttons -->
-            <div
-              class="flex shrink-0 flex-col gap-3 min-[480px]:flex-row lg:gap-4"
-            >
+            <div class="flex gap-4">
               <a
                 href="https://zalo.me/0355051303"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex min-h-14 items-center justify-center
-                gap-3 bg-[#0866FF] px-5 py-4 text-xs font-semibold uppercase
+                class="inline-flex items-center justify-center gap-3 px-6 py-3 text-[11px] font-semibold
+                 bg-[#0866FF] uppercase
                  tracking-wide text-white transition-colors hover:bg-[#0052D4]
                   focus-visible:outline-2 focus-visible:outline-offset-4
-                   focus-visible:outline-text-heading sm:min-w-55 sm:px-6"
+                   focus-visible:outline-text-heading"
               >
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 24 24"
                   fill="none"
-                  class="h-6 w-6 shrink-0"
+                  class="h-4 w-4 shrink-0"
                 >
                   <path
                     d="M4 4.5h16v12H9l-5 3v-15Z"
@@ -1252,17 +1299,16 @@ const pageDescription =
                 href="https://www.facebook.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex min-h-14 items-center justify-center gap-3
-                 bg-badge-background px-5 py-4 text-xs font-semibold uppercase
-                  tracking-wide text-white transition-colors hover:bg-text-heading
-                   focus-visible:outline-2 focus-visible:outline-offset-4
-                    focus-visible:outline-text-heading sm:min-w-62.5 sm:px-6"
+                class="inline-flex items-center justify-center gap-3 px-6 py-3 text-[11px] font-semibold
+                 bg-brand-primary uppercase
+                 tracking-wide text-white transition-colors hover:bg-brand-secondary
+                  focus-visible:outline-2 focus-visible:outline-offset-4"
               >
                 <svg
                   aria-hidden="true"
                   viewBox="0 0 24 24"
                   fill="none"
-                  class="h-6 w-6 shrink-0"
+                  class="h-4 w-4 shrink-0"
                 >
                   <path
                     d="M4 5h16v12H9l-5 3V5Z"

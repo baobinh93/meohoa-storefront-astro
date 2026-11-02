@@ -1,91 +1,83 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+
 @import "tailwindcss";
 
 /* ========================================
-   MÈO HOA — DESIGN TOKENS
-   ======================================== */
+   MÈO HOA — DESIGN SYSTEM
+   Tailwind CSS v4.1
+======================================== */
 
 @theme {
-  /* Typography */
+  /* TYPOGRAPHY */
   --font-heading: "Playfair Display", serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
 
-  /* Brand colors */
-  --color-text-navbar: #524344;
-  --color-text-card: #524344;
-  --color-text-white: #ffffff;
-  --color-text-section: #735b30;
+  /* BACKGROUND */
+  --color-background-cream: #fbf9f5;
+  --color-background-ivory: #f5f3ef;
+  --color-background-gray: #eae8e4;
+  --color-background-gray-light: #efeeea;
+
+  /* BRAND */
+  --color-brand-primary: #5c2730;
+  --color-brand-secondary: #783046;
+  --color-brand-dark: #594d34;
+  --color-brand-gold: #735b30;
+
+  /* TEXT */
+  --color-text-primary: #1b1c1a;
+  --color-text-secondary: #524344;
   --color-text-heading: #5c2730;
-  --color-text-black: #1b1c1a;
+  --color-text-accent: #735b30;
+  --color-text-white: #ffffff;
 
-  /* Product badges */
-  --color-badge-text: #ffffff;
+  /* BUTTON */
+  --color-button-primary: #5c2730;
+  --color-button-secondary: #783d46;
+  --color-button-dark: #594d34;
+  --color-button-gold: #735b30;
+
+  /* PRODUCT BADGES */
   --color-badge-background: #783d46;
+  --color-badge-yellow: #fcdba6;
+  --color-badge-gold: #735b30;
+  --color-badge-dark: #594d34;
 
-  /* Background colors */
-  --color-background: #f5f3ef;
-  --color-surface: #fbf9f5;
-
-  /* Supporting colors */
-  --color-muted: #74665d;
-  --color-border: #e8dfd5;
-  --color-gold: #a58a73;
-}
-
-/* ========================================
-   CSS VARIABLES
-   Dùng cho CSS thông thường và các component
-   ======================================== */
-
-:root {
-  color-scheme: light;
-
-  /* Brand */
-  --mh-burgundy: #5c2730;
-  --mh-burgundy-dark: #783d46;
-
-  /* Background */
-  --mh-ivory: #f5f3ef;
-  --mh-paper: #fbf9f5;
-
-  /* Text */
-  --mh-ink: #1b1c1a;
-  --mh-text-navbar: #524344;
-  --mh-text-card: #524344;
-  --mh-text-section: #735b30;
-  --mh-text-white: #ffffff;
-  --mh-muted: #74665d;
-
-  /* Border & accent */
-  --mh-line: #e8dfd5;
-  --mh-gold: #a58a73;
-
-  /* Badge */
-  --mh-badge-bg: #783d46;
-  --mh-badge-text: #ffffff;
+  --color-badge-text: #ffffff;
+  /* SHADOW */
+  --shadow-product-card: 0 1px 2px 0 rgb(0 0 0 / 5%);
+  /* HEADER EFFECTS */
+  --blur-header: 24px;
+  --shadow-header: 0 1px 8px 0 rgb(60 48 43 / 5%);
 }
 
 /* ========================================
    GLOBAL STYLES
-   ======================================== */
+======================================== */
 
 html {
   scroll-behavior: smooth;
-  background: var(--mh-ivory);
+  background: var(--color-background-ivory);
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: var(--mh-ivory);
+
+  background: var(--color-background-ivory);
 
   font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* ========================================
+   RESET
+======================================== */
 
 *,
 *::before,
@@ -105,6 +97,10 @@ textarea {
   font: inherit;
 }
 
+/* ========================================
+   INTERACTION
+======================================== */
+
 button,
 a,
 select,
@@ -116,7 +112,11 @@ button {
   cursor: pointer;
 }
 
+/* ========================================
+   TEXT SELECTION
+======================================== */
+
 ::selection {
-  color: var(--mh-text-white);
-  background: var(--mh-burgundy);
+  color: var(--color-text-white);
+  background: var(--color-brand-primary);
 }

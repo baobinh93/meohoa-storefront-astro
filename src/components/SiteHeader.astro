@@ -20,7 +20,10 @@ const navigation = [
 ---
 
 <!-- DESKTOP HEADER -->
-<header class="hidden border-b border-border bg-[#faf8f4] lg:block">
+<header
+  class="hidden bg-background-cream/90 lg:block backdrop-blur-header
+    shadow-header"
+>
   <div
     class="mx-auto flex min-h-23 w-[calc(100%-32px)] max-w-300 items-center justify-between gap-8"
   >
@@ -30,12 +33,13 @@ const navigation = [
       aria-label="Mèo Hoa - Trang chủ"
     >
       <span
-        class="font-heading text-[32px] font-medium leading-none tracking-[-0.045em] text-text-heading"
+        class="font-heading text-[32px] font-medium leading-none tracking-[-0.045em]
+         text-text-heading"
       >
         Mèo Hoa
       </span>
       <span
-        class="text-[11px] font-semibold tracking-[0.22em] text-text-section"
+        class="text-[11px] font-semibold tracking-[0.22em] text-text-accent"
       >
         QUÀ TẶNG BIÊN HÒA
       </span>
@@ -48,7 +52,8 @@ const navigation = [
       {
         navigation.map((item) => (
           <a
-            class="whitespace-nowrap text-[11px] font-sans font-semibold uppercase text-text-navbar no-underline transition-colors hover:text-[#794640]"
+            class="whitespace-nowrap text-[11px] font-sans font-semibold uppercase 
+            text-text-secondary no-underline transition-colors hover:text-text-heading"
             href={item.href}
           >
             {item.label}
@@ -58,7 +63,9 @@ const navigation = [
     </nav>
 
     <a
-      class="inline-flex shrink-0 items-center gap-2 bg-badge-background px-4 py-3 text-[11px] font-semibold text-white no-underline transition-colors hover:bg-text-heading"
+      class="inline-flex shrink-0 items-center gap-2 bg-badge-background
+      px-4 py-3 text-[11px] font-semibold text-white no-underline transition-colors
+       hover:bg-text-heading"
       href="#lien-he"
     >
       TƯ VẤN ĐẶT HÀNG
@@ -69,7 +76,10 @@ const navigation = [
 <!-- MOBILE HEADER -->
 <header
   id="mobile-header"
-  class="sticky top-0 z-50 border-b border-border bg-[#faf8f4] shadow-sm transition-transform duration-300 ease-in-out will-change-transform lg:hidden"
+  class="sticky top-0 z-50
+   bg-background-cream/90 backdrop-blur-header
+    shadow-header
+  s transition-transform duration-300 ease-in-out will-change-transform lg:hidden"
 >
   <div class="relative flex items-center justify-between px-5 sm:px-8 py-2">
     <!-- Hamburger -->
@@ -123,7 +133,7 @@ const navigation = [
       </span>
 
       <span
-        class="text-[11px] font-semibold tracking-[0.14em] text-text-section min-[390px]:text-[11px] min-[390px]:tracking-[0.18em]"
+        class="text-[11px] font-semibold tracking-[0.14em] text-text-accent min-[390px]:text-[11px] min-[390px]:tracking-[0.18em]"
       >
         QUÀ TẶNG BIÊN HÒA
       </span>
@@ -132,7 +142,7 @@ const navigation = [
     <!-- Concierge -->
     <a
       href="#lien-he"
-      class="flex h-8 w-8 shrink-0 items-center justify-center text-text-section transition-opacity hover:opacity-60"
+      class="flex h-8 w-8 shrink-0 items-center justify-center text-text-heading transition-opacity hover:opacity-60"
       aria-label="Tư vấn đặt hàng"
     >
       <svg
@@ -155,15 +165,16 @@ const navigation = [
     aria-label="Điều hướng mobile"
     aria-hidden="true"
     inert
-    class="absolute left-0 right-0 top-full overflow-hidden border-t border-border
-     bg-[#faf8f4] opacity-0 shadow-lg transition-[opacity,visibility] duration-200
+    class="absolute left-0 right-0 top-full overflow-hidden
+     bg-background-cream/90 opacity-0 shadow-lg transition-[opacity,visibility] duration-200
      invisible"
   >
     <div class="mx-auto flex max-w-150 flex-col px-6 py-3">
       {
         navigation.map((item) => (
           <a
-            class="border-b border-border py-4 text-sm font-medium text-text-navbar no-underline transition-colors last:border-b-0 hover:text-text-heading"
+            class=" py-4 text-sm font-medium text-text-primary no-underline
+             transition-colors  hover:text-text-heading"
             href={item.href}
           >
             {item.label}
