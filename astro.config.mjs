@@ -4,8 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://baobinh93.github.io",
-  base: "/meohoa-storefront-astro",
+  site: "https://meohoa.io.vn",
+  base: "/",
   output: "static",
 
   vite: {
