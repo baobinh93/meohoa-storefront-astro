@@ -1,15 +1,16 @@
 ---
 const BASE_URL = import.meta.env.BASE_URL;
+
 const navigation = [
   { label: "Trang chủ", href: BASE_URL },
-  { label: "Sản phẩm", href: `${BASE_URL}/san-pham/` },
+  { label: "Sản phẩm", href: `${BASE_URL}san-pham/` },
   {
     label: "Mèo Hoa",
-    href: `${BASE_URL}/san-pham/?category=8af55872-69be-4363-a43f-4fbbdf3a2fe6&badge=co-san`,
+    href: `${BASE_URL}san-pham/?category=8af55872-69be-4363-a43f-4fbbdf3a2fe6&badge=co-san`,
   },
   {
     label: "Mèo Thần Tài",
-    href: `${BASE_URL}/san-pham/?category=f99923c3-8e77-4158-bac5-0aa243364452&badge=co-san`,
+    href: `${BASE_URL}san-pham/?category=f99923c3-8e77-4158-bac5-0aa243364452&badge=co-san`,
   },
 ];
 
@@ -32,7 +33,7 @@ const currentYear = new Date().getFullYear();
       <!-- Brand -->
       <div class="min-w-0">
         <a
-          href="/"
+          href={BASE_URL}
           class="inline-block font-heading text-3xl font-medium leading-tight text-text-heading transition-colors hover:text-text-section sm:text-[36px]"
         >
           Mèo Hoa
@@ -118,7 +119,7 @@ const currentYear = new Date().getFullYear();
                     points="12.466 19.2658 19.182 19.2658 12.466 29.4028 19.182 29.4028"
                   ></polyline>
                   <path
-                    d="m41.517 4.5018-29.011.0354C3.882 11.9372 1.282 21.9552 8.976 36.4482c.4875 1.7082-.359 3.42-1.9992 5.1283 2.3642.3218 4.7693-.1218 6.863-1.266 13.983 6.27 21.919 2.1805 29.644-2.7323l.0355-31.074c.0013-1.1046-.8931-2.001-1.9977-2.0023Z"
+                    d="M41.517 4.5018-29.011.0354C3.882 11.9372 1.282 21.9552 8.976 36.4482c.4875 1.7082-.359 3.42-1.9992 5.1283 2.3642.3218 4.7693-.1218 6.863-1.266 13.983 6.27 21.919 2.1805 29.644-2.7323l.0355-31.074c.0013-1.1046-.8931-2.001-1.9977-2.0023Z"
                   ></path>
                   <path
                     d="M25.63 26.791c0 1.4425-1.2196 2.6118-2.724 2.6118s-2.724-1.1694-2.724-2.6118v-1.6978c0-1.4425 1.2196-2.6118 2.724-2.6118s2.724 1.1694 2.724 2.6118"
@@ -148,7 +149,7 @@ const currentYear = new Date().getFullYear();
         <ul class="m-0 list-none space-y-3 p-0 text-sm leading-6">
           <li>
             <a
-              href=`${BASE_URL}/san-pham/`
+              href={`${BASE_URL}san-pham/`}
               class="transition-colors hover:text-text-heading"
             >
               Mèo Hoa Signature
@@ -156,7 +157,7 @@ const currentYear = new Date().getFullYear();
           </li>
           <li>
             <a
-              href=`${BASE_URL}/san-pham/`
+              href={`${BASE_URL}san-pham/`}
               class="transition-colors hover:text-text-heading"
             >
               Mèo Thần Tài
@@ -164,7 +165,7 @@ const currentYear = new Date().getFullYear();
           </li>
           <li>
             <a
-              href=`${BASE_URL}/san-pham/`
+              href={`${BASE_URL}san-pham/`}
               class="transition-colors hover:text-text-heading"
             >
               Hoa Khai Trương
@@ -172,7 +173,7 @@ const currentYear = new Date().getFullYear();
           </li>
           <li>
             <a
-              href=`${BASE_URL}/san-pham/`
+              href={`${BASE_URL}san-pham/`}
               class="transition-colors hover:text-text-heading"
             >
               Quà Tặng Tân Gia
@@ -180,7 +181,7 @@ const currentYear = new Date().getFullYear();
           </li>
           <li>
             <a
-              href=`${BASE_URL}/san-pham/`
+              href={`${BASE_URL}san-pham/`}
               class="transition-colors hover:text-text-heading"
             >
               Thiết kế theo Yêu Cầu
@@ -384,6 +385,7 @@ const currentYear = new Date().getFullYear();
         </a>
       </div>
     </div>
+
     <!-- ========================================= -->
     <!-- DESKTOP BOTTOM BAR -->
     <!-- ========================================= -->
@@ -399,21 +401,21 @@ const currentYear = new Date().getFullYear();
 
         <nav aria-label="Chính sách" class="flex flex-wrap gap-x-6 gap-y-3">
           <a
-            href=`${BASE_URL}/chinh-sach-bao-hanh/`
+            href={`${BASE_URL}chinh-sach-bao-hanh/`}
             class="transition-colors hover:text-text-heading"
           >
             Chính sách bảo hành
           </a>
 
           <a
-            href=`${BASE_URL}/chinh-sach-van-chuyen/`
+            href={`${BASE_URL}chinh-sach-van-chuyen/`}
             class="transition-colors hover:text-text-heading"
           >
             Chính sách vận chuyển
           </a>
 
           <a
-            href=`${BASE_URL}/bao-mat-thong-tin/`
+            href={`${BASE_URL}bao-mat-thong-tin/`}
             class="transition-colors hover:text-text-heading"
           >
             Bảo mật thông tin
@@ -421,6 +423,7 @@ const currentYear = new Date().getFullYear();
         </nav>
       </div>
     </div>
+
     <!-- ========================================= -->
     <!-- MOBILE FOOTER -->
     <!-- ========================================= -->
@@ -428,7 +431,7 @@ const currentYear = new Date().getFullYear();
       <!-- Brand -->
       <div>
         <a
-          href="/"
+          href={BASE_URL}
           class="inline-block font-heading text-[36px] font-medium leading-tight text-text-heading no-underline"
         >
           Mèo Hoa
@@ -544,7 +547,7 @@ const currentYear = new Date().getFullYear();
           >
             <li>
               <a
-                href={`${BASE_URL}/san-pham/`}
+                href={`${BASE_URL}san-pham/`}
                 class="no-underline transition-colors hover:text-text-heading"
               >
                 Mèo Hoa Khai Trương
@@ -552,7 +555,7 @@ const currentYear = new Date().getFullYear();
             </li>
             <li>
               <a
-                href={`${BASE_URL}/san-pham/`}
+                href={`${BASE_URL}san-pham/`}
                 class="no-underline transition-colors hover:text-text-heading"
               >
                 Mèo Thần Tài Tân Gia
@@ -560,7 +563,7 @@ const currentYear = new Date().getFullYear();
             </li>
             <li>
               <a
-                href={`${BASE_URL}/san-pham/`}
+                href={`${BASE_URL}san-pham/`}
                 class="no-underline transition-colors hover:text-text-heading"
               >
                 Hộp Quà Cao Cấp
@@ -582,7 +585,7 @@ const currentYear = new Date().getFullYear();
           >
             <li>
               <a
-                href={`${BASE_URL}/chinh-sach-van-chuyen/`}
+                href={`${BASE_URL}chinh-sach-van-chuyen/`}
                 class="no-underline transition-colors hover:text-text-heading"
               >
                 Giao Hàng 2 Giờ
@@ -590,7 +593,7 @@ const currentYear = new Date().getFullYear();
             </li>
             <li>
               <a
-                href={`${BASE_URL}/chinh-sach-bao-hanh/`}
+                href={`${BASE_URL}chinh-sach-bao-hanh/`}
                 class="no-underline transition-colors hover:text-text-heading"
               >
                 Bảo Mật &amp; Đổi Trả
@@ -598,7 +601,7 @@ const currentYear = new Date().getFullYear();
             </li>
             <li>
               <a
-                href={`${BASE_URL}/dich-vu-doanh-nghiep/`}
+                href={`${BASE_URL}dich-vu-doanh-nghiep/`}
                 class="no-underline transition-colors hover:text-text-heading"
               >
                 Dịch Vụ Doanh Nghiệp
