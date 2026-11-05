@@ -1,3 +1,4 @@
+
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getPublishedProducts } from "../../lib/products";
@@ -21,7 +22,7 @@ const primaryImage =
   product.product_images.find((image) => image.is_primary) ??
   product.product_images[0];
 
-// Badge: chỉ hiển thị khi sản phẩm có trạng thái trong database
+// Badge
 const badgeName = product.badge_name;
 const isAvailable = badgeName?.toLocaleUpperCase("vi-VN") === "CÓ SẴN";
 
@@ -32,6 +33,7 @@ const pageDescription =
   product.description ||
   `Khám phá ${product.name} tại Mèo Hoa.`;
 
+// Format price
 const formatPrice = (price: number) =>
   new Intl.NumberFormat("vi-VN", {
     maximumFractionDigits: 0,
@@ -49,10 +51,10 @@ const powerLabels = details.power.map((power) => {
   return power;
 });
 
-// Các thẻ thông tin sản phẩm: Power + Size + Waving
+// Các thẻ thông tin sản phẩm
 const productTags = [
   ...powerLabels,
-  details.size !== null ? `Size ${details.size}` : null,
+  details.size,
   details.waving !== null
     ? details.waving
       ? "Vẫy tay"
@@ -132,8 +134,8 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Bộ sưu tập",
-      item: new URL(`${BASE_URL}/san-pham/`, siteUrl).toString(),
+      name: "Sản phẩm",
+      item: new URL(`${BASE_URL}san-pham/`, siteUrl).toString(),
     },
     {
       "@type": "ListItem",
@@ -151,6 +153,7 @@ const breadcrumbSchema = {
   canonicalPath={`/san-pham/${product.slug}/`}
   ogImage={primaryImage?.image_url}
 >
+  <!-- SEO Schema -->
   <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 
   <script
@@ -174,9 +177,9 @@ const breadcrumbSchema = {
 
       <a
         class="no-underline hover:text-[#794640]"
-        href={`${BASE_URL}/san-pham/`}
+        href={`${BASE_URL}san-pham/`}
       >
-        Bộ sưu tập
+        Sản phẩm
       </a>
 
       <span aria-hidden="true">/</span>
@@ -190,8 +193,11 @@ const breadcrumbSchema = {
       <!-- Product Image Gallery -->
       <div class="min-w-0">
         <!-- Main image -->
-        <div class="relative overflow-hidden bg-[#f0e9df]" data-product-gallery>
-          <!-- Product badge: góc trên bên trái ảnh -->
+        <div
+          class="relative overflow-hidden bg-[#f0e9df]"
+          data-product-gallery
+        >
+          <!-- Product badge -->
           {
             badgeName && (
               <span
@@ -209,14 +215,21 @@ const breadcrumbSchema = {
 
           {
             primaryImage ? (
-              <img
-                data-main-image
-                class="aspect-[4/3] w-full object-cover transition-opacity duration-300 md:aspect-[4/5]"
-                src={primaryImage.image_url}
-                alt={primaryImage.alt?.trim() || product.name}
-                fetchpriority="high"
-                decoding="async"
-              />
+              <button
+                type="button"
+                data-open-gallery
+                aria-label={`Phóng to ảnh sản phẩm ${product.name}`}
+                class="group block w-full cursor-zoom-in text-left focus-visible:outline-2 focus-visible:outline-[#794640]"
+              >
+                <img
+                  data-main-image
+                  class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02] md:aspect-[4/5]"
+                  src={primaryImage.image_url}
+                  alt={primaryImage.alt?.trim() || product.name}
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </button>
             ) : (
               <div
                 class="grid aspect-[4/3] w-full place-items-center bg-[#f0e9df] font-heading text-3xl text-[#a58a73] md:aspect-[4/5]"
@@ -225,6 +238,26 @@ const breadcrumbSchema = {
               >
                 Mèo Hoa
               </div>
+            )
+          }
+
+          <!-- Click hint -->
+          {
+            primaryImage && (
+              <span class="pointer-events-none absolute bottom-3 right-3 z-10 flex items-center gap-2 bg-black/35 px-3 py-2 text-[10px] tracking-wide text-white backdrop-blur-sm">
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <circle cx="10.5" cy="10.5" r="6.5" />
+                  <path d="m16 16 5 5M10.5 7.5v6M7.5 10.5h6" />
+                </svg>
+                PHÓNG TO
+              </span>
             )
           }
         </div>
@@ -299,15 +332,13 @@ const breadcrumbSchema = {
 
         <!-- Product details -->
         <div class="mt-7 space-y-4 text-[15px] leading-7 text-[#74665d]">
-          <!-- Product tags: Power + Size + Waving -->
+          <!-- Product tags -->
           {
             productTags.length > 0 && (
               <div class="flex flex-wrap items-center gap-2">
                 {productTags.map((tag) => (
                   <span
-                    class="inline-flex items-center rounded-sm border border-[#e5d8ca] bg-[#f8f5f0]
-                    px-2 py-0                    md:px-3 md:py-1.5
-                   text-[11px] md:text-[13px] font-medium text-[#794640]"
+                    class="inline-flex items-center rounded-sm border border-[#e5d8ca] bg-[#f8f5f0] px-2 py-0 md:px-3 md:py-1.5 text-[11px] md:text-[13px] font-medium text-[#794640]"
                   >
                     {tag}
                   </span>
@@ -344,6 +375,102 @@ const breadcrumbSchema = {
     </section>
   </main>
 
+  <!-- Fullscreen Product Image Lightbox -->
+  <div
+    data-image-lightbox
+    class="fixed inset-0 z-[100] flex items-center justify-center bg-[#171412]/95 px-3 py-5 opacity-0 transition-opacity duration-200 sm:px-8"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Thư viện ảnh sản phẩm"
+    hidden
+  >
+    <!-- Close button -->
+    <button
+      type="button"
+      data-lightbox-close
+      aria-label="Đóng thư viện ảnh"
+      class="absolute right-4 top-4 z-30 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/15 sm:right-8 sm:top-7"
+    >
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+      >
+        <path d="m18 6-12 12M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Image counter -->
+    <div
+      data-lightbox-counter
+      class="absolute left-1/2 top-7 z-20 -translate-x-1/2 text-[12px] tracking-[0.2em] text-white/75"
+    >
+      1 / 1
+    </div>
+
+    <!-- Previous button -->
+    <button
+      type="button"
+      data-lightbox-prev
+      aria-label="Ảnh trước"
+      class="absolute left-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/15 sm:left-8 sm:h-14 sm:w-14"
+    >
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+    </button>
+
+    <!-- Lightbox image stage -->
+    <div
+      class="flex h-full w-full items-center justify-center overflow-hidden"
+      data-lightbox-stage
+    >
+      <img
+        data-lightbox-image
+        src=""
+        alt={product.name}
+        draggable="false"
+        class="max-h-[calc(100dvh-100px)] max-w-[calc(100vw-32px)] select-none object-contain opacity-0 transition-opacity duration-200 sm:max-h-[calc(100dvh-120px)] sm:max-w-[calc(100vw-160px)]"
+      />
+    </div>
+
+    <!-- Next button -->
+    <button
+      type="button"
+      data-lightbox-next
+      aria-label="Ảnh tiếp theo"
+      class="absolute right-2 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/15 sm:right-8 sm:h-14 sm:w-14"
+    >
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path d="m9 18 6-6-6-6" />
+      </svg>
+    </button>
+
+    <!-- Bottom hint -->
+    <p
+      class="pointer-events-none absolute bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] tracking-[0.12em] text-white/45"
+    >
+      VUỐT ĐỂ XEM ẢNH TIẾP THEO
+    </p>
+  </div>
+
   <!-- Mobile fixed order button -->
   <div
     class="fixed inset-x-0 bottom-0 z-40 border-t border-[#e8dfd5] bg-[#fffdfa]/95 px-4 pb-[calc(12px+env(safe-area-inset-bottom))] pt-3 backdrop-blur-md sm:hidden"
@@ -358,6 +485,7 @@ const breadcrumbSchema = {
     </button>
   </div>
 
+  <!-- Order Modal -->
   <OrderModal
     product={product}
     imageUrl={primaryImage?.image_url}
@@ -365,6 +493,34 @@ const breadcrumbSchema = {
     waving={details.waving}
   />
 
+  <!-- Lightbox Styles -->
+  <style>
+    [data-image-lightbox][hidden] {
+      display: none !important;
+    }
+
+    [data-image-lightbox].is-open {
+      opacity: 1;
+    }
+
+    [data-image-lightbox] button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
+    }
+
+    [data-lightbox-image].is-loaded {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-image-lightbox],
+      [data-lightbox-image] {
+        transition: none;
+      }
+    }
+  </style>
+
+  <!-- Gallery & Lightbox Script -->
   <script>
     const galleries = document.querySelectorAll<HTMLElement>(
       "[data-product-gallery]",
@@ -374,38 +530,255 @@ const breadcrumbSchema = {
       const mainImage =
         gallery.querySelector<HTMLImageElement>("[data-main-image]");
 
+      const openButton =
+        gallery.querySelector<HTMLButtonElement>("[data-open-gallery]");
+
       const container = gallery.parentElement;
+
       const thumbnails =
         container?.querySelectorAll<HTMLButtonElement>("[data-thumbnail]");
 
-      if (!mainImage || !thumbnails?.length) return;
+      const modal = document.querySelector<HTMLElement>(
+        "[data-image-lightbox]",
+      );
 
-      thumbnails.forEach((thumbnail) => {
+      const modalImage = modal?.querySelector<HTMLImageElement>(
+        "[data-lightbox-image]",
+      );
+
+      const counter = modal?.querySelector<HTMLElement>(
+        "[data-lightbox-counter]",
+      );
+
+      const closeButton = modal?.querySelector<HTMLButtonElement>(
+        "[data-lightbox-close]",
+      );
+
+      const prevButton = modal?.querySelector<HTMLButtonElement>(
+        "[data-lightbox-prev]",
+      );
+
+      const nextButton = modal?.querySelector<HTMLButtonElement>(
+        "[data-lightbox-next]",
+      );
+
+      const stage = modal?.querySelector<HTMLElement>(
+        "[data-lightbox-stage]",
+      );
+
+      if (!mainImage || !modal || !modalImage || !openButton) return;
+
+      type GalleryImage = {
+        src: string;
+        alt: string;
+      };
+
+      const images: GalleryImage[] = thumbnails?.length
+        ? Array.from(thumbnails).map((thumbnail) => ({
+            src: thumbnail.dataset.imageSrc || "",
+            alt: thumbnail.dataset.imageAlt || "",
+          }))
+        : [
+            {
+              src: mainImage.src,
+              alt: mainImage.alt,
+            },
+          ];
+
+      const normalizeUrl = (src: string) =>
+        new URL(src, window.location.href).href;
+
+      let currentIndex = Math.max(
+        0,
+        images.findIndex(
+          (image) => normalizeUrl(image.src) === mainImage.src,
+        ),
+      );
+
+      let previousOverflow = "";
+      let previousFocus: HTMLElement | null = null;
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      const updateCounter = () => {
+        if (counter) {
+          counter.textContent = `${currentIndex + 1} / ${images.length}`;
+        }
+      };
+
+      // Đồng bộ trạng thái thumbnail
+      const updateThumbnails = () => {
+        thumbnails?.forEach((thumbnail, index) => {
+          const isActive = index === currentIndex;
+
+          thumbnail.setAttribute("aria-pressed", String(isActive));
+
+          thumbnail.classList.toggle("border-[#794640]", isActive);
+          thumbnail.classList.toggle("ring-1", isActive);
+          thumbnail.classList.toggle("ring-[#794640]", isActive);
+          thumbnail.classList.toggle("border-transparent", !isActive);
+        });
+      };
+
+      // Hiển thị ảnh theo index
+      const showImage = (index: number) => {
+        if (!images.length) return;
+
+        currentIndex = (index + images.length) % images.length;
+
+        const image = images[currentIndex];
+
+        modalImage.classList.remove("is-loaded");
+
+        modalImage.src = image.src;
+        modalImage.alt = image.alt;
+
+        mainImage.src = image.src;
+        mainImage.alt = image.alt;
+
+        updateCounter();
+        updateThumbnails();
+      };
+
+      modalImage.addEventListener("load", () => {
+        modalImage.classList.add("is-loaded");
+      });
+
+      modalImage.addEventListener("error", () => {
+        modalImage.classList.remove("is-loaded");
+      });
+
+      // Mở modal
+      const openLightbox = () => {
+        if (!images.length) return;
+
+        previousFocus =
+          document.activeElement instanceof HTMLElement
+            ? document.activeElement
+            : null;
+
+        currentIndex = Math.max(
+          0,
+          images.findIndex(
+            (image) => normalizeUrl(image.src) === mainImage.src,
+          ),
+        );
+
+        showImage(currentIndex);
+
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        modal.hidden = false;
+
+        requestAnimationFrame(() => {
+          modal.classList.add("is-open");
+          closeButton?.focus();
+        });
+      };
+
+      // Đóng modal
+      const closeLightbox = () => {
+        if (modal.hidden) return;
+
+        modal.classList.remove("is-open");
+
+        document.body.style.overflow = previousOverflow;
+
+        modal.hidden = true;
+
+        previousFocus?.focus();
+      };
+
+      // Chuyển ảnh
+      const nextImage = () => {
+        showImage(currentIndex + 1);
+      };
+
+      const prevImage = () => {
+        showImage(currentIndex - 1);
+      };
+
+      // Mở ảnh
+      openButton.addEventListener("click", openLightbox);
+
+      // Đóng ảnh
+      closeButton?.addEventListener("click", closeLightbox);
+
+      // Điều hướng
+      nextButton?.addEventListener("click", nextImage);
+      prevButton?.addEventListener("click", prevImage);
+
+      // Click nền tối để đóng
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          closeLightbox();
+        }
+      });
+
+      // Bàn phím
+      document.addEventListener("keydown", (event) => {
+        if (modal.hidden) return;
+
+        switch (event.key) {
+          case "Escape":
+            closeLightbox();
+            break;
+
+          case "ArrowRight":
+            event.preventDefault();
+            nextImage();
+            break;
+
+          case "ArrowLeft":
+            event.preventDefault();
+            prevImage();
+            break;
+        }
+      });
+
+      // Vuốt trái / phải trên điện thoại
+      stage?.addEventListener(
+        "touchstart",
+        (event) => {
+          const touch = event.changedTouches[0];
+
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+        },
+        { passive: true },
+      );
+
+      stage?.addEventListener(
+        "touchend",
+        (event) => {
+          const touch = event.changedTouches[0];
+
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+
+          // Chỉ nhận diện thao tác vuốt ngang
+          if (
+            Math.abs(deltaX) < 45 ||
+            Math.abs(deltaX) < Math.abs(deltaY)
+          ) {
+            return;
+          }
+
+          if (deltaX < 0) {
+            nextImage();
+          } else {
+            prevImage();
+          }
+        },
+        { passive: true },
+      );
+
+      // Click thumbnail để đổi ảnh
+      thumbnails?.forEach((thumbnail, index) => {
         thumbnail.addEventListener("click", () => {
-          const imageSrc = thumbnail.dataset.imageSrc;
-          const imageAlt = thumbnail.dataset.imageAlt || "";
-
-          if (!imageSrc) return;
-
-          mainImage.style.opacity = "0";
-
-          window.setTimeout(() => {
-            mainImage.src = imageSrc;
-            mainImage.alt = imageAlt;
-            mainImage.style.opacity = "1";
-          }, 150);
-
-          thumbnails.forEach((item) => {
-            const isActive = item === thumbnail;
-
-            item.setAttribute("aria-pressed", String(isActive));
-
-            item.classList.toggle("border-[#794640]", isActive);
-            item.classList.toggle("ring-1", isActive);
-            item.classList.toggle("ring-[#794640]", isActive);
-
-            item.classList.toggle("border-transparent", !isActive);
-          });
+          showImage(index);
         });
       });
     });

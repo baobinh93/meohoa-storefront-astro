@@ -4,10 +4,10 @@ const BASE_URL = import.meta.env.BASE_URL;
 
 const homeUrl = BASE_URL;
 const productsUrl = `${BASE_URL}san-pham/`;
-const contactUrl = `${BASE_URL}#lien-he`;
+const contactUrl = "https://zalo.me/0355051303";
 
 // Thay bằng đường dẫn ảnh mèo thần tài bạn muốn sử dụng
-const errorImage = `${BASE_URL}/images/404/404.webp`;
+const errorImage = `${BASE_URL}images/404/404.webp`;
 ---
 
 <BaseLayout
@@ -171,13 +171,13 @@ const errorImage = `${BASE_URL}/images/404/404.webp`;
               stroke-width="1.7"
               stroke-linejoin="round"></path>
           </svg>
-          TƯ VẤN QUA LIÊN HỆ
+          TƯ VẤN QUA ZALO
         </a>
       </div>
     </section>
 
     <!-- Floating contact -->
-    <div class="fixed bottom-6 right-5 z-20 flex flex-col items-end gap-2">
+    <!-- <div class="fixed bottom-6 right-5 z-20 flex flex-col items-end gap-2">
       <span
         class="bg-white px-3 py-2 text-[10px] font-semibold tracking-wider text-[#80643b] shadow-[0_5px_20px_rgba(0,0,0,0.06)]"
       >
@@ -197,6 +197,6 @@ const errorImage = `${BASE_URL}/images/404/404.webp`;
             stroke-linejoin="round"></path>
         </svg>
       </a>
-    </div>
+    </div> -->
   </main>
 </BaseLayout>

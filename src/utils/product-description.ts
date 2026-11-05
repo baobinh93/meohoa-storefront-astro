@@ -1,5 +1,5 @@
 export interface ProductDetails {
-  size: number | null;
+  size: string | null;
   power: string[];
   waving: boolean | null;
   features: string[];
@@ -28,16 +28,14 @@ export function normalizeProductDescription(
       .replace(/\s+/g, " ")
       .trim();
 
-    // Size: chuẩn hóa về inch
-    const sizeMatch = normalized.match(
-      /(?:mèo\s*)?size\s*(\d+(?:[.,]\d+)?)\s*(cm|inch|in)?\b/,
-    );
+    // Size: chỉ nhận diện khi bắt đầu bằng Size, KT, Kích thước
+    // Giữ nguyên giá trị và đơn vị, không quy đổi
+    const sizeMatch = item.match(/^(?:size|kt|kích\s*thước)\s*[:\-]?\s*(.+)$/i);
 
     if (sizeMatch) {
-      const value = Number(sizeMatch[1].replace(",", "."));
-      const unit = sizeMatch[2];
-
-      result.size = unit === "cm" ? Number((value / 2.54).toFixed(2)) : value;
+      result.size = /^size\b/i.test(item)
+        ? item.trim()
+        : `Size ${sizeMatch[1].trim()}`;
 
       continue;
     }
